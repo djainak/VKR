@@ -22,7 +22,7 @@ namespace VKR.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Назване меню
+        /// Название меню
         /// </summary>
         public string Name { get; set; }
 
@@ -125,5 +125,75 @@ namespace VKR.Models
         /// </summary>
         public string PhoneNumber { get; set; }
     }
+
+    /// <summary>
+    /// Класс пользвательской корзины
+    /// </summary>
+    public class Cart
+    {
+        /// <summary>
+        /// ID корзины
+        /// </summary>
+        public int CartID { get; set; }
+
+        /// <summary>
+        /// Внешний ключ на покупателя
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
+        /// Товары, входящие в корзину и их количество
+        /// </summary>
+        public virtual Dictionary <MenuItem, int> CartMenuItems { get; set; }
+
+    }
+
+    /// <summary>
+    /// Класс заказа
+    /// </summary>
+    public class Order
+    {
+        /// <summary>
+        /// ID заказа
+        /// </summary>
+        public int OrderID { get; set; }
+
+        /// <summary>
+        /// Упаковка заказа
+        /// 0 - с собой
+        /// 1 - на вынос
+        /// </summary>
+        public bool WhereEat { get; set; }
+
+        /// <summary>
+        /// Время поступления заказа в обработку
+        /// </summary>
+        public DateTime OrderTime { get; set; }
+
+        /// <summary>
+        /// Время готовности заказа
+        /// </summary>
+        public DateTime ReadyTime { get; set; }
+
+        /// <summary>
+        /// Заметки к заказу
+        /// </summary>
+        public string Notes { get; set; }
+
+        /// <summary>
+        /// 0 - обработка
+        /// 1 - подтверждет
+        /// 2 - ожидает выдачи
+        /// 3 - выполнен
+        /// 4 - отменен
+        /// </summary>
+        public int Status { get; set; }
+
+        /// <summary>
+        /// Внешний ключ на покупателя
+        /// </summary>
+        public int UserId { get; set; }
+    }
     
+
 }
