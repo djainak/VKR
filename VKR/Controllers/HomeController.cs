@@ -11,7 +11,7 @@ namespace VKR.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            Console.WriteLine();
+            //Console.WriteLine();
 
             return View();
         }
