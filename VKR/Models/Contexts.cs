@@ -150,28 +150,6 @@ namespace VKR.Models
     }
 
     /// <summary>
-    /// Класс пользвательской корзины
-    /// </summary>
-    public class Cart
-    {
-        /// <summary>
-        /// ID корзины
-        /// </summary>
-        public int CartID { get; set; }
-
-        /// <summary>
-        /// Внешний ключ на покупателя
-        /// </summary>
-        public int UserId { get; set; }
-
-        /// <summary>
-        /// Товары, входящие в корзину и их количество
-        /// </summary>
-        public virtual Dictionary <MenuItem, int> CartMenuItems { get; set; }
-
-    }
-
-    /// <summary>
     /// Класс заказа
     /// </summary>
     public class Order
@@ -216,5 +194,10 @@ namespace VKR.Models
         /// Внешний ключ на покупателя
         /// </summary>
         public int UserId { get; set; }
+
+        /// <summary>
+        /// Товары, входящие в заказ и их количество
+        /// </summary>
+        public virtual Dictionary<MenuItem, int> CartMenuItems { get; set; }
     }
 }
