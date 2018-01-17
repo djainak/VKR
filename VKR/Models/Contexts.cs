@@ -73,5 +73,57 @@ namespace VKR.Models
         public Menu Menu { get; set; } 
     }
 
+    /// <summary>
+    /// Класс пользователя
+    /// </summary>
+    public class User
+    {
+        /// <summary>
+        /// ID пользователя
+        /// </summary>
+        public int UserID { get; set; }
+
+        /// <summary>
+        /// 0 - покупатель
+        /// 1 - кассир (модератор)
+        /// 2 - менеджер (администратор)
+        /// </summary>
+        public int Status { get; set; }
+
+        /// <summary>
+        /// Фамилия покупателя
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// Имя покупателя
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Отчество покупателя
+        /// </summary>
+        public string Patronymic { get; set; }
+
+        /// <summary>
+        /// Email покупателя
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
+        /// Логин покупателя
+        /// </summary>
+        public string Login { get; set; }
+
+        /// <summary>
+        /// Пароль покупателя
+        /// </summary>
+        public string Password { get; set; }
+
+        /// <summary>
+        /// Номер телефона
+        /// </summary>
+        public string PhoneNumber { get; set; }
+    }
     
 }
