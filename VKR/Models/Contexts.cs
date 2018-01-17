@@ -3,12 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
-using System.ComponentModel.DataAnnotations;
 
 namespace VKR.Models
 {
     public class Contexts : DbContext
     {
+        /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными из таблицы Меню
+        /// </summary>
+        public DbSet<Menu> Menues { get; set; }
+
+        /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными из таблицы пунктов меню
+        /// </summary>
+        public DbSet<MenuItem> MenuItems { get; set; }
+
+        /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными из таблицы пользователей
+        /// </summary>
+        public DbSet<User> Users { get; set; }
+
+        /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными из таблицы корзин
+        /// </summary>
+        public DbSet<Cart> Carts { get; set; }
+
+        /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными из таблицы заказов
+        /// </summary>
+        public DbSet<Order> Orders { get; set; }
     }
 
     /// <summary>
@@ -194,6 +217,4 @@ namespace VKR.Models
         /// </summary>
         public int UserId { get; set; }
     }
-    
-
 }
