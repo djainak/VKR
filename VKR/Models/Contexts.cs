@@ -24,11 +24,6 @@ namespace VKR.Models
         public DbSet<User> Users { get; set; }
 
         /// <summary>
-        /// Коллекция данных, загружаемая из БД, с данными из таблицы корзин
-        /// </summary>
-        public DbSet<Cart> Carts { get; set; }
-
-        /// <summary>
         /// Коллекция данных, загружаемая из БД, с данными из таблицы заказов
         /// </summary>
         public DbSet<Order> Orders { get; set; }
