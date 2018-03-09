@@ -1,0 +1,22 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MenuList</title>
+</head>
+<body>
+    <div> 
+        @foreach(var menu in ViewBag.Menues)
+        {
+            <a href="../AddMenuItem/AddMenuItemForm?menuId=@menu.Id">@menu.Name</a>
+            <br />
+        }
+    </div>
+</body>
+</html>
