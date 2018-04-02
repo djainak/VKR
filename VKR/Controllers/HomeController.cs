@@ -16,6 +16,11 @@ namespace VKR.Controllers
 
             return View();
         }
+
+    }
+    public class AdminController : Controller
+    {
+        [HttpGet]
         public ActionResult MenuList()
         {
             using (var db = new Contexts())
@@ -26,13 +31,7 @@ namespace VKR.Controllers
 
             return View();
         }
-    }
-    public class AdminController : Controller
-    {
 
-    }
-    public class AddMenuItemController : Controller
-    {
         [HttpGet]
         public ActionResult AddMenuItemForm()
         {
@@ -45,7 +44,7 @@ namespace VKR.Controllers
             {
                 //Ищем там меню по ид
                 Menu menu = db.Menues.Where(ent => ent.Id == id).FirstOrDefault();
-                if(menu == null)
+                if (menu == null)
                 {
                     ViewBag.isError = true;
                 }
@@ -56,11 +55,11 @@ namespace VKR.Controllers
                     ViewBag.MenuItems = menuItems;
                 }
             }
-            
+
             return View();
         }
         [HttpPost]
-        public ActionResult AddMenuItem()
+        public ActionResult Admin()
         {
             //Считываем данные из формы
             int menuId = Convert.ToInt32(HttpContext.Request.Form["MenuId"]);
@@ -84,6 +83,5 @@ namespace VKR.Controllers
             return Redirect("./AddMenuItemForm?menuId=" + menuId);
             //return View();
         }
-
     }
 }

@@ -264,8 +264,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\AddMenuItem\AddMenuItemForm.cshtml" />
-    <Content Include="Views\Home\MenuList.cshtml" />
+    <Content Include="Views\Admin\MenuList.cshtml" />
+    <Content Include="Views\Admin\AddMenuItemForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801172013451_initial.resx">

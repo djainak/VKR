@@ -3,6 +3,7 @@
 }
 <html>
 <head>
+    <script type="text/javascript" src="jquery.js"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Добавление пункта меню</title>
 </head>
@@ -15,7 +16,7 @@
         else
         {
 
-            <form method="post" action="./AddMenuItem" style="background: #ccc; border: 1px solid black; padding: 20px;">
+            <form method="post" action="./Admin" style="background: #ccc; border: 1px solid black; padding: 20px;">
                 <input type="hidden" value="@ViewBag.MenuId" name="MenuId" />
                 <p>Введите название блюда:</p>
                 <input type="text" name="Name" placeholder="Name" />
@@ -35,9 +36,10 @@
             <table style="width: 100%; border: 1px solid gray" border="1">
                 <tr>
                     <th style="width: 10%">Id</th>
-                    <th style="width: 30%">Name</th>
+                    <th style="width: 20%">Name</th>
                     <th style="width: 50%">Ingridients</th>
                     <th style="width: 10%">Price</th>
+                    <th style="width: 10%">DeleteMenuItem</th>
                 </tr>
                 @foreach (var menuItem in ViewBag.MenuItems)
                 {
