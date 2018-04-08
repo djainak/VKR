@@ -3,55 +3,54 @@
 }
 <html>
 <head>
-    <script type="text/javascript" src="jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Добавление пункта меню</title>
 </head>
 <body>
     <div>
         @if (ViewBag.isError)
-        {
-            <p style="color: red; font-size: 18px;">Данное меню не существует</p>
-        }
-        else
-        {
+    {
+        <p style="color: red; font-size: 18px;">Данное меню не существует</p>
+}
+else
+{
+    <a href="../Admin/ListMenuItems?menuId=@ViewBag.MenuId">Добавить пункт меню</a>
+    <br />
+    <table style="width: 100%; border: 1px solid gray" border="1">
+        <tr>
+            <th style="width: 20%">Name</th>
+            <th style="width: 50%">Ingridients</th>
+            <th style="width: 10%">Price</th>
+            <th style="width: 10%">DeleteMenuItem</th>
+        </tr>
+        @foreach (var menuItem in ViewBag.MenuItems)
+    {
+        <tr value=@menuItem.Id>
+            <td>@menuItem.Name</td>
+            <td>@menuItem.Ingredients</td>
+            <td>@menuItem.Price</td>
+            <td><input type="button" value="Удалить" class="remove-menu-item" /></td>
+        </tr>
+}
+    </table>
 
-            <form method="post" action="./Admin" style="background: #ccc; border: 1px solid black; padding: 20px;">
-                <input type="hidden" value="@ViewBag.MenuId" name="MenuId" />
-                <p>Введите название блюда:</p>
-                <input type="text" name="Name" placeholder="Name" />
-                <br />
-                <br />
-                <p>Введите состав:</p>
-                <input type="text" name="Ingridients" placeholder="Ingredients" />
-                <br />
-                <br />
-                <p>Введите цену:</p>
-                <input type="text" name="Price" placeholder="Price" />
-                <br />
-                <br />
-                <input type="submit" />
-            </form>
-            <br />
-            <table style="width: 100%; border: 1px solid gray" border="1">
-                <tr>
-                    <th style="width: 10%">Id</th>
-                    <th style="width: 20%">Name</th>
-                    <th style="width: 50%">Ingridients</th>
-                    <th style="width: 10%">Price</th>
-                    <th style="width: 10%">DeleteMenuItem</th>
-                </tr>
-                @foreach (var menuItem in ViewBag.MenuItems)
-                {
-                    <tr>
-                        <td>@menuItem.Id</td>
-                        <td>@menuItem.Name</td>
-                        <td>@menuItem.Ingredients</td>
-                        <td>@menuItem.Price</td>
-                    </tr>
+    <script>
+        $(".remove-menu-item").on("click", function () {
+            var button = $(this);
+            var str = button.parent().parent();
+            //str.remove();
+            $.ajax({
+                url: "../Admin/RemoveMenuItem?id=" + str.attr("value")+"&menuId=@ViewBag.MenuId",
+                type: "POST",
+                dataType: "text",
+                success: function (json) {
+                    str.remove();
                 }
-            </table>
-        }
+            })
+        })
+    </script>
+}
     </div>
 </body>
 </html>

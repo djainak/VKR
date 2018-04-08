@@ -33,6 +33,15 @@ namespace VKR.Controllers
         }
 
         [HttpGet]
+        public ActionResult ListMenuItems()
+        {
+            //Вытаскиваем ид из адреса
+            int id = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
+            ViewBag.MenuId = id;
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult AddMenuItemForm()
         {
             //Вытаскиваем ид из адреса
@@ -58,6 +67,16 @@ namespace VKR.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult RemoveMenuItem()
+        {
+            int id = Convert.ToInt32(HttpContext.Request.Params["id"]);
+            int m_id = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
+
+            return Redirect("./AddMenuItemForm?menuId=" + m_id);
+        }
+
         [HttpPost]
         public ActionResult Admin()
         {
