@@ -7,11 +7,30 @@
 
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="../Content/Style/css/pushy.css">
     <meta name="viewport" content="width=device-width" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <title>MenuList</title>
+    <title>Меню</title>
 </head>
 <body>
+    <div>
+        <!-- Pushy Menu -->
+        <nav class="pushy pushy-left">
+            <div class="pushy-content">
+                <ul>
+                    <li class="pushy-link"><a href="../Admin/Home">О точке питания</a></li>
+                    <li class="pushy-link"><a href="../Admin/MenuList">Меню</a></li>
+                    <li class="pushy-link"><a href="../Admin/PersonalAccount">Личный кабинет</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Your Content -->
+        <div id="container">
+            <!-- Menu Button -->
+            <button class="menu-btn">&#9776</button>
+        </div>
+    </div>
     <div>
         <a href="../Admin/AddNewMenu">Добавить меню</a>
         <br />
@@ -23,28 +42,30 @@
                 <th style="width: 10%">DeleteMenu</th>
             </tr>
             @foreach (var menu in ViewBag.Menues)
-        {
-            <tr value=@menu.Id>
-                <td><a href="../Admin/AddMenuItemForm?menuId=@menu.Id">@menu.Name</a></td>
-                <td>@menu.Description</td>
-                <td><input type="button" value="Удалить" class="remove-menu" /></td>
-            </tr>
-    }
+            {
+                <tr value=@menu.Id>
+                    <td><a href="../Admin/AddMenuItemForm?menuId=@menu.Id">@menu.Name</a></td>
+                    <td>@menu.Description</td>
+                    <td><input type="button" value="Удалить" class="remove-menu" /></td>
+                </tr>
+            }
         </table>
         <script>
-        $(".remove-menu").on("click", function () {
-            var button = $(this);
-            var str = button.parent().parent();
-            $.ajax({
-                url: "../Admin/RemoveMenu?id=" + str.attr("value"),
-                type: "POST",
-                dataType: "text",
-                success: function () {
-                    str.remove();
-                }
+            $(".remove-menu").on("click", function () {
+                var button = $(this);
+                var str = button.parent().parent();
+                $.ajax({
+                    url: "../Admin/RemoveMenu?id=" + str.attr("value"),
+                    type: "POST",
+                    dataType: "text",
+                    success: function () {
+                        str.remove();
+                    }
+                })
             })
-        })
         </script>
     </div>
+
+    <script src="~/Content/Style/js/pushy.min.js"></script>
 </body>
 </html>

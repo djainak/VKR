@@ -29,6 +29,12 @@ namespace VKR.Controllers
         }
 
         [HttpGet]
+        public ActionResult PersonalAccount()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult MenuList()
         {
             using (var db = new Contexts())

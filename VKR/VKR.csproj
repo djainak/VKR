@@ -270,6 +270,7 @@
     <Content Include="Views\Admin\ListMenuItems.cshtml" />
     <Content Include="Views\Admin\AddNewMenu.cshtml" />
     <Content Include="Views\Admin\Home.cshtml" />
+    <Content Include="Views\Admin\PersonalAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801172013451_initial.resx">
