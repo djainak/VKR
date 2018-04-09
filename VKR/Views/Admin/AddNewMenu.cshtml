@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddNewMenu</title>
+</head>
+<body>
+    <div>
+        <form method="post" action="./AddMenu" style="background: #ccc; border: 1px solid black; padding: 20px;">
+            <input type="hidden" value="@ViewBag.MenuId" name="MenuId" />
+            <p>Введите название меню:</p>
+            <input type="text" name="Name" placeholder="Name" />
+            <br />
+            <br />
+            <p>Введите описание меню:</p>
+            <input type="text" name="Description" placeholder="Description" />
+            <br />
+            <br />
+            <input type="submit" />
+        </form>
+    </div>
+</body>
+</html>

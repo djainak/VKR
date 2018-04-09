@@ -12,12 +12,39 @@
     <title>MenuList</title>
 </head>
 <body>
-    <div> 
-        @foreach(var menu in ViewBag.Menues)
+    <div>
+        <a href="../Admin/AddNewMenu">Добавить меню</a>
+        <br />
+        <br />
+        <table style="width: 100%; border: 1px solid gray" border="1">
+            <tr>
+                <th style="width: 30%">Name</th>
+                <th style="width: 60%">Description</th>
+                <th style="width: 10%">DeleteMenu</th>
+            </tr>
+            @foreach (var menu in ViewBag.Menues)
         {
-            <a href="../Admin/AddMenuItemForm?menuId=@menu.Id">@menu.Name</a>
-            <br />
-        }
+            <tr value=@menu.Id>
+                <td><a href="../Admin/AddMenuItemForm?menuId=@menu.Id">@menu.Name</a></td>
+                <td>@menu.Description</td>
+                <td><input type="button" value="Удалить" class="remove-menu" /></td>
+            </tr>
+    }
+        </table>
+        <script>
+        $(".remove-menu").on("click", function () {
+            var button = $(this);
+            var str = button.parent().parent();
+            $.ajax({
+                url: "../Admin/RemoveMenu?id=" + str.attr("value"),
+                type: "POST",
+                dataType: "text",
+                success: function () {
+                    str.remove();
+                }
+            })
+        })
+        </script>
     </div>
 </body>
 </html>

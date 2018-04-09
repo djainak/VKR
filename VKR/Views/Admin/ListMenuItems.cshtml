@@ -12,8 +12,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </head>
 <body>
+    <a href="../Admin/AddMenuItemForm?menuId=@ViewBag.MenuId">Вернуться к списку блюд</a>
+    <br />
     <div>
-        <form method="post" action="./Admin" style="background: #ccc; border: 1px solid black; padding: 20px;">
+        <form method="post" action="./NewMenuItem" style="background: #ccc; border: 1px solid black; padding: 20px;">
             <input type="hidden" value="@ViewBag.MenuId" name="MenuId" />
             <p>Введите название блюда:</p>
             <input type="text" name="Name" placeholder="Name" />
