@@ -23,7 +23,11 @@ namespace VKR.Controllers
         [HttpGet]
         public ActionResult Home()
         {
-            ViewBag.Title = "О точке";
+            using (var db = new Contexts())
+            {
+                ViewBag.DinningRoom = db.DinningRooms.FirstOrDefault();
+                ViewBag.Manager = db.Users.Where(c => c == db.DinningRooms.FirstOrDefault().Manager).FirstOrDefault();
+            }
 
             return View();
         }
@@ -45,6 +49,26 @@ namespace VKR.Controllers
         [HttpPost]
         public ActionResult SetDR()
         {
+            //Считываем данные из формы
+            string Adress = HttpContext.Request.Form["Adress"];
+            string Phone = HttpContext.Request.Form["Phone"];
+            string Email = HttpContext.Request.Form["Email"];
+            string login = HttpContext.Request.Form["Login"];
+            int Dishes = Convert.ToInt32(HttpContext.Request.Form["Dishes"]);
+            int Interval = Convert.ToInt32(HttpContext.Request.Form["Interval"]);
+
+            //Добавляем новый пункт меню в БД
+            using (var db = new Contexts())
+            {
+                db.DinningRooms.FirstOrDefault().Adress = Adress;
+                db.DinningRooms.FirstOrDefault().PhoneNum = Phone;
+                db.DinningRooms.FirstOrDefault().Email = Email;
+                db.DinningRooms.FirstOrDefault().Dishes = Dishes;
+                db.DinningRooms.FirstOrDefault().Interval = Interval;
+                db.DinningRooms.FirstOrDefault().Manager = db.Users.Where(c => c.Login == login).FirstOrDefault();
+                db.SaveChanges();
+            }
+
             return Redirect("../Admin/Home");
         }
 

@@ -30,6 +30,11 @@ namespace VKR.Models
         /// Коллекция данных, загружаемая из БД, с данными из таблицы заказов
         /// </summary>
         public DbSet<Order> Orders { get; set; }
+
+        /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными из таблицы точек питания
+        /// </summary>
+        public DbSet<DinningRoom> DinningRooms { get; set; }
     }
 
     /// <summary>
@@ -197,5 +202,46 @@ namespace VKR.Models
         /// Товары, входящие в заказ и их количество
         /// </summary>
         public virtual Dictionary<MenuItem, int> CartMenuItems { get; set; }
+    }
+
+    /// <summary>
+    /// Класс точки питания
+    /// </summary>
+    public class DinningRoom
+    {
+        /// <summary>
+        /// ID точки питания
+        /// </summary>
+        public int DinningRoomID { get; set; }
+
+        /// <summary>
+        /// Адрес точки питания
+        /// </summary>
+        public string Adress { get; set; }
+
+        /// <summary>
+        /// Телефон точки питания
+        /// </summary>
+        public string PhoneNum { get; set; }
+
+        /// <summary>
+        /// Адрес электронной почты точки питания
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
+        /// Контактное лицо точки питания
+        /// </summary>
+        public User Manager { get; set; }
+
+        /// <summary>
+        /// Количество блюд для рассчета предлагаемого времени
+        /// </summary>
+        public int Dishes { get; set; }
+
+        /// <summary>
+        /// Интервал, в который приготавливается определенное в Dishes количество блюд
+        /// </summary>
+        public int Interval { get; set; }
     }
 }

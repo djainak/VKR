@@ -31,12 +31,12 @@
             <button class="menu-btn">&#9776</button>
         </div>
         <div>
-            <p>Адрес точки: </p>
-            <p>Телефон: </p>
-            <p>E-mail: </p>
-            <p>Контактное лицо: </p>
+            <p>Адрес точки: @ViewBag.DinningRoom.Adress</p>
+            <p>Телефон: @ViewBag.DinningRoom.PhoneNum</p>
+            <p>E-mail: @ViewBag.DinningRoom.Email</p>
+            <p>Контактное лицо:  @ViewBag.Manager.FirstName @ViewBag.Manager.Name @ViewBag.Manager.Patronymic</p>
             <br />
-            <p>Количество блюд/интервал времени: </p>
+            <p>Количество блюд/интервал времени: @ViewBag.DinningRoom.Dishes / @ViewBag.DinningRoom.Interval</p>
         </div>
     </div>
     <script src="~/Content/Style/js/pushy.min.js"></script>
