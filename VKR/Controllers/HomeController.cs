@@ -28,6 +28,26 @@ namespace VKR.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Редактирование страницы о точке питания
+        /// </summary>
+        /// <returns>Форма редактирования</returns>
+        [HttpGet]
+        public ActionResult SetDinningRoom()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Обработка изменения настроек точки питания
+        /// </summary>
+        /// <returns>Возвращает на страницу с информацией о точке питания</returns>
+        [HttpPost]
+        public ActionResult SetDR()
+        {
+            return Redirect("../Admin/Home");
+        }
+
         [HttpGet]
         public ActionResult PersonalAccount()
         {
