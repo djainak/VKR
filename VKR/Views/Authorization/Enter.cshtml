@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Авторизация</title>
+</head>
+<body>
+    <div>
+        
+        <form method="post" action="./Authorize" style="background: #ccc; border: 1px solid black; padding: 20px;">
+            @if (ViewBag.isError)
+    {
+        <p style="color: red; font-size: 18px;">Неправильный логин или пароль.</p>
+}
+            <p>Введите логин:</p>
+            <input type="text" name="Login" placeholder="Логин" />
+            <br />
+            <br />
+            <p>Введите пароль:</p>
+            <input type="password" name="Password" placeholder="Пароль" />
+            <br />
+            <br />
+            <input type="submit" />
+        </form>
+    </div>
+</body>
+</html>

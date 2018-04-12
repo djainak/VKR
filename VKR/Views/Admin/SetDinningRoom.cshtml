@@ -15,18 +15,20 @@
         <div>
             <form method="post" action="./SetDR">
                 <p>Адрес точки: </p>
-                <input type="text" name="Adress">
+                <input type="text" name="Adress" placeholder="@ViewBag.DinningRoom.Adress">
                 <p>Телефон: </p>
-                <input type="tel" name="Phone">
+                <input type="tel" name="Phone" placeholder="@ViewBag.DinningRoom.PhoneNum">
                 <p>E-mail: </p>
-                <input type="email" name="Email">
+                <input type="email" name="Email" placeholder="@ViewBag.DinningRoom.Email">
                 <p>Контактное лицо: </p>
-                <input type="text"name="Login">
+                <input type="text" name="Login" placeholder="@ViewBag.Manager.Login">
                 <br />
                 <p>Количество блюд/интервал времени: </p>
-                <input type="text" name="Dishes">
+                <input type="text" name="Dishes" placeholder=" @ViewBag.DinningRoom.Dishes">
                 <p>/</p>
-                <input type="text" name="Interval">
+                <input type="text" name="Interval" placeholder="@ViewBag.DinningRoom.Interval">
+                <br />
+                <a href="../Admin/Home">Отмена</a>
                 <br />
                 <input type="submit" value="Сохранить">
             </form>
