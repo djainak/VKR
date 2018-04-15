@@ -32,7 +32,7 @@
         </div>
     </div>
     <div>
-        <a href="../Admin/AddNewMenu">Добавить меню</a>
+        <a href="../Admin/AddNewMenu?UserId=@ViewBag.UserID">Добавить меню</a>
         <br />
         <br />
         <table style="width: 100%; border: 1px solid gray" border="1">
@@ -44,7 +44,7 @@
             @foreach (var menu in ViewBag.Menues)
             {
                 <tr value=@menu.Id>
-                    <td><a href="../Admin/AddMenuItemForm?menuId=@menu.Id">@menu.Name</a></td>
+                    <td><a href="../Admin/AddMenuItemForm?MenuId=@menu.Id&UserId=@ViewBag.UserID">@menu.Name</a></td>
                     <td>@menu.Description</td>
                     <td><input type="button" value="Удалить" class="remove-menu" /></td>
                 </tr>
@@ -54,6 +54,7 @@
             $(".remove-menu").on("click", function () {
                 var button = $(this);
                 var str = button.parent().parent();
+                // + "&UserId=@ViewBag.UserID"
                 $.ajax({
                     url: "../Admin/RemoveMenu?id=" + str.attr("value"),
                     type: "POST",

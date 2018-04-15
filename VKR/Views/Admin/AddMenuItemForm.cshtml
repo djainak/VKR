@@ -15,9 +15,9 @@
 }
 else
 {
-    <a href="../Admin/ListMenuItems?menuId=@ViewBag.MenuId">Добавить пункт меню</a>
+    <a href="../Admin/ListMenuItems?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID">Добавить пункт меню</a>
     <br />
-    <a href="../Admin/MenuList">Вернуться к списку меню</a>
+    <a href="../Admin/MenuList?UserId=@ViewBag.UserID">Вернуться к списку меню</a>
     <br />
     <table style="width: 100%; border: 1px solid gray" border="1">
         <tr>
@@ -41,9 +41,9 @@ else
         $(".remove-menu-item").on("click", function () {
             var button = $(this);
             var str = button.parent().parent();
-            //str.remove();
+            // +"&UserId=@ViewBag.UserID";
             $.ajax({
-                url: "../Admin/RemoveMenuItem?id=" + str.attr("value")+"&menuId=@ViewBag.MenuId",
+                url: "../Admin/RemoveMenuItem?id=" + str.attr("value")+"&MenuId=@ViewBag.MenuId",
                 type: "POST",
                 dataType: "text",
                 success: function () {

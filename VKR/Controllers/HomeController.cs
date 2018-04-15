@@ -89,6 +89,8 @@ namespace VKR.Controllers
         [HttpGet]
         public ActionResult SetDinningRoom()
         {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
             using (var db = new Contexts())
             {
                 ViewBag.DinningRoom = db.DinningRooms.FirstOrDefault();
@@ -134,12 +136,17 @@ namespace VKR.Controllers
         [HttpGet]
         public ActionResult PersonalAccount()
         {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
             return View();
         }
 
         [HttpGet]
         public ActionResult MenuList()
         {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+
             using (var db = new Contexts())
             {
                 List<Menu> menues = db.Menues.ToList();
@@ -152,6 +159,8 @@ namespace VKR.Controllers
         [HttpGet]
         public ActionResult AddNewMenu()
         {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
             return View();
         }
 
@@ -176,7 +185,7 @@ namespace VKR.Controllers
                 db.Menues.Add(menu);
                 db.SaveChanges();
             }
-            return Redirect("./AddMenuItemForm?menuId=" + menu.Id + "&UserId=" + ViewBag.UserID);
+            return Redirect("./AddMenuItemForm?MenuId=" + menu.Id + "&UserId=" + ViewBag.UserID);
         }
 
         /// <summary>
@@ -188,6 +197,9 @@ namespace VKR.Controllers
         {
             //Вытаскиваем ид из адреса
             int id = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+
             ViewBag.MenuId = id;
             return View();
         }
@@ -197,6 +209,8 @@ namespace VKR.Controllers
         {
             //Вытаскиваем ид из адреса
             int id = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
 
             ViewBag.isError = false;
             //Обращаемся к БД
@@ -238,7 +252,7 @@ namespace VKR.Controllers
                 db.SaveChanges();
             }
 
-            return Redirect("./AddMenuItemForm?menuId=" + m_id + "&UserId=" + ViewBag.UserID);
+            return Redirect("./AddMenuItemForm?MenuId=" + m_id + "&UserId=" + ViewBag.UserID);
         }
 
         /// <summary>
@@ -268,7 +282,7 @@ namespace VKR.Controllers
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
 
             //Считываем данные из формы
-            int menuId = Convert.ToInt32(HttpContext.Request.Form["MenuId"]);
+            int menuId = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
             string name = HttpContext.Request.Form["Name"];
             string ingredients = HttpContext.Request.Form["Ingredients"];
             int price = Convert.ToInt32(HttpContext.Request.Form["Price"]);
@@ -286,7 +300,7 @@ namespace VKR.Controllers
                 db.MenuItems.Add(menuItem);
                 db.SaveChanges();
             }
-            return Redirect("./AddMenuItemForm?menuId=" + menuId + "&UserId=" + ViewBag.UserID);
+            return Redirect("./AddMenuItemForm?MenuId=" + menuId + "&UserId=" + ViewBag.UserID);
             //return View();
         }
     }

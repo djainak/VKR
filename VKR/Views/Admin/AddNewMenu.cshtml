@@ -12,7 +12,9 @@
 </head>
 <body>
     <div>
-        <form method="post" action="./AddMenu" style="background: #ccc; border: 1px solid black; padding: 20px;">
+        <a href="../Admin/MenuList?UserId=@ViewBag.UserID">Вернуться к списку меню</a>
+        <br />
+        <form method="post" action="./AddMenu?UserId=@ViewBag.UserID" style="background: #ccc; border: 1px solid black; padding: 20px;">
             <input type="hidden" value="@ViewBag.MenuId" name="MenuId" />
             <p>Введите название меню:</p>
             <input type="text" name="Name" placeholder="Name" />
