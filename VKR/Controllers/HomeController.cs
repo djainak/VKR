@@ -361,6 +361,44 @@ namespace VKR.Controllers
         }
 
         /// <summary>
+        /// Редактирование пункта меню
+        /// </summary>
+        /// <returns>Форма редактирования пункта меню</returns>
+        [HttpGet]
+        public ActionResult ChangeMenuItem()
+        {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+            ViewBag.MenuId = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
+            ViewBag.MenuItemId = Convert.ToInt32(HttpContext.Request.Params["MenuItemId"]);
+
+            using (var db = new Contexts())
+            {
+                ViewBag.MenuItem = db.MenuItems.Find(ViewBag.MenuItemId);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChMenuItem()
+        {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+            ViewBag.MenuId = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
+            int menuItemId = Convert.ToInt32(HttpContext.Request.Params["MenuItemId"]);
+
+            //Изменяем пункт меню в БД
+            using (var db = new Contexts())
+            {
+                db.MenuItems.Find(menuItemId).Name = HttpContext.Request.Form["Name"];
+                db.MenuItems.Find(menuItemId).Ingredients = HttpContext.Request.Form["Ingredients"];
+                db.MenuItems.Find(menuItemId).Price = Convert.ToInt32(HttpContext.Request.Form["Price"]);
+                db.SaveChanges();
+            }
+            return Redirect("./AddMenuItemForm?MenuId=" + ViewBag.MenuId + "&UserId=" + ViewBag.UserID);
+        }
+
+        /// <summary>
         /// Страница с личными данными авторизированного пользователя
         /// </summary>
         /// <returns>Страницу с личными данными</returns>

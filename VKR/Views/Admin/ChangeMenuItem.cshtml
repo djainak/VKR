@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Изменить блюдо</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+    <a href="../Admin/AddMenuItemForm?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID">Вернуться к списку блюд</a>
+    <br />
+    <div>
+        <form method="post" action="./ChMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID&MenuItemId=@ViewBag.MenuItemId" style="background: #ccc; border: 1px solid black; padding: 20px;">
+            <p>Введите название блюда:</p>
+            <input type="text" name="Name" value="@ViewBag.MenuItem.Name" required />
+            <br />
+            <br />
+            <p>Введите состав:</p>
+            <input type="text" name="Ingredients" value="@ViewBag.MenuItem.Ingredients" />
+            <br />
+            <br />
+            <p>Введите цену:</p>
+            <input type="number" name="Price" value="@ViewBag.MenuItem.Price" required />
+            <br />
+            <br />
+            <input type="submit" />
+        </form>
+    </div>
+</body>
+</html>
