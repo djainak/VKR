@@ -17,7 +17,7 @@
     <div>
         <form method="post" action="./NewMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID" style="background: #ccc; border: 1px solid black; padding: 20px;">
             <p>Введите название блюда:</p>
-            <input type="text" name="Name" placeholder="Name" />
+            <input type="text" name="Name" placeholder="Name" required/>
             <br />
             <br />
             <p>Введите состав:</p>
@@ -25,7 +25,7 @@
             <br />
             <br />
             <p>Введите цену:</p>
-            <input type="text" name="Price" placeholder="Price" />
+            <input type="number" name="Price" placeholder="Price" required/>
             <br />
             <br />
             <input type="submit" />

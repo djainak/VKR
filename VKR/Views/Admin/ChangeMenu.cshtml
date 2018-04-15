@@ -8,20 +8,19 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Добавление нового меню</title>
+    <title>Редактирование меню</title>
 </head>
 <body>
     <div>
         <a href="../Admin/MenuList?UserId=@ViewBag.UserID">Вернуться к списку меню</a>
         <br />
-        <form method="post" action="./AddMenu?UserId=@ViewBag.UserID" style="background: #ccc; border: 1px solid black; padding: 20px;">
-            <input type="hidden" value="@ViewBag.MenuId" name="MenuId" />
+        <form method="post" action="./ChMenu?UserId=@ViewBag.UserID&MenuId=@ViewBag.Menu.Id" style="background: #ccc; border: 1px solid black; padding: 20px;">
             <p>Введите название меню:</p>
-            <input type="text" name="Name" placeholder="Name" required/>
+            <input type="text" name="Name" value="@ViewBag.Menu.Name" required />
             <br />
             <br />
             <p>Введите описание меню:</p>
-            <input type="text" name="Description" placeholder="Description" />
+            <input type="text" name="Description" value="@ViewBag.Menu.Description" />
             <br />
             <br />
             <input type="submit" />

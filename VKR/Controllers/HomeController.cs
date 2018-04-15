@@ -320,6 +320,47 @@ namespace VKR.Controllers
         }
 
         /// <summary>
+        /// Форма для редактирования меню
+        /// </summary>
+        /// <returns>Страница с формой редактирования меню</returns>
+        [HttpGet]
+        public ActionResult ChangeMenu()
+        {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+            int menuId = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
+            //Добавляем новое меню в БД
+            using (var db = new Contexts())
+            {
+                ViewBag.Menu = db.Menues.Find(menuId);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChMenu()
+        {
+            //Считываем данные из формы
+            string name = HttpContext.Request.Form["Name"];
+            string description = HttpContext.Request.Form["Description"];
+
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+            
+            int m_id = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
+            ViewBag.MenuId = m_id;
+
+            //Добавляем новое меню в БД
+            using (var db = new Contexts())
+            {
+                db.Menues.Find(m_id).Name = name;
+                db.Menues.Find(m_id).Description = description;
+                db.SaveChanges();
+            }
+            return Redirect("./MenuList?UserId=" + ViewBag.UserID);
+        }
+
+        /// <summary>
         /// Страница с личными данными авторизированного пользователя
         /// </summary>
         /// <returns>Страницу с личными данными</returns>

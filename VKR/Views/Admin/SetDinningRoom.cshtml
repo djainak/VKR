@@ -13,20 +13,20 @@
 <body>
     <div>
         <div>
-            <form method="post" action="./SetDR">
+            <form method="post" action="./SetDR?UserId=@ViewBag.UserID">
                 <p>Адрес точки: </p>
-                <input type="text" name="Adress" placeholder="@ViewBag.DinningRoom.Adress">
+                <input type="text" name="Adress" value="@ViewBag.DinningRoom.Adress" required>
                 <p>Телефон: </p>
-                <input type="tel" name="Phone" placeholder="@ViewBag.DinningRoom.PhoneNum">
+                <input type="tel" name="Phone" value="@ViewBag.DinningRoom.PhoneNum" required>
                 <p>E-mail: </p>
-                <input type="email" name="Email" placeholder="@ViewBag.DinningRoom.Email">
+                <input type="email" name="Email" value="@ViewBag.DinningRoom.Email" required>
                 <p>Контактное лицо: </p>
-                <input type="text" name="Login" placeholder="@ViewBag.Manager.Login">
+                <input type="text" name="Login" value="@ViewBag.Manager.Login" required>
                 <br />
                 <p>Количество блюд/интервал времени: </p>
-                <input type="text" name="Dishes" placeholder=" @ViewBag.DinningRoom.Dishes">
+                <input type="number" name="Dishes" value=" @ViewBag.DinningRoom.Dishes" required>
                 <p>/</p>
-                <input type="text" name="Interval" placeholder="@ViewBag.DinningRoom.Interval">
+                <input type="number" name="Interval" value="@ViewBag.DinningRoom.Interval" required>
                 <br />
                 <a href="../Admin/Home?UserId=@ViewBag.UserID">Отмена</a>
                 <br />
