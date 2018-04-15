@@ -31,13 +31,24 @@
             <button class="menu-btn">&#9776</button>
         </div>
         <div>
-            <p>Логин: </p>
-            <p>Фамилия: </p>
-            <p>Имя: </p>
-            <p>Отчество: </p>
-            <p>Статус: </p>
-            <p>E-mail: </p>
-            <p>Телефон: </p>
+            <p>Логин: @ViewBag.User.Login</p>
+            <p>Фамилия:  @ViewBag.User.FirstName</p>
+            <p>Имя: @ViewBag.User.Name</p>
+            <p>Отчество: @ViewBag.User.Patronymic</p>
+            @if (@ViewBag.User.Status == 0)
+    {
+        <p>Статус: Покупатель</p>
+}
+            @if (@ViewBag.User.Status == 1)
+    {
+        <p>Статус: Модератор</p>
+}
+            @if (@ViewBag.User.Status == 2)
+    {
+        <p>Статус: Администратор</p>
+}
+            <p>E-mail: @ViewBag.User.Email</p>
+            <p>Телефон: @ViewBag.User.PhoneNumber</p>
         </div>
     </div>
     <script src="~/Content/Style/js/pushy.min.js"></script>

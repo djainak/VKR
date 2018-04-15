@@ -68,6 +68,10 @@ namespace VKR.Controllers
     /// </summary>
     public class AdminController : Controller
     {
+        /// <summary>
+        /// Страница с данними о точке питания
+        /// </summary>
+        /// <returns>Страница с данными о точке питания</returns>
         [HttpGet]
         public ActionResult Home()
         {
@@ -133,14 +137,10 @@ namespace VKR.Controllers
             return Redirect("../Admin/Home?UserId=" + ViewBag.UserID);
         }
 
-        [HttpGet]
-        public ActionResult PersonalAccount()
-        {
-            //Вытаскиваем ид из адреса
-            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
-            return View();
-        }
-
+        /// <summary>
+        /// Список доступных меню
+        /// </summary>
+        /// <returns>Страница со списком меню</returns>
         [HttpGet]
         public ActionResult MenuList()
         {
@@ -156,6 +156,10 @@ namespace VKR.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Добавление нового меню
+        /// </summary>
+        /// <returns>Страница с формой добавления нового меню</returns>
         [HttpGet]
         public ActionResult AddNewMenu()
         {
@@ -164,6 +168,10 @@ namespace VKR.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Добавление нового меню
+        /// </summary>
+        /// <returns>Переадресация на страницу со списком пунктов нового меню</returns>
         [HttpPost]
         public ActionResult AddMenu()
         {
@@ -204,6 +212,10 @@ namespace VKR.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Список пунктов данного меню
+        /// </summary>
+        /// <returns>Страница со списком пунктов меню</returns>
         [HttpGet]
         public ActionResult AddMenuItemForm()
         {
@@ -275,6 +287,10 @@ namespace VKR.Controllers
             return Redirect("./MenuList?UserId=" + ViewBag.UserID);
         }
 
+        /// <summary>
+        /// Создаем новый пункт меню
+        /// </summary>
+        /// <returns>Переадресация к списку пунктов данного меню</returns>
         [HttpPost]
         public ActionResult NewMenuItem()
         {
@@ -301,7 +317,24 @@ namespace VKR.Controllers
                 db.SaveChanges();
             }
             return Redirect("./AddMenuItemForm?MenuId=" + menuId + "&UserId=" + ViewBag.UserID);
-            //return View();
+        }
+
+        /// <summary>
+        /// Страница с личными данными авторизированного пользователя
+        /// </summary>
+        /// <returns>Страницу с личными данными</returns>
+        [HttpGet]
+        public ActionResult PersonalAccount()
+        {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+
+            using (var db = new Contexts())
+            {
+                ViewBag.User = db.Users.Find(Convert.ToInt32(HttpContext.Request.Params["UserId"]));
+            }
+
+            return View();
         }
     }
 }
