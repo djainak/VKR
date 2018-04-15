@@ -279,6 +279,7 @@
     <Content Include="Views\Authorization\Enter.cshtml" />
     <Content Include="Views\Admin\ChangeMenu.cshtml" />
     <Content Include="Views\Admin\ChangeMenuItem.cshtml" />
+    <Content Include="Views\Registration\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801172013451_initial.resx">

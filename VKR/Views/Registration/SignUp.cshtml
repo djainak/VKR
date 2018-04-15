@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Регистрация</title>
+</head>
+<body>
+    <div>
+        <a href="../Authorization/Enter">Вход</a>
+        <br />
+        <form method="post" action="./NewUser" style="background: #ccc; border: 1px solid black; padding: 20px;">
+            <p>Придумайте логин:</p>
+            <input type="text" name="Login" placeholder="Логин" required />
+            <br />
+            <br />
+            <p>Придумайте пароль:</p>
+            <input type="password" name="Password" placeholder="Пароль" required />
+            <br />
+            <br />
+            <p>Введите фамилию:</p>
+            <input type="text" name="FirstName" placeholder="Фамилия" required />
+            <br />
+            <br />
+            <p>Введите имя:</p>
+            <input type="text" name="Name" placeholder="Имя" required />
+            <br />
+            <br />
+            <p>Введите отчество:</p>
+            <input type="text" name="Patronymic" placeholder="Отчество" />
+            <br />
+            <br />
+            <p>Введите e-mail:</p>
+            <input type="email" name="Email" placeholder="E-mail" required />
+            <br />
+            <br />
+            <p>Введите телефон:</p>
+            <input type="tel" name="PhoneNumber" placeholder="Телефон" required />
+            <br />
+            <br />
+            <input type="submit" />
+        </form>
+    </div>
+</body>
+</html>
