@@ -16,7 +16,7 @@
         <br />
         <form method="post" action="./NewUser" style="background: #ccc; border: 1px solid black; padding: 20px;">
             <p>Придумайте логин:</p>
-            <input type="text" name="Login" placeholder="Логин" required />
+            <input type="text" name="Login" id="Login" placeholder="Логин" required />
             <br />
             <br />
             <p>Придумайте пароль:</p>
@@ -45,6 +45,21 @@
             <br />
             <input type="submit" />
         </form>
+
+        <script>
+            $(document).ready(function () {
+                $("#Login").focusout(function () {
+                    $.ajax({
+                        url: "../Registration/CheckLogin?value=" + $("#Login").val(),
+                        type: "POST",
+                        dataType: "text",
+                        success: function () {
+                            str.remove();
+                        }
+                    })
+                })
+            }
+        </script>
     </div>
 </body>
 </html>

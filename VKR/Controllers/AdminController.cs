@@ -3,113 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 using VKR.Models;
 
 namespace VKR.Controllers
 {
-    public class HomeController : Controller
-    {
-        public ActionResult Index()
-        {
-            ViewBag.Title = "Home Page";
-
-            return View();
-        }
-
-    }
-
-    /// <summary>
-    /// Класс регистрации нового пользователя
-    /// </summary>
-    public class RegistrationController:Controller
-    {
-        /// <summary>
-        /// Регистрация пользователя
-        /// </summary>
-        /// <returns>Форма регистрации пользователя</returns>
-        [HttpGet]
-        public ActionResult SignUp()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// Обработка формы регистрации нового пользователя
-        /// </summary>
-        /// <returns>Переадресация на личный кабинет (!!!ПОКА НА АДМИНКУ)</returns>
-        [HttpPost]
-        public ActionResult NewUser()
-        {
-            User user = new User();
-            user.Login = HttpContext.Request.Form["Login"];
-            user.Password = HttpContext.Request.Form["Password"];
-            user.Email = HttpContext.Request.Form["Email"];
-            user.FirstName = HttpContext.Request.Form["FirstName"];
-            user.Name = HttpContext.Request.Form["Name"];
-            user.Patronymic = HttpContext.Request.Form["Patronymic"];
-            user.PhoneNumber = HttpContext.Request.Form["PhoneNumber"];
-            user.Status = 0;
-
-            using (var db = new Contexts())
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-            }
-                //В дальнейшем сделать переадресацию на личный кабинет, сейчас переадресация в админку
-                return Redirect("../Admin/Home?UserId=" + user.UserID);
-        }
-    }
-
-    /// <summary>
-    /// Класс авторизации
-    /// </summary>
-    public class AuthorizationController : Controller
-    {
-        /// <summary>
-        /// Реализация авторизации
-        /// </summary>
-        /// <returns>Страница авторизации</returns>
-        [HttpGet]
-        public ActionResult Enter()
-        {
-            if (HttpContext.Request.Params["id"] == "false")
-                ViewBag.isError = true;
-            else
-                ViewBag.isError = false;
-            return View();
-        }
-
-        /// <summary>
-        /// Авторизация пользователем
-        /// </summary>
-        /// <returns>Страница "О точке питания"</returns>
-        [HttpPost]
-        public ActionResult Authorize()
-        {
-            //Считываем данные из формы
-            string Login = HttpContext.Request.Form["Login"];
-            string Password = HttpContext.Request.Form["Password"];
-
-            using (var db = new Contexts())
-            {
-                ViewBag.User = db.Users.Where(c => c.Login == Login && c.Password == Password).FirstOrDefault();
-                if (ViewBag.User == null)
-                {
-                    ViewBag.isError = true;
-                    return Redirect("../Authorization/Enter?id=false" );
-                }
-            }
-
-            return Redirect("../Admin/Home?UserId=" + ViewBag.User.UserID);
-        }
-    }
-
-    /// <summary>
-    /// Класс админской части
-    /// </summary>
     public class AdminController : Controller
     {
+
         /// <summary>
         /// Страница с данними о точке питания
         /// </summary>
@@ -388,7 +288,7 @@ namespace VKR.Controllers
 
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
-            
+
             int m_id = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
             ViewBag.MenuId = m_id;
 
