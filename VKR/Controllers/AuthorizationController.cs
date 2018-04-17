@@ -54,5 +54,19 @@ namespace VKR.Controllers
                 }
             }
         }
+
+        /// <summary>
+        /// Метод, обрабатывающий выход из аккаунта
+        /// </summary>
+        /// <returns>Переадресация на главную страницу КОСТЫЛЬ</returns>
+        [HttpGet]
+        public ActionResult LogOut()
+        {
+            HttpCookie token = new HttpCookie("user_token", "");
+            HttpContext.Response.Cookies.Add(token);
+
+            //Переадресация на главную страницу КОСТЫЛЬ
+            return Redirect("../Admin/Home");
+        }
     }
 }
