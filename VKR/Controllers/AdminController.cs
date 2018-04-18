@@ -7,7 +7,7 @@ using VKR.Models;
 
 namespace VKR.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : UserBasedController
     {
 
         /// <summary>

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Newtonsoft.Json;
+using VKR.Models;
 
 namespace VKR.Controllers
 {
@@ -18,22 +20,19 @@ namespace VKR.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return "value";
+            string login = HttpContext.Request.Params["value"];
+            using (var db = new Contexts())
+            {
+                if (db.Users.Where(c => c.Login == login).FirstOrDefault() == null)
+                {
+                    return "false";
+                }
+                else
+                {
+                    return "true";
+                }
+            }
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
-        }
     }
 }

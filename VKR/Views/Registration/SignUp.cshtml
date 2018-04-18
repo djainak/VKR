@@ -50,11 +50,16 @@
             $(document).ready(function () {
                 $("#Login").focusout(function () {
                     $.ajax({
-                        url: "../Registration/CheckLogin?value=" + $("#Login").val(),
-                        type: "POST",
+                        url: "../api/values",
+                        data: "Login=" + $("#Login").val(),
                         dataType: "text",
-                        success: function () {
-                            str.remove();
+                        success: function (text) {
+                            if (text == "true") {
+                                $("#Login").setCustomValidity("");
+                            }
+                            else {
+                                $("#Login").setCustomValidity("Такой логин уже занят. Введите другой.");
+                            }
                         }
                     })
                 })

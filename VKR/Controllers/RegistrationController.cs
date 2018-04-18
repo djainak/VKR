@@ -44,24 +44,5 @@ namespace VKR.Controllers
             //В дальнейшем сделать переадресацию на личный кабинет, сейчас переадресация в админку
             return Redirect("../Admin/Home?UserId=" + user.UserID);
         }
-
-        [HttpPost]
-        public ActionResult CheckLogin()
-        {
-            string login = HttpContext.Request.Params["value"];
-            using (var db = new Contexts())
-            {
-                if (db.Users.Where(c => c.Login == login).FirstOrDefault() == null)
-                {
-                    //
-                }
-                else
-                {
-
-                }
-            }
-            //ЗАГЛУШКА
-            return Redirect("../Admin/Home");
-        }
     }
 }
