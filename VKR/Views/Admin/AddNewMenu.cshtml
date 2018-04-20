@@ -17,13 +17,14 @@
         <form method="post" action="./AddMenu?UserId=@ViewBag.UserID" style="background: #ccc; border: 1px solid black; padding: 20px;">
             <input type="hidden" value="@ViewBag.MenuId" name="MenuId" />
             <p>Введите название меню:</p>
-            <input type="text" name="Name" placeholder="Name" required/>
+            <input type="text" name="Name" placeholder="Name" required />
             <br />
             <br />
             <p>Введите описание меню:</p>
             <input type="text" name="Description" placeholder="Description" />
             <br />
             <br />
+            <p><input type="checkbox" name="UseThisMenu" value="true"> Выбрать данное меню основным</p>
             <input type="submit" />
         </form>
     </div>

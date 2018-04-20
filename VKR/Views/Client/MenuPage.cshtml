@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Меню</title>
+</head>
+<body>
+    <div>
+        <table style="width: 100%; border: 1px solid gray" border="1">
+            <tr>
+                <th style="width: 20%">Название</th>
+                <th style="width: 50%">Состав</th>
+                <th style="width: 10%">Категория</th>
+                <th style="width: 10%">Цена</th>
+            </tr>
+            @foreach (var menuItem in ViewBag.MenuItems)
+        {
+            <tr value=@menuItem.Id>
+                <td>@menuItem.Name</td>
+                <td>@menuItem.Ingredients</td>
+                <td>@menuItem.Category</td>
+                <td>@menuItem.Price</td>
+                <td><a href="../Admin/ChangeMenuItem?UserId=@ViewBag.UserID&MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId">Редактировать</a></td>
+                <td><input type="button" value="Удалить" class="remove-menu-item" /></td>
+            </tr>
+    }
+        </table>
+    </div>
+</body>
+</html>

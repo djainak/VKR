@@ -88,11 +88,22 @@ namespace VKR.Controllers
         {
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
-
             using (var db = new Contexts())
             {
                 List<Menu> menues = db.Menues.ToList();
                 ViewBag.Menues = menues;
+                foreach(Menu menu in db.Menues)
+                {
+                    if (menu.Status)
+                    {
+                        @ViewBag.NameMenu = menu.Name;
+                    }
+                }
+                if (@ViewBag.NameMenu == null)
+                {
+                    db.Menues.FirstOrDefault().Status = true;
+                    @ViewBag.NameMenu = db.Menues.FirstOrDefault().Name;
+                }
             }
 
             return View();
@@ -120,6 +131,7 @@ namespace VKR.Controllers
             //Считываем данные из формы
             string name = HttpContext.Request.Form["Name"];
             string description = HttpContext.Request.Form["Description"];
+            bool IsMainMenu = Convert.ToBoolean(HttpContext.Request.Form["UseThisMenu"]);
 
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
@@ -132,6 +144,16 @@ namespace VKR.Controllers
             //Добавляем новое меню в БД
             using (var db = new Contexts())
             {
+                if (IsMainMenu)
+                {
+                    foreach (Menu m in db.Menues)
+                    {
+                        m.Status = false;
+                    }
+                    menu.Status = true;
+                }
+                else
+                    menu.Status = false;
                 db.Menues.Add(menu);
                 db.SaveChanges();
             }
@@ -242,8 +264,10 @@ namespace VKR.Controllers
             //Считываем данные из формы
             int menuId = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
             string name = HttpContext.Request.Form["Name"];
+            string category = HttpContext.Request.Form["Category"];
             string ingredients = HttpContext.Request.Form["Ingredients"];
             int price = Convert.ToInt32(HttpContext.Request.Form["Price"]);
+            
 
             //Создаем объект пункта Меню и заполняем данными из формы
             MenuItem menuItem = new MenuItem();
@@ -251,6 +275,7 @@ namespace VKR.Controllers
             menuItem.Name = name;
             menuItem.Ingredients = ingredients;
             menuItem.Price = price;
+            menuItem.Category = category;
 
             //Добавляем новый пункт меню в БД
             using (var db = new Contexts())
@@ -285,6 +310,7 @@ namespace VKR.Controllers
             //Считываем данные из формы
             string name = HttpContext.Request.Form["Name"];
             string description = HttpContext.Request.Form["Description"];
+            bool IsMainMenu = Convert.ToBoolean(HttpContext.Request.Form["UseThisMenu"]);
 
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
@@ -297,6 +323,16 @@ namespace VKR.Controllers
             {
                 db.Menues.Find(m_id).Name = name;
                 db.Menues.Find(m_id).Description = description;
+                if (IsMainMenu)
+                {
+                    foreach(Menu menu in db.Menues)
+                    {
+                        menu.Status = false;
+                    }
+                    db.Menues.Find(m_id).Status = true;
+                }
+                else
+                    db.Menues.Find(m_id).Status = false;
                 db.SaveChanges();
             }
             return Redirect("./MenuList?UserId=" + ViewBag.UserID);
@@ -334,6 +370,7 @@ namespace VKR.Controllers
             {
                 db.MenuItems.Find(menuItemId).Name = HttpContext.Request.Form["Name"];
                 db.MenuItems.Find(menuItemId).Ingredients = HttpContext.Request.Form["Ingredients"];
+                db.MenuItems.Find(menuItemId).Category = HttpContext.Request.Form["Category"];
                 db.MenuItems.Find(menuItemId).Price = Convert.ToInt32(HttpContext.Request.Form["Price"]);
                 db.SaveChanges();
             }

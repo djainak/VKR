@@ -17,15 +17,19 @@
     <div>
         <form method="post" action="./NewMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID" style="background: #ccc; border: 1px solid black; padding: 20px;">
             <p>Введите название блюда:</p>
-            <input type="text" name="Name" placeholder="Name" required/>
+            <input type="text" name="Name" placeholder="Name" required />
             <br />
             <br />
             <p>Введите состав:</p>
             <input type="text" name="Ingredients" placeholder="Ingredients" />
             <br />
             <br />
+            <p>Введите категорию:</p>
+            <input type="text" name="Category" placeholder="Category" required/>
+            <br />
+            <br />
             <p>Введите цену:</p>
-            <input type="number" name="Price" placeholder="Price" required/>
+            <input type="number" name="Price" placeholder="Price" required />
             <br />
             <br />
             <input type="submit" />

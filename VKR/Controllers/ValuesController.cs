@@ -20,7 +20,7 @@ namespace VKR.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            string login = HttpContext.Request.Params["value"];
+            string login = "";
             using (var db = new Contexts())
             {
                 if (db.Users.Where(c => c.Login == login).FirstOrDefault() == null)

@@ -38,7 +38,8 @@ namespace VKR.Controllers
                 {
                     using (var db = new Contexts())
                     {
-                        if (db.Users.Find(token) == null)
+                        int id = Convert.ToInt32(token);
+                        if (db.Users.Find(id) == null)
                         {
                             filterContext.Result = Redirect(server_root_url + "Authorization/Enter?id=false");
                         }

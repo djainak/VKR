@@ -58,6 +58,11 @@ namespace VKR.Models
         public string Description { get; set; }
 
         /// <summary>
+        /// Поле, показывающее, какое меню сейчас действующее
+        /// </summary>
+        public bool Status { get; set; }
+
+        /// <summary>
         /// Товары, входящие в меню
         /// </summary>
         public virtual List<MenuItem> MenuItems { get; set; }
@@ -87,6 +92,11 @@ namespace VKR.Models
         /// Цена за единицу товара
         /// </summary>
         public int Price { get; set; }
+
+        /// <summary>
+        /// Категория блюда
+        /// </summary>
+        public string Category { get; set; }
 
         /// <summary>
         /// Внешний ключ на меню, в котором лежит пункт меню
