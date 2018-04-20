@@ -132,6 +132,7 @@ namespace VKR.Controllers
             string name = HttpContext.Request.Form["Name"];
             string description = HttpContext.Request.Form["Description"];
             bool IsMainMenu = Convert.ToBoolean(HttpContext.Request.Form["UseThisMenu"]);
+            bool flag = false;
 
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
@@ -151,11 +152,26 @@ namespace VKR.Controllers
                         m.Status = false;
                     }
                     menu.Status = true;
+                    db.Menues.Add(menu);
+                    db.SaveChanges();
                 }
                 else
+                {
                     menu.Status = false;
-                db.Menues.Add(menu);
-                db.SaveChanges();
+                    db.Menues.Add(menu);
+                    db.SaveChanges();
+                    //Проверка, есть ли у нас тогда выбранное основное меню
+                    foreach (Menu m in db.Menues)
+                    {
+                        if (m.Status)
+                            flag = true;
+                    }
+                    if (!flag)
+                    {
+                        db.Menues.FirstOrDefault().Status = true;
+                        db.SaveChanges();
+                    }
+                }
             }
             return Redirect("./AddMenuItemForm?MenuId=" + menu.Id + "&UserId=" + ViewBag.UserID);
         }
@@ -311,6 +327,7 @@ namespace VKR.Controllers
             string name = HttpContext.Request.Form["Name"];
             string description = HttpContext.Request.Form["Description"];
             bool IsMainMenu = Convert.ToBoolean(HttpContext.Request.Form["UseThisMenu"]);
+            bool flag = false;
 
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
@@ -330,10 +347,24 @@ namespace VKR.Controllers
                         menu.Status = false;
                     }
                     db.Menues.Find(m_id).Status = true;
+                    db.SaveChanges();
                 }
                 else
+                {
                     db.Menues.Find(m_id).Status = false;
-                db.SaveChanges();
+                    db.SaveChanges();
+                    //Проверка, есть ли у нас тогда выбранное основное меню
+                    foreach (Menu m in db.Menues)
+                    {
+                        if (m.Status)
+                            flag = true;
+                    }
+                    if (!flag)
+                    {
+                        db.Menues.FirstOrDefault().Status = true;
+                        db.SaveChanges();
+                    }
+                }  
             }
             return Redirect("./MenuList?UserId=" + ViewBag.UserID);
         }
