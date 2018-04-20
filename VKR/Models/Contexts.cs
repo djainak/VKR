@@ -22,6 +22,11 @@ namespace VKR.Models
         public DbSet<MenuItem> MenuItems { get; set; }
 
         /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными из таблицы категорий блюд меню
+        /// </summary>
+        public DbSet<CategoryMenuItem> CategoryMenuItem { get; set; }
+
+        /// <summary>
         /// Коллекция данных, загружаемая из БД, с данными из таблицы пользователей
         /// </summary>
         public DbSet<User> Users { get; set; }
@@ -96,7 +101,7 @@ namespace VKR.Models
         /// <summary>
         /// Категория блюда
         /// </summary>
-        public string Category { get; set; }
+        public CategoryMenuItem Category { get; set; }
 
         /// <summary>
         /// Внешний ключ на меню, в котором лежит пункт меню
@@ -107,6 +112,22 @@ namespace VKR.Models
         /// Объект меню, на который ссылается пункт
         /// </summary>
         public Menu Menu { get; set; } 
+    }
+
+    /// <summary>
+    /// Класс для таблицы категорий блюд
+    /// </summary>
+    public class CategoryMenuItem
+    {
+        /// <summary>
+        /// Id категории
+        /// </summary>
+        public int CategoryMenuItemID { get; set; }
+
+        /// <summary>
+        /// Название категории
+        /// </summary>
+        public string Name { get; set; }
     }
 
     /// <summary>

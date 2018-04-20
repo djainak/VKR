@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201804201854543_DB_200418.Designer.cs">
       <DependentUpon>201804201854543_DB_200418.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804202026156_DB_200418_2.cs" />
+    <Compile Include="Migrations\201804202026156_DB_200418_2.Designer.cs">
+      <DependentUpon>201804202026156_DB_200418_2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contexts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -306,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804201854543_DB_200418.resx">
       <DependentUpon>201804201854543_DB_200418.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804202026156_DB_200418_2.resx">
+      <DependentUpon>201804202026156_DB_200418_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

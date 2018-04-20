@@ -291,7 +291,7 @@ namespace VKR.Controllers
             menuItem.Name = name;
             menuItem.Ingredients = ingredients;
             menuItem.Price = price;
-            menuItem.Category = category;
+            //menuItem.Category = category;
 
             //Добавляем новый пункт меню в БД
             using (var db = new Contexts())
@@ -320,6 +320,10 @@ namespace VKR.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Метод, обрабатывающий изменение меню
+        /// </summary>
+        /// <returns>Перенаправляет на страницу со списком меню</returns>
         [HttpPost]
         public ActionResult ChMenu()
         {
@@ -401,7 +405,7 @@ namespace VKR.Controllers
             {
                 db.MenuItems.Find(menuItemId).Name = HttpContext.Request.Form["Name"];
                 db.MenuItems.Find(menuItemId).Ingredients = HttpContext.Request.Form["Ingredients"];
-                db.MenuItems.Find(menuItemId).Category = HttpContext.Request.Form["Category"];
+                //db.MenuItems.Find(menuItemId).Category = HttpContext.Request.Form["Category"];
                 db.MenuItems.Find(menuItemId).Price = Convert.ToInt32(HttpContext.Request.Form["Price"]);
                 db.SaveChanges();
             }
