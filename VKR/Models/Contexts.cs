@@ -104,6 +104,11 @@ namespace VKR.Models
         public CategoryMenuItem Category { get; set; }
 
         /// <summary>
+        /// Ключ к категориям блюд
+        /// </summary>
+        public int CategoryMenuItemId { get; set; }
+
+        /// <summary>
         /// Внешний ключ на меню, в котором лежит пункт меню
         /// </summary>
         public int MenuId { get; set; }

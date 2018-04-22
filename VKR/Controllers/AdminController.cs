@@ -187,7 +187,16 @@ namespace VKR.Controllers
             int id = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+            List<string> a = new List<string>();
 
+            using (var db = new Contexts())
+            {
+                foreach (var c in db.CategoryMenuItem)
+                {
+                    a.Add(c.Name);
+                }
+            }
+            ViewBag.Category = a;
             ViewBag.MenuId = id;
             return View();
         }
@@ -218,6 +227,11 @@ namespace VKR.Controllers
                 {
                     ViewBag.MenuId = id;
                     List<MenuItem> menuItems = db.MenuItems.Where(ent => ent.MenuId == id).ToList();
+                    foreach (var c in menuItems)
+                    {
+                        c.Category = db.CategoryMenuItem.Where(cc =>cc.CategoryMenuItemID == c.CategoryMenuItemId).FirstOrDefault();
+                        
+                    }
                     ViewBag.MenuItems = menuItems;
                 }
             }
@@ -291,11 +305,11 @@ namespace VKR.Controllers
             menuItem.Name = name;
             menuItem.Ingredients = ingredients;
             menuItem.Price = price;
-            //menuItem.Category = category;
 
             //Добавляем новый пункт меню в БД
             using (var db = new Contexts())
             {
+                menuItem.Category = db.CategoryMenuItem.Where(c => c.Name == category).FirstOrDefault();
                 db.MenuItems.Add(menuItem);
                 db.SaveChanges();
             }

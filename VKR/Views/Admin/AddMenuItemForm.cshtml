@@ -31,7 +31,7 @@ else
         <tr value=@menuItem.Id>
             <td>@menuItem.Name</td>
             <td>@menuItem.Ingredients</td>
-            <td>@menuItem.Category</td>
+            <td>@menuItem.Category.Name</td>
             <td>@menuItem.Price</td>
             <td><a href="../Admin/ChangeMenuItem?UserId=@ViewBag.UserID&MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId">Редактировать</a></td>
             <td><input type="button" value="Удалить" class="remove-menu-item" /></td>

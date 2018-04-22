@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>ListMenuItems</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
 </head>
 <body>
     <a href="../Admin/AddMenuItemForm?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID">Вернуться к списку блюд</a>
@@ -24,8 +26,13 @@
             <input type="text" name="Ingredients" placeholder="Ingredients" />
             <br />
             <br />
-            <p>Введите категорию:</p>
-            <input type="text" name="Category" placeholder="Category" required/>
+            <p>Выберите категорию:</p> 
+            <select id="category" name="Category" required>
+                @foreach (var c in ViewBag.Category)
+        {
+                <option>@c</option>
+        }   
+            </select>
             <br />
             <br />
             <p>Введите цену:</p>
@@ -34,6 +41,10 @@
             <br />
             <input type="submit" />
         </form>
+
+        <script>
+            $("#category").selectmenu();
+        </script>
     </div>
 </body>
 </html>
