@@ -92,18 +92,23 @@ namespace VKR.Controllers
             {
                 List<Menu> menues = db.Menues.ToList();
                 ViewBag.Menues = menues;
-                foreach(Menu menu in db.Menues)
+                if (menues.Count != 0)
                 {
-                    if (menu.Status)
+                    foreach (Menu menu in db.Menues)
                     {
-                        @ViewBag.NameMenu = menu.Name;
+                        if (menu.Status)
+                        {
+                            @ViewBag.NameMenu = menu.Name;
+                        }
+                    }
+                    if (@ViewBag.NameMenu == null)
+                    {
+                        db.Menues.FirstOrDefault().Status = true;
+                        @ViewBag.NameMenu = db.Menues.FirstOrDefault().Name;
                     }
                 }
-                if (@ViewBag.NameMenu == null)
-                {
-                    db.Menues.FirstOrDefault().Status = true;
-                    @ViewBag.NameMenu = db.Menues.FirstOrDefault().Name;
-                }
+                else
+                    @ViewBag.NameMenu = "Нет доступных меню";
             }
 
             return View();
@@ -398,14 +403,24 @@ namespace VKR.Controllers
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
             ViewBag.MenuId = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
             ViewBag.MenuItemId = Convert.ToInt32(HttpContext.Request.Params["MenuItemId"]);
+            List<string> a = new List<string>();
 
             using (var db = new Contexts())
             {
                 ViewBag.MenuItem = db.MenuItems.Find(ViewBag.MenuItemId);
+                foreach (var c in db.CategoryMenuItem)
+                {
+                    a.Add(c.Name);
+                }
+                ViewBag.Category = a;
             }
             return View();
         }
 
+        /// <summary>
+        /// Метод, обрабатывающий изменение пункта меню
+        /// </summary>
+        /// <returns>Перенаправление на страницу со списком блюд меню</returns>
         [HttpPost]
         public ActionResult ChMenuItem()
         {
@@ -413,13 +428,14 @@ namespace VKR.Controllers
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
             ViewBag.MenuId = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
             int menuItemId = Convert.ToInt32(HttpContext.Request.Params["MenuItemId"]);
+            string category = HttpContext.Request.Form["Category"];
 
             //Изменяем пункт меню в БД
             using (var db = new Contexts())
             {
                 db.MenuItems.Find(menuItemId).Name = HttpContext.Request.Form["Name"];
                 db.MenuItems.Find(menuItemId).Ingredients = HttpContext.Request.Form["Ingredients"];
-                //db.MenuItems.Find(menuItemId).Category = HttpContext.Request.Form["Category"];
+                db.MenuItems.Find(menuItemId).Category = db.CategoryMenuItem.Where(c => c.Name == category).FirstOrDefault();
                 db.MenuItems.Find(menuItemId).Price = Convert.ToInt32(HttpContext.Request.Form["Price"]);
                 db.SaveChanges();
             }
