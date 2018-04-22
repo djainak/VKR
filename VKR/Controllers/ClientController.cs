@@ -19,6 +19,10 @@ namespace VKR.Controllers
         [HttpGet]
         public ActionResult MenuPage()
         {
+            using (var db = new Contexts())
+            {
+                ViewBag.Category = db.CategoryMenuItem.ToList();
+            }
             return View();
         }
     }
