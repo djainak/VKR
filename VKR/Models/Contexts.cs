@@ -71,14 +71,6 @@ namespace VKR.Models
         /// Товары, входящие в меню
         /// </summary>
         public virtual List<MenuItem> MenuItems { get; set; }
-
-        public MenuItem MenuItem
-        {
-            get => default(MenuItem);
-            set
-            {
-            }
-        }
     }
 
     /// <summary>
@@ -125,14 +117,6 @@ namespace VKR.Models
         /// Объект меню, на который ссылается пункт
         /// </summary>
         public Menu Menu { get; set; }
-
-        public CategoryMenuItem CategoryMenuItem
-        {
-            get => default(CategoryMenuItem);
-            set
-            {
-            }
-        }
     }
 
     /// <summary>
@@ -254,22 +238,6 @@ namespace VKR.Models
         /// Товары, входящие в заказ и их количество
         /// </summary>
         public virtual Dictionary<MenuItem, int> CartMenuItems { get; set; }
-
-        public User User
-        {
-            get => default(User);
-            set
-            {
-            }
-        }
-
-        public MenuItem MenuItem
-        {
-            get => default(MenuItem);
-            set
-            {
-            }
-        }
     }
 
     /// <summary>
@@ -311,13 +279,5 @@ namespace VKR.Models
         /// Интервал, в который приготавливается определенное в Dishes количество блюд
         /// </summary>
         public int Interval { get; set; }
-
-        public User User
-        {
-            get => default(User);
-            set
-            {
-            }
-        }
     }
 }

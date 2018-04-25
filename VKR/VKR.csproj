@@ -162,6 +162,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Style\fonts\" />
     <Folder Include="Content\Style\img\" />
+    <Folder Include="Views\FilterMenuItems\" />
     <Folder Include="Views\UserBased\" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +201,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\FilterMenuItemsController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\UserBasedController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -239,6 +241,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Style\css\jquery-ui.css" />
+    <Content Include="Content\Style\css\menuPage.css" />
     <Content Include="Content\Style\css\pushy.css" />
     <Content Include="Content\Style\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\Style\css\images\ui-bg_glass_65_ffffff_1x400.png" />

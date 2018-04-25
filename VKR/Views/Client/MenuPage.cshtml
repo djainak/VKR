@@ -8,7 +8,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Style/css/menuPage.css" rel="stylesheet" />
     <title>Меню</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </head>
 <body>
     <div>
@@ -16,10 +18,40 @@
             <tr>
                 @foreach (var category in ViewBag.Category)
                 {
-                    <td><a id="">@category.Name</a></td>
+                    <td><a class="category-filter" id="@category.CategoryMenuItemID">@category.Name</a></td>
                 }
             </tr>
-            </table>
+        </table>
     </div>
+    <div id="div" class="divstyle">
+
+    </div>
+    <script>
+        $(".category-filter").on("click", function () {
+            var id = $(this).attr("id")
+                $.ajax({
+                    url: "../api/filterMenuItems",
+                    data: "id=" + id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (json) {
+                        //Очищаем 
+                        $("#div").empty();
+
+                        //Преобразовываем JSON
+                        var json_parse = JSON.parse(json);
+                        for (var i = 0; i < json_parse.length; i++) {
+                            var block = '<div value="' + json_parse[i]["Id"] + '" class="left"><p>'
+                                + json_parse[i]["Name"] + '</p></div>';
+                            
+                            //var header = '<h2>' + json_parse[i]["Name"] + '</h2>';
+
+                            //Добавляем в div
+                            document.getElementById('div').innerHTML += block;
+                        }
+                    }
+                })
+            })
+    </script>
 </body>
 </html>

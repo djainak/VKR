@@ -1,0 +1,13 @@
+﻿.left {
+
+    width: calc(25% - 15px);
+}
+
+.divstyle:after {
+
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
