@@ -162,6 +162,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Style\fonts\" />
     <Folder Include="Content\Style\img\" />
+    <Folder Include="Views\EditingRights\" />
     <Folder Include="Views\FilterMenuItems\" />
     <Folder Include="Views\UserBased\" />
   </ItemGroup>
@@ -381,6 +382,8 @@
     <Content Include="Views\Registration\SignUp.cshtml" />
     <Content Include="Views\Client\MenuPage.cshtml" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <Content Include="Views\Admin\ListUsers.cshtml" />
+    <Content Include="Views\Admin\ChangeUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801172013451_initial.resx">

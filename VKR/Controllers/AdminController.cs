@@ -7,6 +7,9 @@ using VKR.Models;
 
 namespace VKR.Controllers
 {
+    /// <summary>
+    /// Контроллер, реализующий логику администраторской части сайта
+    /// </summary>
     public class AdminController : UserBasedController
     {
 
@@ -477,6 +480,77 @@ namespace VKR.Controllers
             }
 
             return View();
+        }
+
+        /// <summary>
+        /// Вывод на экран всех пользователей и их фильтрация
+        /// </summary>
+        /// <returns>Страница со списком пользователей</returns>
+        [HttpGet]
+        public ActionResult ListUsers()
+        {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+
+            using (var db = new Contexts())
+            {
+                ViewBag.Users = db.Users.ToList();
+            }
+            return View();
+        }
+
+        /// <summary>
+        /// Редактирование пользователя
+        /// </summary>
+        /// <returns>Форма редактирования пользователя</returns>
+        [HttpGet]
+        public ActionResult ChangeUser()
+        {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+
+            using (var db = new Contexts())
+            {
+                ViewBag.RedUser = db.Users.Find(Convert.ToInt32(HttpContext.Request.Params["RedUserId"]));
+            }
+
+            return View();
+        }
+
+        /// <summary>
+        /// Метод, обрабатывающий изменение данных о пользователе
+        /// </summary>
+        /// <returns>Перенаправление на страницу со списком пользователей</returns>
+        [HttpPost]
+        public ActionResult ChUser()
+        {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+            int RedUserId = Convert.ToInt32(HttpContext.Request.Params["ID"]);
+            string Entitlement = HttpContext.Request.Form["Entitlement"];
+            int status;
+            if (Entitlement == "Покупатель")
+                status = 0;
+            else if (Entitlement == "Модератор")
+                status = 1;
+            else
+                status = 2;
+
+
+                using (var db = new Contexts())
+            {
+                User user = db.Users.Find(RedUserId);
+                user.Login = HttpContext.Request.Form["Login"];
+                user.Email = HttpContext.Request.Form["Email"];
+                user.FirstName = HttpContext.Request.Form["FirstName"];
+                user.Name = HttpContext.Request.Form["Name"];
+                user.Patronymic = HttpContext.Request.Form["Patronymic"];
+                user.PhoneNumber = HttpContext.Request.Form["PhoneNumber"];
+                user.Status = status;
+                db.SaveChanges();
+            }
+            
+            return Redirect("../Admin/ListUsers?UserId=" + ViewBag.UserID);
         }
     }
 }
