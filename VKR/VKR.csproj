@@ -232,6 +232,14 @@
     <Compile Include="Migrations\201804221820159_DB_220418.Designer.cs">
       <DependentUpon>201804221820159_DB_220418.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805031341263_DB_030518.cs" />
+    <Compile Include="Migrations\201805031341263_DB_030518.Designer.cs">
+      <DependentUpon>201805031341263_DB_030518.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805031424492_DB_0305181.cs" />
+    <Compile Include="Migrations\201805031424492_DB_0305181.Designer.cs">
+      <DependentUpon>201805031424492_DB_0305181.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contexts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -255,6 +263,7 @@
     <Content Include="Content\Style\css\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\Style\css\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\Style\js\jquery-ui.js" />
+    <Content Include="Content\Style\js\plusminus.js" />
     <Content Include="Content\Style\js\pushy.min.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -383,6 +392,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804221820159_DB_220418.resx">
       <DependentUpon>201804221820159_DB_220418.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805031341263_DB_030518.resx">
+      <DependentUpon>201805031341263_DB_030518.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805031424492_DB_0305181.resx">
+      <DependentUpon>201805031424492_DB_0305181.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

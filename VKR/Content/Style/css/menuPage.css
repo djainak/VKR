@@ -11,3 +11,11 @@
     clear: both;
     visibility: hidden;
 }
+
+.rub {
+    display: inline-block;
+    font-size: 24px;
+    line-height: 7px;
+    border-bottom: 1px solid #000000;
+    width: 0.4em;
+}

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +26,12 @@ namespace VKR.Controllers
         public string Get(int id)
         {
             List<MenuItem> menuitems = new List<MenuItem>();
+            int menu_id;
             using (var db = new Contexts())
             {
                 //добавить проверку на выгрузку из действующего меню
-                //Menu menu = db.Menues.Where(m => m.Status == true).FirstOrDefault(); && m.Menu == menu
-                menuitems = db.MenuItems.Where(m => m.CategoryMenuItemId == id).ToList();
+                menu_id = db.Menues.Where(m => m.Status == true).FirstOrDefault().Id; 
+                menuitems = db.MenuItems.Where(m => (m.CategoryMenuItemId == id && m.MenuId == menu_id)).ToList();
             }
 
             return JsonConvert.SerializeObject(menuitems);

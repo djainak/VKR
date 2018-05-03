@@ -40,6 +40,11 @@ namespace VKR.Models
         /// Коллекция данных, загружаемая из БД, с данными из таблицы точек питания
         /// </summary>
         public DbSet<DinningRoom> DinningRooms { get; set; }
+
+        /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными о рабочих и нерабочих днях
+        /// </summary>
+        public DbSet<DayWork> DayWork { get; set; }
     }
 
     /// <summary>
@@ -276,8 +281,40 @@ namespace VKR.Models
         public int Dishes { get; set; }
 
         /// <summary>
-        /// Интервал, в который приготавливается определенное в Dishes количество блюд
+        /// Интервал, в который приготавливается определенное в Dishes количество блюд в минутах
         /// </summary>
         public int Interval { get; set; }
+    }
+
+    /// <summary>
+    /// Класс рабочих и нерабочих дней
+    /// </summary>
+    public class DayWork
+    {
+        /// <summary>
+        /// Уникальный идентификатор дня
+        /// </summary>
+        public int DayWorkID { get; set; }
+
+        /// <summary>
+        /// Название дня недели
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Время начала рабочего дня
+        /// </summary>
+        public string StartDay { get; set; }
+
+        /// <summary>
+        /// Время окончания рабочего дня
+        /// </summary>
+        public string EndDay { get; set; }
+        /// <summary>
+        /// Рабочий или нерабочий день
+        /// 0 - нерабочий
+        /// 1 - рабочий
+        /// </summary>
+        public bool IsWorkDay { get; set; }
     }
 }
