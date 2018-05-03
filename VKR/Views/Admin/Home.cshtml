@@ -39,6 +39,23 @@
             <p>Контактное лицо:  @ViewBag.Manager.FirstName @ViewBag.Manager.Name @ViewBag.Manager.Patronymic</p>
             <br />
             <p>Количество блюд/интервал времени: @ViewBag.DinningRoom.Dishes / @ViewBag.DinningRoom.Interval</p>
+            <br />
+            <p>Рабочие дни: </p>
+            <table style="width: 100%; border: 1px solid gray" border="1">
+                <tr>
+                    <th style="width: 30%">День</th>
+                    <th style="width: 35%">Начало рабочего дня</th>
+                    <th style="width: 35%">Окончание рабочего дня</th>
+                </tr>
+                @foreach (var day in ViewBag.WorkDays)
+    {
+                <tr value=@day.DayWorkID>
+                    <td>@day.Name</td>
+                    <td>@day.StartDayHour : @day.StartDayMin</td>
+                    <td>@day.EndDayHour : @day.EndDayMin</td>
+                </tr>
+}
+            </table>
         </div>
     </div>
     <script src="~/Content/Style/js/pushy.min.js"></script>

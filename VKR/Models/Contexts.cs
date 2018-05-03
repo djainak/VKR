@@ -302,19 +302,36 @@ namespace VKR.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Время начала рабочего дня
+        /// Время начала рабочего дня часы
         /// </summary>
-        public string StartDay { get; set; }
+        public string StartDayHour { get; set; }
 
         /// <summary>
-        /// Время окончания рабочего дня
+        /// Время начала рабочего дня минуты
         /// </summary>
-        public string EndDay { get; set; }
+        public string StartDayMin { get; set; }
+
+        /// <summary>
+        /// Время окончания рабочего дня часы
+        /// </summary>
+        public string EndDayHour { get; set; }
+
+        /// <summary>
+        /// Время окончания рабочего дня минуты
+        /// </summary>
+        public string EndDayMin { get; set; }
+
         /// <summary>
         /// Рабочий или нерабочий день
         /// 0 - нерабочий
         /// 1 - рабочий
         /// </summary>
         public bool IsWorkDay { get; set; }
+
+        /// <summary>
+        /// Внешний ключ на точку питания, к которой привязан день
+        /// </summary>
+        public int DinningRoomID { get; set; }
+
     }
 }

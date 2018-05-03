@@ -22,6 +22,8 @@ namespace VKR.Controllers
             using (var db = new Contexts())
             {
                 ViewBag.DinningRoom = db.DinningRooms.FirstOrDefault();
+                ViewBag.WorkDays = db.DayWork.Where(d=> d.IsWorkDay == true)
+                    .ToList();
                 ViewBag.Manager = db.Users.Where(c => c == db.DinningRooms.FirstOrDefault().Manager).FirstOrDefault();
             }
 
@@ -39,6 +41,7 @@ namespace VKR.Controllers
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
             using (var db = new Contexts())
             {
+                ViewBag.WorkDays = db.DayWork.ToList();
                 ViewBag.DinningRoom = db.DinningRooms.FirstOrDefault();
                 ViewBag.Manager = db.Users.Where(c => c == db.DinningRooms.FirstOrDefault().Manager).FirstOrDefault();
             }
@@ -73,6 +76,22 @@ namespace VKR.Controllers
                 db.DinningRooms.FirstOrDefault().Dishes = Dishes;
                 db.DinningRooms.FirstOrDefault().Interval = Interval;
                 db.DinningRooms.FirstOrDefault().Manager = db.Users.Where(c => c.Login == login).FirstOrDefault();
+
+                foreach (var day in db.DayWork)
+                {
+                    int id = Convert.ToInt32(HttpContext.Request.Params[day.DayWorkID.ToString()]);
+                    if (id == day.DayWorkID)
+                    {
+                        day.IsWorkDay = true;
+                    }
+                    else
+                        day.IsWorkDay = false;
+
+                    day.StartDayHour = HttpContext.Request.Params["StDH_" + day.DayWorkID];
+                    day.StartDayMin = HttpContext.Request.Params["StDM_" + day.DayWorkID];
+                    day.EndDayHour = HttpContext.Request.Params["EDH_" + day.DayWorkID]; 
+                    day.EndDayMin = HttpContext.Request.Params["EDM_" + day.DayWorkID];
+                }
                 db.SaveChanges();
             }
 

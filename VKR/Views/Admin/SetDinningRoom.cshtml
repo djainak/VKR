@@ -28,6 +28,21 @@
                 <p>/</p>
                 <input type="number" name="Interval" value="@ViewBag.DinningRoom.Interval" required>
                 <br />
+                <p>Рабочие дни: </p>
+                @foreach (var day in ViewBag.WorkDays)
+    {
+        if (day.IsWorkDay)
+        {
+            <p><input type="checkbox" name="@day.DayWorkID" id="@day.DayWorkID" value="@day.DayWorkID" checked />@day.Name</p>
+}
+else
+{
+            <p><input type="checkbox" name="@day.DayWorkID" id="@day.DayWorkID" value="@day.DayWorkID" />@day.Name</p>
+}
+            <p>Начало рабочего дня: <input type="number" name="StDH_@day.DayWorkID" value="@day.StartDayHour" />:<input type="number" name="StDM_@day.DayWorkID" value="@day.StartDayMin" /></p>
+            <p>Конец рабочего дня: <input type="number" name="EDH_@day.DayWorkID" value="@day.EndDayHour" />:<input type="number" name="EDM_@day.DayWorkID" value="@day.EndDayMin" /></p>
+            <br />
+}
                 <a href="../Admin/Home?UserId=@ViewBag.UserID">Отмена</a>
                 <br />
                 <input type="submit" value="Сохранить">
