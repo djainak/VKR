@@ -9,24 +9,42 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Добавление нового меню</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
+    <link href="~/Content/Style/css/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
 </head>
 <body>
-    <div>
-        <a href="../Admin/MenuList?UserId=@ViewBag.UserID">Вернуться к списку меню</a>
+    <div class="mainstyle">
         <br />
-        <form method="post" action="./AddMenu?UserId=@ViewBag.UserID" style="background: #ccc; border: 1px solid black; padding: 20px;">
+        <a href="../Admin/MenuList?UserId=@ViewBag.UserID" class="but">Вернуться к списку меню</a>
+        <br />
+        <br />
+    </div>
+    <div class="allform">
+        <form method="post" action="./AddMenu?UserId=@ViewBag.UserID">
+            <h2>Добавление нового меню</h2>
             <input type="hidden" value="@ViewBag.MenuId" name="MenuId" />
             <p>Введите название меню:</p>
-            <input type="text" name="Name" placeholder="Name" required />
+            <input type="text" name="Name" placeholder="Название меню" required />
             <br />
             <br />
             <p>Введите описание меню:</p>
-            <input type="text" name="Description" placeholder="Description" />
+            <input type="text" name="Description" placeholder="Описание меню" />
             <br />
             <br />
-            <p><input type="checkbox" name="UseThisMenu" value="true"> Выбрать данное меню основным</p>
-            <input type="submit" />
+            <label style="font-weight:500">
+                <input class="checkbox" type="checkbox" name="UseThisMenu" value="true">
+                <span class="checkbox-custom"></span>
+                <span class="label">Выбрать данное меню основным</span>
+            </label>
+            <br />
+            <br />
+            <input type="submit" class="but" />
         </form>
     </div>
+    <script>
+        $(".but").button();
+    </script>
 </body>
 </html>

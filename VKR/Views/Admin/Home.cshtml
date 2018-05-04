@@ -8,8 +8,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
     <title>О точке питания</title>
 </head>
 <body>
@@ -24,7 +26,7 @@
         </nav>
     </div>
         <div class="mainstyle">
-            <a href="../Admin/SetDinningRoom?UserId=@ViewBag.UserID">Настройки</a>
+            <a href="../Admin/SetDinningRoom?UserId=@ViewBag.UserID" class="but">Настройки</a>
             <br />
             <p><label>Адрес точки: </label>@ViewBag.DinningRoom.Adress</p>
             <p><label>Телефон: </label>@ViewBag.DinningRoom.PhoneNum</p>
@@ -50,7 +52,8 @@
 }
             </table>
         </div>
-    </div>
-    <script src="~/Content/Style/js/pushy.min.js"></script>
+    <script>
+        $(".but").button();
+    </script>
 </body>
 </html>

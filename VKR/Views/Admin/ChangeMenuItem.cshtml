@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Изменить блюдо</title>
+    <title>Редактирование пункта меню</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="~/Content/Style/js/jquery-ui.js"></script>
     <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
@@ -21,8 +21,8 @@
         <br />
     </div>
     <div class="allform">
-        <h2>Изменение пункта меню</h2>
         <form method="post" action="./ChMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID&MenuItemId=@ViewBag.MenuItemId">
+            <h2>Редактирование пункта меню</h2>
             <p>Введите название блюда:</p>
             <input type="text" name="Name" value="@ViewBag.MenuItem.Name" required />
             <br />

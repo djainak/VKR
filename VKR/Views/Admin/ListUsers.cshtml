@@ -27,6 +27,7 @@
     </div>
     <div>
         <div class="mainstyle">
+            <h2>Настройка прав пользователей</h2>
             <p>
                 Фамилия: <input type="text" id="FirstName" />
                 Имя: <input type="text" id="Name" />
@@ -37,17 +38,17 @@
                 E-mail: <input type="email" id="Email" />
                 Телефон: <input type="tel" id="PhoneNumber" />
             </p>
-            <label>
+            <label style="font-weight: 500">
                 <input class="checkbox" type="checkbox" id="0" value="Покупатель" checked>
                 <span class="checkbox-custom"></span>
                 <span class="label">Покупатель</span>
             </label>
-            <label>
+            <label style="font-weight: 500">
                 <input class="checkbox" type="checkbox" id="1" value="Модератор" checked>
                 <span class="checkbox-custom"></span>
                 <span class="label">Модератор</span>
             </label>
-            <label>
+            <label style="font-weight: 500">
                 <input class="checkbox" type="checkbox" id="2" value="Администратор" checked>
                 <span class="checkbox-custom"></span>
                 <span class="label">Администратор</span>
@@ -63,32 +64,33 @@
                     <th style="width: 15%">Права</th>
                     <th style="width: 10%">Email</th>
                     <th style="width: 10%">Телефон</th>
-                    <th style="width: 20%"></th>
                 </tr>
                 @foreach (var user in ViewBag.Users)
                 {
-                    <tr value=@user.UserID>
-                        <td>@user.FirstName @user.Name @user.Patronymic</td>
-                        <td>@user.Login</td>
-                        @if (user.Status == 0)
-                        {
-                            <td>Покупатель</td>
-                        }
-                        else if (user.Status == 1)
-                        {
-                            <td>Модератор</td>
-                        }
-                        else
-                        {
-                            <td>Администратор</td>
-                        }
-                        <td>@user.Email</td>
-                        <td>@user.PhoneNumber</td>
-                        <td>
-                            <a href="../Admin/ChangeUser?UserId=@ViewBag.UserID&RedUserId=@user.UserID" class="red">Редактировать</a>
-                            <input type="button" value="Удалить" class="remove-user" />
-                        </td>
-                    </tr>
+                <tr value=@user.UserID>
+                    <td>@user.FirstName @user.Name @user.Patronymic</td>
+                    <td>@user.Login</td>
+                    @if (user.Status == 0)
+    {
+                <td>Покупатель</td>
+}
+else if (user.Status == 1)
+{
+                <td>Модератор</td>
+}
+else
+{
+                <td>Администратор</td>
+}
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>
+                        <a href="../Admin/ChangeUser?UserId=@ViewBag.UserID&RedUserId=@user.UserID" class="red">Редактировать</a>
+                    </td>
+                    <td>
+                        <input type="button" value="Удалить" class="remove-user" />
+                    </td>
+                </tr>
                 }
             </table>
         </div>
@@ -148,8 +150,7 @@
                     //Шапка таблицы
                     var block = '<table style="width: 95%; border: 0px" border="1"><tr><th style="width: 30%">ФИО</th>'
                         + '<th style="width: 15%">Логин</th>' + '<th style="width: 15%">Права</th>'
-                        + '<th style="width: 10%">Email</th>' + '<th style="width: 10%">Телефон</th>'
-                        + '<th style="width: 20%"></th></tr>';
+                        + '<th style="width: 10%">Email</th>' + '<th style="width: 10%">Телефон</th></tr>';
 
                     for (var i = 0; i < json_parse.length; i++) {
                         block = block + '<tr value=' + json_parse[i]["UserID"] + '><td>' + json_parse[i]["FirstName"]
@@ -167,7 +168,7 @@
                         }
                         block = block + '<td>' + json_parse[i]["Email"] + '</td><td>' + json_parse[i]["PhoneNumber"]
                             + '</td><td>' + '<a href="../Admin/ChangeUser?UserId=@ViewBag.UserID&RedUserId='
-                            + json_parse[i]["UserID"] + '" class="red">Редактировать</a><input type="button" value="Удалить" class="remove-user" />'
+                            + json_parse[i]["UserID"] + '" class="red">Редактировать</a></td><td><input type="button" value="Удалить" class="remove-user" />'
                             + '</td></tr>';
                     }
                     block = block + '</table>';

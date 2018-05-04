@@ -12,10 +12,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="~/Content/Style/js/jquery-ui.js"></script>
     <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
 </head>
 <body>
     <div>
-        <div>
+        <div class="allform">
+            <h2>Настройка точки питания</h2>
             <form method="post" action="./SetDR?UserId=@ViewBag.UserID">
                 <div>
                     <p>Адрес точки: </p>
@@ -45,16 +47,20 @@ else
 {
                 <p><input type="checkbox" name="@day.DayWorkID" id="@day.DayWorkID" value="@day.DayWorkID" />@day.Name</p>
 }
-                <p>Начало рабочего дня: <input type="number" name="StDH_@day.DayWorkID" value="@day.StartDayHour" />:<input type="number" name="StDM_@day.DayWorkID" value="@day.StartDayMin" /></p>
-                <p>Конец рабочего дня: <input type="number" name="EDH_@day.DayWorkID" value="@day.EndDayHour" />:<input type="number" name="EDM_@day.DayWorkID" value="@day.EndDayMin" /></p>
+                <p>Начало рабочего дня: <input type="number" name="StDH_@day.DayWorkID" value="@day.StartDayHour" style="width: 50px"/>:<input type="number" name="StDM_@day.DayWorkID" value="@day.StartDayMin" style="width: 50px"/></p>
+                <p>Конец рабочего дня: <input type="number" name="EDH_@day.DayWorkID" value="@day.EndDayHour" style="width: 50px"/>:<input type="number" name="EDM_@day.DayWorkID" value="@day.EndDayMin" style="width: 50px"/></p>
                 <br />
 }
                 </div>
-                <a href="../Admin/Home?UserId=@ViewBag.UserID">Отмена</a>
-                <br />
-                <input type="submit" value="Сохранить">
+                <p>
+                    <a href="../Admin/Home?UserId=@ViewBag.UserID" class="but">Отмена</a>
+                    <input type="submit" value="Сохранить" class="but">
+                </p>
             </form>
         </div>
     </div>
+    <script>
+        $(".but").button();
+    </script>
 </body>
 </html>

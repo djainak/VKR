@@ -8,9 +8,11 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <title>Меню</title>
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
+    <title>Список меню</title>
 </head>
 <body>
     <div>
@@ -24,26 +26,30 @@
         </nav>
     </div>
     <div class="mainstyle">
-        <a href="../Admin/AddNewMenu?UserId=@ViewBag.UserID">Добавить меню</a>
+        <h2>Список меню</h2>
+        <br />
+        <a href="../Admin/AddNewMenu?UserId=@ViewBag.UserID" class="but">Добавить меню</a>
         <br />
         <br />
-        <p id="main_m">В качестве основного меню выбрано: @ViewBag.NameMenu</p>
+        <p id="main_m"><label>В качестве основного меню выбрано: </label>@ViewBag.NameMenu</p>
         <table style="width: 95%; border: 1px solid gray" border="1">
             <tr>
                 <th style="width: 30%">Название</th>
                 <th style="width: 60%">Описание</th>
             </tr>
             @foreach (var menu in ViewBag.Menues)
-            {
+        {
             <tr value=@menu.Id>
                 <td><a href="../Admin/AddMenuItemForm?MenuId=@menu.Id&UserId=@ViewBag.UserID">@menu.Name</a></td>
                 <td>@menu.Description</td>
-                <td><a href="../Admin/ChangeMenu?UserId=@ViewBag.UserID&MenuId=@menu.Id">Редактировать</a></td>
+                <td><a href="../Admin/ChangeMenu?UserId=@ViewBag.UserID&MenuId=@menu.Id" class="but">Редактировать</a></td>
                 <td><input type="button" value="Удалить" class="remove-menu" /></td>
             </tr>
-            }
+    }
         </table>
         <script>
+            $(".but").button();
+            $(".remove-menu").button();
             $(".remove-menu").on("click", function () {
                 var button = $(this);
                 var str = button.parent().parent();
@@ -59,7 +65,5 @@
             })
         </script>
     </div>
-
-    <script src="~/Content/Style/js/pushy.min.js"></script>
 </body>
 </html>

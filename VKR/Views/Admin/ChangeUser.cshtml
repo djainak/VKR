@@ -16,8 +16,8 @@
 </head>
 <body>
     <div class="allform">
-        <h2>Редактирование пользователя</h2>
         <form method="post" action="./ChUser?UserId=@ViewBag.UserID">
+            <h2>Редактирование пользователя</h2>
             <input type="number" name="ID" value="@ViewBag.RedUser.UserID" hidden />
             <p>Логин:</p>
             <input type="text" name="Login" id="Login" value="@ViewBag.RedUser.Login" required />

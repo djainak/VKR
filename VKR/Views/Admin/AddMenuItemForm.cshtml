@@ -3,9 +3,9 @@
 }
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width" />
-    <title>Добавление пункта меню</title>
+    <title>Список пунктов меню</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
     <link href="~/Content/Style/css/jquery-ui.css" rel="stylesheet" />
     <script src="~/Content/Style/js/jquery-ui.js"></script>
@@ -21,21 +21,20 @@
             </ul>
         </nav>
     </div>
-    <div>
+    <div class="mainstyle">
+        <h2>Список пунктов меню</h2>
         @if (ViewBag.isError)
         {
             <p style="color: red; font-size: 18px;">Данное меню не существует</p>
         }
         else
         {
-            <div class="mainstyle">
+            <p>
                 <a href="../Admin/ListMenuItems?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID" class="but">Добавить пункт меню</a>
-                <br />
-                <br />
                 <a href="../Admin/MenuList?UserId=@ViewBag.UserID" class="but">Вернуться к списку меню</a>
                 <br />
                 <br />
-            </div>
+            </p>
             <table style="width: 95%; border: 1px solid gray" border="1">
                 <tr>
                     <th style="width: 20%">Название</th>

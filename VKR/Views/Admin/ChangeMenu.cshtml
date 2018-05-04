@@ -22,8 +22,8 @@
         <br />
     </div>
     <div class="allform">
-        <h2>Изменение меню</h2>
         <form method="post" action="./ChMenu?UserId=@ViewBag.UserID&MenuId=@ViewBag.Menu.Id">
+            <h2>Редактирование меню</h2>
             <p>Введите название меню:</p>
             <input type="text" name="Name" value="@ViewBag.Menu.Name" required />
             <br />
@@ -32,7 +32,7 @@
             <input type="text" name="Description" value="@ViewBag.Menu.Description" />
             <br />
             <br />
-            <label>
+            <label style="font-weight:500">
                 <input class="checkbox" type="checkbox" name="UseThisMenu" value="true">
                 <span class="checkbox-custom"></span>
                 <span class="label">Выбрать данное меню основным</span>

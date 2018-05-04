@@ -12,38 +12,45 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="~/Content/Style/js/jquery-ui.js"></script>
     <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
 </head>
 <body>
-    <a href="../Admin/AddMenuItemForm?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID">Вернуться к списку блюд</a>
-    <br />
-    <div>
-        <form method="post" action="./NewMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID" style="background: #ccc; border: 1px solid black; padding: 20px;">
+    <div class="mainstyle">
+        <br />
+        <a href="../Admin/AddMenuItemForm?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID" class="but">Вернуться к списку блюд</a>
+        <br />
+        <br />
+    </div>
+    <div class="allform">
+        <form method="post" action="./NewMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID">
+            <h2>Добавление нового пункта меню</h2>
             <p>Введите название блюда:</p>
-            <input type="text" name="Name" placeholder="Name" required />
+            <input type="text" name="Name" placeholder="  Название" required />
             <br />
             <br />
-            <p>Введите состав:</p>
-            <input type="text" name="Ingredients" placeholder="Ingredients" />
+            <p>Введите ингредиенты:</p>
+            <input type="text" name="Ingredients" placeholder="  Ингредиенты" />
             <br />
             <br />
-            <p>Выберите категорию:</p> 
+            <p>Выберите категорию:</p>
             <select id="category" name="Category" required>
                 @foreach (var c in ViewBag.Category)
         {
-                <option>@c</option>
-        }   
+            <option>@c</option>
+}
             </select>
             <br />
             <br />
             <p>Введите цену:</p>
-            <input type="number" name="Price" placeholder="Price" required />
+            <input type="number" name="Price" placeholder="  Цена" required />
             <br />
             <br />
-            <input type="submit" />
+            <input type="submit" class="but" />
         </form>
 
         <script>
             $("#category").selectmenu();
+            $(".but").button();
         </script>
     </div>
 </body>

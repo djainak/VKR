@@ -23,27 +23,26 @@
             </ul>
         </nav>
     </div>
-        <div class="mainstyle">
-            <p>Логин: @ViewBag.User.Login</p>
-            <p>Фамилия:  @ViewBag.User.FirstName</p>
-            <p>Имя: @ViewBag.User.Name</p>
-            <p>Отчество: @ViewBag.User.Patronymic</p>
-            @if (@ViewBag.User.Status == 0)
-    {
-        <p>Статус: Покупатель</p>
-}
-            @if (@ViewBag.User.Status == 1)
-    {
-        <p>Статус: Модератор</p>
-}
-            @if (@ViewBag.User.Status == 2)
-    {
-        <p>Статус: Администратор</p>
-}
-            <p>E-mail: @ViewBag.User.Email</p>
-            <p>Телефон: @ViewBag.User.PhoneNumber</p>
-        </div>
+    <div class="mainstyle">
+        <h2>Личный кабинет</h2>
+        <p><label>Логин: </label>@ViewBag.User.Login</p>
+        <p><label>Фамилия: </label>@ViewBag.User.FirstName</p>
+        <p><label>Имя: </label>@ViewBag.User.Name</p>
+        <p><label>Отчество: </label>@ViewBag.User.Patronymic</p>
+        @if (@ViewBag.User.Status == 0)
+        {
+            <p><label>Статус: </label>Покупатель</p>
+        }
+        @if (@ViewBag.User.Status == 1)
+        {
+            <p><label>Статус: </label>Модератор</p>
+        }
+        @if (@ViewBag.User.Status == 2)
+        {
+            <p><label>Статус: </label>Администратор</p>
+        }
+        <p><label>E-mail: </label>@ViewBag.User.Email</p>
+        <p><label>Телефон: </label>@ViewBag.User.PhoneNumber</p>
     </div>
-    <script src="~/Content/Style/js/pushy.min.js"></script>
 </body>
 </html>
