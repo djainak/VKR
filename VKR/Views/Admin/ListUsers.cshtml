@@ -9,7 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" type="text/css" href="../Content/Style/css/pushy.css">
-    <title>Настройка прав</title>
+    <title>Настройка прав пользователей</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="~/Content/Style/js/jquery-ui.js"></script>
     <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
@@ -23,7 +23,7 @@
                     <li class="pushy-link"><a href="../Admin/Home?UserId=@ViewBag.UserID">О точке питания</a></li>
                     <li class="pushy-link"><a href="../Admin/MenuList?UserId=@ViewBag.UserID">Меню</a></li>
                     <li class="pushy-link"><a href="../Admin/PersonalAccount?UserId=@ViewBag.UserID">Личный кабинет</a></li>
-                    <li class="pushy-link"><a href="../Admin/ListUsers?UserId=@ViewBag.UserID">Настройка прав</a></li>
+                    <li class="pushy-link"><a href="../Admin/ListUsers?UserId=@ViewBag.UserID">Настройка прав пользователей</a></li>
                 </ul>
             </div>
         </nav>
@@ -50,7 +50,7 @@
             <button type="submit" id="search"></button>
         </div>
 
-        <div id="table">
+        <div id="usertable">
             <table style="width: 100%; border: 0px" border="1">
                 <tr>
                     <th style="width: 30%">ФИО</th>
@@ -100,7 +100,6 @@
     </script>
     <script>
         $("#search").on("click", function () {
-            var id = $(this).attr("id")
             $.ajax({
                 url: "../api/filterUsers",
                 data: {
@@ -110,75 +109,48 @@
                     login: $("#Login").val(),
                     tel: $("#PhoneNumber").val(),
                     email: $("#Email").val(),
-                    status0: $("#0").val(),
-                    status1: $("#1").val(),
-                    status2: $("#2").val()
+                    status0: $("#0").prop("checked"),
+                    status1: $("#1").prop("checked"),
+                    status2: $("#2").prop("checked")
                 },
                 type: "GET",
                 dataType: "json",
                 success: function (json) {
                     //Очищаем
-                    $("#table").empty();
+                    $("#usertable").empty();
 
                     //Преобразовываем JSON
                     var json_parse = JSON.parse(json);
+                    console.log(json_parse);
 
                     //Шапка таблицы
                     var block = '<table style="width: 100%; border: 0px" border="1"><tr><th style="width: 30%">ФИО</th>'
                         + '<th style="width: 15%">Логин</th>' + '<th style="width: 15%">Права</th>'
-                        + '<th style="width: 10%">Email</th>' + '<th style="width: 10%">Email</th>'
-                        + '<th style="width: 10%">Телефон</th>' + '<th style="width: 20%"></th></tr>';
-
-                    //Добавляем в div
-                    document.getElementById('table').innerHTML += block;
-
-                @foreach (var user in ViewBag.Users)
-                {
-                    <tr value=@user.UserID>
-                        <td>@user.FirstName @user.Name @user.Patronymic</td>
-                        <td>@user.Login</td>
-                        @if (user.Status == 0)
-                        {
-                            <td>Покупатель</td>
-                        }
-                        else if (user.Status == 1)
-                        {
-                            <td>Модератор</td>
-                        }
-                        else
-                        {
-                            <td>Администратор</td>
-                        }
-                        <td>@user.Email</td>
-                        <td>@user.PhoneNumber</td>
-                        <td>
-                            <a href="../Admin/ChangeUser?UserId=@ViewBag.UserID&RedUserId=@user.UserID">Редактировать</a>
-                            <input type="button" value="Удалить" class="remove-user" />
-                        </td>
-                    </tr>
-                }
-            </table>
-
-
-
-
-
-
-
-
-
+                        + '<th style="width: 10%">Email</th>' + '<th style="width: 10%">Телефон</th>'
+                        + '<th style="width: 20%"></th></tr>';
 
                     for (var i = 0; i < json_parse.length; i++) {
-                        var block = '<div value="' + json_parse[i]["Id"] + '" class="left"><p>'
-                            + json_parse[i]["Name"] + '</p><p>' + json_parse[i]["Price"]
-                            + '<span class="rub">Р</span><div class="minus">-</div>'
-                            + '<input type = "text" value = "1"><div class="plus"> +</div><p>Ингредиенты: </p>'
-                            + json_parse[i]["Ingredients"] + '</br><input type="button" value="Добавить в корзину" class="add-to-cart"/>'
-                            + '</div>';
+                        block = block + '<tr value=' + json_parse[i]["UserID"] + '><td>' + json_parse[i]["FirstName"]
+                            + ' ' + json_parse[i]["Name"] + ' ' + json_parse[i]["Patronymic"] + '</td><td>'
+                            + json_parse[i]["Login"] + '</td>';
 
-                        //Добавляем в div
-                        document.getElementById('div').innerHTML += block;
+                        if (json_parse[i]["Status"] == 0) {
+                            block = block + '<td>Покупатель</td>';
+                        }
+                        else if (json_parse[i]["Status"] == 1) {
+                            block = block +'<td>Модератор</td>';
+                        }
+                        else {
+                            block = block + '<td>Администратор</td>'
+                        }
+                        block = block + '<td>' + json_parse[i]["Email"] + '</td><td>' + json_parse[i]["PhoneNumber"]
+                            + '</td><td>' + '<a href="../Admin/ChangeUser?UserId=@ViewBag.UserID&RedUserId='
+                            + json_parse[i]["UserID"] + '">Редактировать</a><input type="button" value="Удалить" class="remove-user" />'
+                            + '</td></tr>';
                     }
+                    block = block + '</table>';
+                    //Добавляем в div
+                    document.getElementById('usertable').innerHTML += block;
                 }
             })
         })
