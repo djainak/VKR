@@ -107,6 +107,20 @@
         });
     </script>
     <script>
+        $(".remove-user").on("click", function () {
+            var button = $(this);
+            var str = button.parent().parent();
+            $.ajax({
+                url: "../Admin/RemoveUser?id=" + str.attr("value"),
+                type: "POST",
+                dataType: "text",
+                success: function () {
+                    str.remove();
+                }
+            })
+        })
+    </script>
+    <script>
         $("#search").on("click", function () {
             $.ajax({
                 url: "../api/filterUsers",

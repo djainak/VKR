@@ -309,6 +309,26 @@ namespace VKR.Controllers
         }
 
         /// <summary>
+        /// Реализация удаления пользователя из БД
+        /// </summary>
+        /// <returns>Страничка без удаленного пользователя</returns>
+        [HttpPost]
+        public ActionResult RemoveUser()
+        {
+            //Вытаскиваем ид из адреса
+            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
+
+            int id = Convert.ToInt32(HttpContext.Request.Params["id"]);
+            using (var db = new Contexts())
+            {
+                User user = db.Users.Find(id);
+                db.Users.Remove(user);
+                db.SaveChanges();
+            }
+            return Redirect("./ListUsers?UserId=" + ViewBag.UserID);
+        }
+
+        /// <summary>
         /// Создаем новый пункт меню
         /// </summary>
         /// <returns>Переадресация к списку пунктов данного меню</returns>

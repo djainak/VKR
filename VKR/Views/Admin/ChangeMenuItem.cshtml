@@ -11,13 +11,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="~/Content/Style/js/jquery-ui.js"></script>
     <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
 
 </head>
 <body>
-    <a href="../Admin/AddMenuItemForm?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID">Вернуться к списку блюд</a>
-    <br />
-    <div>
-        <form method="post" action="./ChMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID&MenuItemId=@ViewBag.MenuItemId" style="background: #ccc; border: 1px solid black; padding: 20px;">
+    <div class="mainstyle">
+        <a href="../Admin/AddMenuItemForm?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID" class="but">Вернуться к списку блюд</a>
+        <br />
+        <br />
+    </div>
+    <div class="allform">
+        <h2>Изменение пункта меню</h2>
+        <form method="post" action="./ChMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID&MenuItemId=@ViewBag.MenuItemId">
             <p>Введите название блюда:</p>
             <input type="text" name="Name" value="@ViewBag.MenuItem.Name" required />
             <br />
@@ -29,9 +34,9 @@
             <p>Выберите категорию:</p>
             <select id="category" name="Category" required>
                 @foreach (var c in ViewBag.Category)
-            {
-                <option>@c</option>
-        }
+                {
+                    <option>@c</option>
+                }
             </select>
             <br />
             <br />
@@ -39,10 +44,11 @@
             <input type="number" name="Price" value="@ViewBag.MenuItem.Price" required />
             <br />
             <br />
-            <input type="submit" />
+            <input type="submit" class="but"/>
         </form>
         <script>
             $("#category").selectmenu();
+            $(".but").button();
         </script>
     </div>
 </body>

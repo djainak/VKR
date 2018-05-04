@@ -1,4 +1,14 @@
-﻿table {
+﻿.allform {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    color: #000000;
+    font-size: 14px;
+    background: #F5D7BF;
+    width: 35%; /* устанавливаем ширину элемента */
+    padding: 20px; /* устанавливаем внутренние отступы элемента */
+    border: 2px solid #000000; /* устанавливаем границы элемента */
+}
+
+table {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     text-align: left;
     border-collapse: separate;

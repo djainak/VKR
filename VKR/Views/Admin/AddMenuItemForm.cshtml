@@ -6,40 +6,58 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Добавление пункта меню</title>
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
+    <link href="~/Content/Style/css/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
 </head>
 <body>
     <div>
+        <nav role='navigation'>
+            <ul>
+                <li><a href="../Admin/Home?UserId=@ViewBag.UserID">О точке питания</a></li>
+                <li><a href="../Admin/MenuList?UserId=@ViewBag.UserID">Меню</a></li>
+                <li><a href="../Admin/PersonalAccount?UserId=@ViewBag.UserID">Личный кабинет</a></li>
+                <li><a href="../Admin/ListUsers?UserId=@ViewBag.UserID">Настройка прав пользователей</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div>
         @if (ViewBag.isError)
-    {
-        <p style="color: red; font-size: 18px;">Данное меню не существует</p>
-}
-else
-{
-    <a href="../Admin/ListMenuItems?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID">Добавить пункт меню</a>
-    <br />
-    <a href="../Admin/MenuList?UserId=@ViewBag.UserID">Вернуться к списку меню</a>
-    <br />
-    <table style="width: 100%; border: 1px solid gray" border="1">
-        <tr>
-            <th style="width: 20%">Название</th>
-            <th style="width: 50%">Состав</th>
-            <th style="width: 10%">Категория</th>
-            <th style="width: 10%">Цена</th>
-        </tr>
-        @foreach (var menuItem in ViewBag.MenuItems)
-    {
-        <tr value=@menuItem.Id>
-            <td>@menuItem.Name</td>
-            <td>@menuItem.Ingredients</td>
-            <td>@menuItem.Category.Name</td>
-            <td>@menuItem.Price</td>
-            <td><a href="../Admin/ChangeMenuItem?UserId=@ViewBag.UserID&MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId">Редактировать</a></td>
-            <td><input type="button" value="Удалить" class="remove-menu-item" /></td>
-        </tr>
-}
-    </table>
+        {
+            <p style="color: red; font-size: 18px;">Данное меню не существует</p>
+        }
+        else
+        {
+            <div class="mainstyle">
+                <a href="../Admin/ListMenuItems?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID" class="but">Добавить пункт меню</a>
+                <br />
+                <br />
+                <a href="../Admin/MenuList?UserId=@ViewBag.UserID" class="but">Вернуться к списку меню</a>
+                <br />
+                <br />
+            </div>
+            <table style="width: 95%; border: 1px solid gray" border="1">
+                <tr>
+                    <th style="width: 20%">Название</th>
+                    <th style="width: 50%">Состав</th>
+                    <th style="width: 10%">Категория</th>
+                    <th style="width: 10%">Цена</th>
+                </tr>
+                @foreach (var menuItem in ViewBag.MenuItems)
+                {
+                    <tr value=@menuItem.Id>
+                        <td>@menuItem.Name</td>
+                        <td>@menuItem.Ingredients</td>
+                        <td>@menuItem.Category.Name</td>
+                        <td>@menuItem.Price</td>
+                        <td><a href="../Admin/ChangeMenuItem?UserId=@ViewBag.UserID&MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId" class="but">Редактировать</a></td>
+                        <td><input type="button" value="Удалить" class="remove-menu-item" /></td>
+                    </tr>
+                }
+            </table>
 
-    <script>
+            <script>
+        $(".remove-menu-item").button();
         $(".remove-menu-item").on("click", function () {
             var button = $(this);
             var str = button.parent().parent();
@@ -53,8 +71,12 @@ else
                 }
             })
         })
-    </script>
-}
+            </script>
+
+        }
     </div>
+    <script>
+        $(".but").button();
+    </script>
 </body>
 </html>
