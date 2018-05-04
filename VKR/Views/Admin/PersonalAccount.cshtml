@@ -7,31 +7,23 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../Content/Style/css/pushy.css">
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <title>Личный кабинет</title>
 </head>
 <body>
     <div>
-        <!-- Pushy Menu -->
-        <nav class="pushy pushy-left">
-            <div class="pushy-content">
-                <ul>
-                    <li class="pushy-link"><a href="../Admin/Home?UserId=@ViewBag.UserID">О точке питания</a></li>
-                    <li class="pushy-link"><a href="../Admin/MenuList?UserId=@ViewBag.UserID">Меню</a></li>
-                    <li class="pushy-link"><a href="../Admin/PersonalAccount?UserId=@ViewBag.UserID">Личный кабинет</a></li>
-                    <li class="pushy-link"><a href="../Admin/ListUsers?UserId=@ViewBag.UserID">Настройка прав пользователей</a></li>
-                </ul>
-            </div>
+        <nav role='navigation'>
+            <ul>
+                <li><a href="../Admin/Home?UserId=@ViewBag.UserID">О точке питания</a></li>
+                <li><a href="../Admin/MenuList?UserId=@ViewBag.UserID">Меню</a></li>
+                <li><a href="../Admin/PersonalAccount?UserId=@ViewBag.UserID">Личный кабинет</a></li>
+                <li><a href="../Admin/ListUsers?UserId=@ViewBag.UserID">Настройка прав пользователей</a></li>
+            </ul>
         </nav>
-
-        <!-- Your Content -->
-        <div id="container">
-            <!-- Menu Button -->
-            <button class="menu-btn">&#9776</button>
-        </div>
-        <div>
+    </div>
+        <div class="mainstyle">
             <p>Логин: @ViewBag.User.Login</p>
             <p>Фамилия:  @ViewBag.User.FirstName</p>
             <p>Имя: @ViewBag.User.Name</p>

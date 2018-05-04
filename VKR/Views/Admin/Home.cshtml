@@ -7,31 +7,23 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../Content/Style/css/pushy.css">
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <title>О точке питания</title>
 </head>
 <body>
     <div>
-        <!-- Pushy Menu -->
-        <nav class="pushy pushy-left">
-            <div class="pushy-content">
-                <ul>
-                    <li class="pushy-link"><a href="../Admin/Home?UserId=@ViewBag.UserID">О точке питания</a></li>
-                    <li class="pushy-link"><a href="../Admin/MenuList?UserId=@ViewBag.UserID">Меню</a></li>
-                    <li class="pushy-link"><a href="../Admin/PersonalAccount?UserId=@ViewBag.UserID">Личный кабинет</a></li>
-                    <li class="pushy-link"><a href="../Admin/ListUsers?UserId=@ViewBag.UserID">Настройка прав пользователей</a></li>
-                </ul>
-            </div>
+        <nav role='navigation'>
+            <ul>
+                <li><a href="../Admin/Home?UserId=@ViewBag.UserID">О точке питания</a></li>
+                <li><a href="../Admin/MenuList?UserId=@ViewBag.UserID">Меню</a></li>
+                <li><a href="../Admin/PersonalAccount?UserId=@ViewBag.UserID">Личный кабинет</a></li>
+                <li><a href="../Admin/ListUsers?UserId=@ViewBag.UserID">Настройка прав пользователей</a></li>
+            </ul>
         </nav>
-
-    <!--Content -->
-        <div id="container">
-            <!-- Menu Button -->
-            <button class="menu-btn">&#9776</button>
-        </div>
-        <div>
+    </div>
+        <div class="mainstyle">
             <a href="../Admin/SetDinningRoom?UserId=@ViewBag.UserID">Настройки</a>
             <br />
             <p>Адрес точки: @ViewBag.DinningRoom.Adress</p>
@@ -42,7 +34,7 @@
             <p>Количество блюд/интервал времени: @ViewBag.DinningRoom.Dishes / @ViewBag.DinningRoom.Interval</p>
             <br />
             <p>Рабочие дни: </p>
-            <table style="width: 100%; border: 1px solid gray" border="1">
+            <table style="width: 50%; border: 1px solid gray" border="1">
                 <tr>
                     <th style="width: 30%">День</th>
                     <th style="width: 35%">Начало рабочего дня</th>

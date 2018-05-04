@@ -273,6 +273,7 @@
     <Content Include="Content\Style\css\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\Style\css\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\Style\css\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\Style\css\mainstyle.css" />
     <Content Include="Content\Style\js\jquery-ui.js" />
     <Content Include="Content\Style\js\plusminus.js" />
     <Content Include="Content\Style\js\pushy.min.js" />
