@@ -9,12 +9,21 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Редактирование меню</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
-        <a href="../Admin/MenuList?UserId=@ViewBag.UserID">Вернуться к списку меню</a>
+    <div class="mainstyle">
         <br />
-        <form method="post" action="./ChMenu?UserId=@ViewBag.UserID&MenuId=@ViewBag.Menu.Id" style="background: #ccc; border: 1px solid black; padding: 20px;">
+        <a href="../Admin/MenuList?UserId=@ViewBag.UserID" class="but">Вернуться к списку меню</a>
+        <br />
+        <br />
+    </div>
+    <div class="allform">
+        <h2>Изменение меню</h2>
+        <form method="post" action="./ChMenu?UserId=@ViewBag.UserID&MenuId=@ViewBag.Menu.Id">
             <p>Введите название меню:</p>
             <input type="text" name="Name" value="@ViewBag.Menu.Name" required />
             <br />
@@ -23,9 +32,18 @@
             <input type="text" name="Description" value="@ViewBag.Menu.Description" />
             <br />
             <br />
-            <p><input type="checkbox" name="UseThisMenu" value="true"> Выбрать данное меню основным</p>
-            <input type="submit" />
+            <label>
+                <input class="checkbox" type="checkbox" name="UseThisMenu" value="true">
+                <span class="checkbox-custom"></span>
+                <span class="label">Выбрать данное меню основным</span>
+            </label>
+            <br />
+            <br />
+            <input type="submit" class="but" />
         </form>
+        <script>
+            $(".but").button();
+        </script>
     </div>
 </body>
 </html>

@@ -8,6 +8,17 @@
     border: 2px solid #000000; /* устанавливаем границы элемента */
 }
 
+input {
+    background-color: #ECE9E0;
+}
+option {
+    background-color: #ECE9E0;
+}
+
+label{
+    font-weight:700;
+}
+
 table {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     text-align: left;
