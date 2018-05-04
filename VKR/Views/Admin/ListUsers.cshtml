@@ -33,8 +33,24 @@
             <!-- Menu Button -->
             <button class="menu-btn">&#9776</button>
         </div>
-
         <div>
+            <p>
+                Фамилия: <input type="text" id="FirstName" />  
+                Имя: <input type="text" id="Name" />  
+                Отчество: <input type="text" id="Patronymic" />
+            </p>
+            <p>
+                Логин: <input type="text" id="Login" />  
+                E-mail: <input type="email" id="Email" />  
+                Телефон: <input type="tel" id="PhoneNumber" />
+            </p>
+            <p><input type="checkbox" id="0" value="Покупатель" checked/>Покупатель</p>
+            <p><input type="checkbox" id="1" value="Модератор" checked/>Модератор</p>
+            <p><input type="checkbox" id="2" value="Администратор" checked/>Администратор</p>
+            <button type="submit" id="search"></button>
+        </div>
+
+        <div id="table">
             <table style="width: 100%; border: 0px" border="1">
                 <tr>
                     <th style="width: 30%">ФИО</th>
@@ -73,5 +89,99 @@
         </div>
     </div>
     <script src="~/Content/Style/js/pushy.min.js"></script>
+    <script>
+        $(function () {
+            $("#search").button({
+                icons: {
+                    primary: "ui-icon-search"
+                }
+            });
+        });
+    </script>
+    <script>
+        $("#search").on("click", function () {
+            var id = $(this).attr("id")
+            $.ajax({
+                url: "../api/filterUsers",
+                data: {
+                    firstname: $("#FirstName").val(),
+                    name: $("#Name").val(),
+                    patronymic: $("#Patronymic").val(),
+                    login: $("#Login").val(),
+                    tel: $("#PhoneNumber").val(),
+                    email: $("#Email").val(),
+                    status0: $("#0").val(),
+                    status1: $("#1").val(),
+                    status2: $("#2").val()
+                },
+                type: "GET",
+                dataType: "json",
+                success: function (json) {
+                    //Очищаем
+                    $("#table").empty();
+
+                    //Преобразовываем JSON
+                    var json_parse = JSON.parse(json);
+
+                    //Шапка таблицы
+                    var block = '<table style="width: 100%; border: 0px" border="1"><tr><th style="width: 30%">ФИО</th>'
+                        + '<th style="width: 15%">Логин</th>' + '<th style="width: 15%">Права</th>'
+                        + '<th style="width: 10%">Email</th>' + '<th style="width: 10%">Email</th>'
+                        + '<th style="width: 10%">Телефон</th>' + '<th style="width: 20%"></th></tr>';
+
+                    //Добавляем в div
+                    document.getElementById('table').innerHTML += block;
+
+                @foreach (var user in ViewBag.Users)
+                {
+                    <tr value=@user.UserID>
+                        <td>@user.FirstName @user.Name @user.Patronymic</td>
+                        <td>@user.Login</td>
+                        @if (user.Status == 0)
+                        {
+                            <td>Покупатель</td>
+                        }
+                        else if (user.Status == 1)
+                        {
+                            <td>Модератор</td>
+                        }
+                        else
+                        {
+                            <td>Администратор</td>
+                        }
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>
+                            <a href="../Admin/ChangeUser?UserId=@ViewBag.UserID&RedUserId=@user.UserID">Редактировать</a>
+                            <input type="button" value="Удалить" class="remove-user" />
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
+
+
+
+
+
+
+
+
+                    for (var i = 0; i < json_parse.length; i++) {
+                        var block = '<div value="' + json_parse[i]["Id"] + '" class="left"><p>'
+                            + json_parse[i]["Name"] + '</p><p>' + json_parse[i]["Price"]
+                            + '<span class="rub">Р</span><div class="minus">-</div>'
+                            + '<input type = "text" value = "1"><div class="plus"> +</div><p>Ингредиенты: </p>'
+                            + json_parse[i]["Ingredients"] + '</br><input type="button" value="Добавить в корзину" class="add-to-cart"/>'
+                            + '</div>';
+
+                        //Добавляем в div
+                        document.getElementById('div').innerHTML += block;
+                    }
+                }
+            })
+        })
+    </script>
 </body>
 </html>

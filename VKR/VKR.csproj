@@ -164,6 +164,7 @@
     <Folder Include="Content\Style\img\" />
     <Folder Include="Views\EditingRights\" />
     <Folder Include="Views\FilterMenuItems\" />
+    <Folder Include="Views\FilterUsers\" />
     <Folder Include="Views\UserBased\" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +204,7 @@
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FilterMenuItemsController.cs" />
+    <Compile Include="Controllers\FilterUsersController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\UserBasedController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
