@@ -22,7 +22,7 @@
         <br />
     </div>
     <div class="allform">
-        <form method="post" action="./NewMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID">
+        <form method="post" action="./NewMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID" enctype="multipart/form-data">
             <h2>Добавление нового пункта меню</h2>
             <p>Введите название блюда:</p>
             <input type="text" name="Name" placeholder="  Название" required />
@@ -35,9 +35,9 @@
             <p>Выберите категорию:</p>
             <select id="category" name="Category" required>
                 @foreach (var c in ViewBag.Category)
-        {
-            <option>@c</option>
-}
+            {
+                <option>@c</option>
+        }
             </select>
             <br />
             <br />
@@ -45,8 +45,19 @@
             <input type="number" name="Price" placeholder="  Цена" required />
             <br />
             <br />
+            <input type="file" name="f" accept="image/jpeg,image/png">
+            <br />
+            <br />
             <input type="submit" class="but" />
         </form>
+        <!--
+    <form enctype="multipart/form-data" method="post">
+        <br />
+        <input type="file" name="f">
+        <br />
+        <br />
+        <input type="submit" value="Сохранить изображение" class="but">
+    </form>-->
 
         <script>
             $("#category").selectmenu();

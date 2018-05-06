@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/Style/css/menuPage.css" rel="stylesheet" />
     <title>Меню</title>
-    <script src="~/Content/Style/js/plusminus.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="~/Content/Style/js/plusminus.js"></script>
 </head>
 <body>
     <div>
@@ -36,6 +36,7 @@
                 type: "GET",
                 dataType: "json",
                 success: function (json) {
+                    
                     //Очищаем
                     $("#div").empty();
 
@@ -45,13 +46,27 @@
                         var block = '<div value="' + json_parse[i]["Id"] + '" class="left"><p>'
                             + json_parse[i]["Name"] + '</p><p>' + json_parse[i]["Price"]
                             + '<span class="rub">Р</span><div class="minus">-</div>'
-                            + '<input type = "text" value = "1"><div class="plus"> +</div><p>Ингредиенты: </p>'
+                            + '<input type = "text" value = "1" class="count_field"><div class="plus"> +</div><p>Ингредиенты: </p>'
                             + json_parse[i]["Ingredients"] + '</br><input type="button" value="Добавить в корзину" class="add-to-cart"/>'
                             + '</div>';
 
                         //Добавляем в div
                         document.getElementById('div').innerHTML += block;
                     }
+                    $('.minus').click(function () {
+                        var $input = $(this).parent().find('input.count_field');
+                        var count = parseInt($input.val()) - 1;
+                        count = count < 1 ? 1 : count;
+                        $input.val(count);
+                        $input.change();
+                        return false;
+                    });
+                    $('.plus').click(function () {
+                        var $input = $(this).parent().find('input.count_field');
+                        $input.val(parseInt($input.val()) + 1);
+                        $input.change();
+                        return false;
+                    });
                 }
             })
         })

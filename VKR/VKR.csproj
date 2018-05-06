@@ -261,7 +261,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Style\css\jquery-ui.css" />
     <Content Include="Content\Style\css\menuPage.css" />
-    <Content Include="Content\Style\css\pushy.css" />
     <Content Include="Content\Style\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\Style\css\images\ui-bg_glass_65_ffffff_1x400.png" />
     <Content Include="Content\Style\css\images\ui-bg_glass_75_dadada_1x400.png" />
@@ -275,8 +274,6 @@
     <Content Include="Content\Style\css\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\Style\css\mainstyle.css" />
     <Content Include="Content\Style\js\jquery-ui.js" />
-    <Content Include="Content\Style\js\plusminus.js" />
-    <Content Include="Content\Style\js\pushy.min.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />

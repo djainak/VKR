@@ -44,9 +44,8 @@ td {
 .mainstyle {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 14px;
+    margin-top: 42px;
 }
-
-@import url(https://fonts.googleapis.com/css?family=Lato);
 
 *, *:before, *:after {
     -webkit-box-sizing: border-box;

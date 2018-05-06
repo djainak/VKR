@@ -25,16 +25,30 @@ namespace VKR.Controllers
         /// <returns>Строка JSON с позициями меню</returns>
         public string Get(int id)
         {
-            List<MenuItem> menuitems = new List<MenuItem>();
-            int menu_id;
-            using (var db = new Contexts())
+            string res = "";
+            try {
+                List<MenuItem> menuitems = new List<MenuItem>();
+                int menu_id;
+                using (var db = new Contexts())
+                {
+                    //добавить проверку на выгрузку из действующего меню
+                    menu_id = db.Menues.Where(m => m.Status == true).FirstOrDefault().Id; 
+                    menuitems = db.MenuItems.Where(m => (m.CategoryMenuItemId == id && m.MenuId == menu_id)).ToList();
+                    
+                }
+                foreach(MenuItem m in menuitems)
+                {
+                    m.Category = null;
+                    m.Menu = null;
+                }
+                res = JsonConvert.SerializeObject(menuitems);
+            }
+            catch (Exception e)
             {
-                //добавить проверку на выгрузку из действующего меню
-                menu_id = db.Menues.Where(m => m.Status == true).FirstOrDefault().Id; 
-                menuitems = db.MenuItems.Where(m => (m.CategoryMenuItemId == id && m.MenuId == menu_id)).ToList();
+                res = e.StackTrace;
             }
 
-            return JsonConvert.SerializeObject(menuitems);
+            return res;
         }
     }
 }
