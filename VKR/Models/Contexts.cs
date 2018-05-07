@@ -50,32 +50,6 @@ namespace VKR.Models
         /// Коллекция данных, загружаемая из БД, с данными о корзинах пользователей
         /// </summary>
         public DbSet<Cart> Cart { get; set; }
-
-        /// <summary>
-        /// Коллекция данных, загружаемая из БД, с данными о картинках
-        /// </summary>
-        public DbSet<Picture> Picture { get; set; }
-    }
-
-    /// <summary>
-    /// Класс картинки
-    /// </summary>
-    public class Picture
-    {
-        /// <summary>
-        /// Уникальный идентификатор картинки
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// Название картинки
-        /// </summary>
-        public string Name { get; set; } 
-
-        /// <summary>
-        /// Картинка
-        /// </summary>
-        public byte[] Image { get; set; }
     }
 
     /// <summary>
@@ -111,7 +85,7 @@ namespace VKR.Models
         /// <summary>
         /// Картинка
         /// </summary>
-        public Picture Picture { get; set; }
+        public string Picture { get; set; }
     }
 
     /// <summary>
@@ -162,7 +136,7 @@ namespace VKR.Models
         /// <summary>
         /// Картинка
         /// </summary>
-        public Picture Picture { get; set; }
+        public string Picture { get; set; }
     }
 
     /// <summary>
@@ -236,7 +210,7 @@ namespace VKR.Models
         /// <summary>
         /// Картинка
         /// </summary>
-        public Picture Picture { get; set; }
+        public string Picture { get; set; }
     }
 
     /// <summary>

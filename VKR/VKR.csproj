@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Style\Files\" />
     <Folder Include="Content\Style\fonts\" />
     <Folder Include="Content\Style\img\" />
     <Folder Include="Views\EditingRights\" />
@@ -258,6 +259,10 @@
     <Compile Include="Migrations\201805071049016_0705182.cs" />
     <Compile Include="Migrations\201805071049016_0705182.Designer.cs">
       <DependentUpon>201805071049016_0705182.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071446039_0705183.cs" />
+    <Compile Include="Migrations\201805071446039_0705183.Designer.cs">
+      <DependentUpon>201805071446039_0705183.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contexts.cs" />
@@ -429,6 +434,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805071049016_0705182.resx">
       <DependentUpon>201805071049016_0705182.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071446039_0705183.resx">
+      <DependentUpon>201805071446039_0705183.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -47,6 +47,12 @@ td {
     margin-top: 42px;
 }
 
+img {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+
 *, *:before, *:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

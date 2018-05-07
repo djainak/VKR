@@ -32,11 +32,19 @@
             <br />
             <br />
             <p>Выберите категорию:</p>
+            
             <select id="category" name="Category" required>
                 @foreach (var c in ViewBag.Category)
-                {
-                    <option>@c</option>
-                }
+    {
+            if (@ViewBag.MenuItem.CategoryMenuItemId == c.CategoryMenuItemID)
+{
+            <option selected="selected">@c.Name</option>
+}
+else
+{
+            <option>@c.Name</option>
+}
+}
             </select>
             <br />
             <br />
@@ -44,7 +52,13 @@
             <input type="number" name="Price" value="@ViewBag.MenuItem.Price" required />
             <br />
             <br />
-            <input type="submit" class="but"/>
+            <p>Текущее изображение:</p>
+            <img src="~/Content/Style/Files/@ViewBag.MenuItem.Picture" alt="Изображение не добавлено">
+            <p>Загрузить новое изображение:</p>
+            <input type="file" name="upload" accept="image/jpeg,image/png">
+            <br />
+            <br />
+            <input type="submit" class="but" />
         </form>
         <script>
             $("#category").selectmenu();

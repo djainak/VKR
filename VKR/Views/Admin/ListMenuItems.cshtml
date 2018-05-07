@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Список блюд</title>
+    <title>Добавление нового пункта меню</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="~/Content/Style/js/jquery-ui.js"></script>
     <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
@@ -45,20 +45,11 @@
             <input type="number" name="Price" placeholder="  Цена" required />
             <br />
             <br />
-            <input type="file" name="pic" accept="image/jpeg,image/png">
+            <input type="file" name="upload" accept="image/jpeg,image/png">
             <br />
             <br />
             <input type="submit" class="but" />
         </form>
-        <!--
-    <form enctype="multipart/form-data" method="post">
-        <br />
-        <input type="file" name="f">
-        <br />
-        <br />
-        <input type="submit" value="Сохранить изображение" class="but">
-    </form>-->
-
         <script>
             $("#category").selectmenu();
             $(".but").button();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -344,16 +345,23 @@ namespace VKR.Controllers
             string category = HttpContext.Request.Form["Category"];
             string ingredients = HttpContext.Request.Form["Ingredients"];
             int price = Convert.ToInt32(HttpContext.Request.Form["Price"]);
-            string pic = HttpContext.Request.Form["pic"];
-
-
-            //Создаем объект пункта Меню и заполняем данными из формы
+            string pic = ""; 
             MenuItem menuItem = new MenuItem();
+            
+            if (upload != null)
+            {
+                pic = Path.GetFileName(upload.FileName);
+
+                // сохраняем файл в папку Files в проекте
+                upload.SaveAs(Server.MapPath("~/Content/Style/Files/" + pic));
+            }
+            
+            //Создаем объект пункта Меню и заполняем данными из формы
             menuItem.MenuId = menuId;
             menuItem.Name = name;
             menuItem.Ingredients = ingredients;
             menuItem.Price = price;
-            //menuItem.Picture = pic;
+            menuItem.Picture = pic;
 
             //Добавляем новый пункт меню в БД
             using (var db = new Contexts())
@@ -447,14 +455,14 @@ namespace VKR.Controllers
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
             ViewBag.MenuId = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
             ViewBag.MenuItemId = Convert.ToInt32(HttpContext.Request.Params["MenuItemId"]);
-            List<string> a = new List<string>();
+            List<CategoryMenuItem> a = new List<CategoryMenuItem>();
 
             using (var db = new Contexts())
             {
                 ViewBag.MenuItem = db.MenuItems.Find(ViewBag.MenuItemId);
                 foreach (var c in db.CategoryMenuItem)
                 {
-                    a.Add(c.Name);
+                    a.Add(c);
                 }
                 ViewBag.Category = a;
             }
@@ -466,17 +474,26 @@ namespace VKR.Controllers
         /// </summary>
         /// <returns>Перенаправление на страницу со списком блюд меню</returns>
         [HttpPost]
-        public ActionResult ChMenuItem()
+        public ActionResult ChMenuItem(HttpPostedFileBase upload)
         {
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
             ViewBag.MenuId = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
             int menuItemId = Convert.ToInt32(HttpContext.Request.Params["MenuItemId"]);
             string category = HttpContext.Request.Form["Category"];
+            string pic = "";
 
             //Изменяем пункт меню в БД
             using (var db = new Contexts())
             {
+                if (upload != null)
+                {
+                    pic = Path.GetFileName(upload.FileName);
+
+                    // сохраняем файл в папку Files в проекте
+                    upload.SaveAs(Server.MapPath("~/Content/Style/Files/" + pic));
+                    db.MenuItems.Find(menuItemId).Picture = pic;
+                }
                 db.MenuItems.Find(menuItemId).Name = HttpContext.Request.Form["Name"];
                 db.MenuItems.Find(menuItemId).Ingredients = HttpContext.Request.Form["Ingredients"];
                 db.MenuItems.Find(menuItemId).Category = db.CategoryMenuItem.Where(c => c.Name == category).FirstOrDefault();
