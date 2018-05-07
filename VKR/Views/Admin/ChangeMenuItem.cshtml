@@ -21,7 +21,7 @@
         <br />
     </div>
     <div class="allform">
-        <form method="post" action="./ChMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID&MenuItemId=@ViewBag.MenuItemId">
+        <form method="post" action="./ChMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID&MenuItemId=@ViewBag.MenuItemId" enctype="multipart/form-data">
             <h2>Редактирование пункта меню</h2>
             <p>Введите название блюда:</p>
             <input type="text" name="Name" value="@ViewBag.MenuItem.Name" required />
@@ -53,7 +53,7 @@ else
             <br />
             <br />
             <p>Текущее изображение:</p>
-            <img src="~/Content/Style/Files/@ViewBag.MenuItem.Picture" alt="Изображение не добавлено">
+            <img src="~/Content/Style/Files/@ViewBag.MenuItem.Picture" width="100" height="100" alt="Изображение не добавлено">
             <p>Загрузить новое изображение:</p>
             <input type="file" name="upload" accept="image/jpeg,image/png">
             <br />

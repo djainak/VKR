@@ -59,8 +59,9 @@
         <div id="usertable">
             <table style="width: 95%; border: 0px" border="1">
                 <tr>
-                    <th style="width: 30%">ФИО</th>
-                    <th style="width: 15%">Логин</th>
+                    <th style="width: 20%">Изображение</th>
+                    <th style="width: 20%">ФИО</th>
+                    <th style="width: 10%">Логин</th>
                     <th style="width: 15%">Права</th>
                     <th style="width: 10%">Email</th>
                     <th style="width: 10%">Телефон</th>
@@ -68,6 +69,7 @@
                 @foreach (var user in ViewBag.Users)
                 {
                 <tr value=@user.UserID>
+                    <td><img src="~/Content/Style/Files/@user.Picture" width="100" height="100" alt="Изображение не добавлено"></td>
                     <td>@user.FirstName @user.Name @user.Patronymic</td>
                     <td>@user.Login</td>
                     @if (user.Status == 0)
@@ -148,12 +150,13 @@ else
                     console.log(json_parse);
 
                     //Шапка таблицы
-                    var block = '<table style="width: 95%; border: 0px" border="1"><tr><th style="width: 30%">ФИО</th>'
-                        + '<th style="width: 15%">Логин</th>' + '<th style="width: 15%">Права</th>'
+                    var block = '<table style="width: 95%; border: 0px" border="1"><tr><th style="width: 20%">Изображение</th><th style="width: 20%">ФИО</th>'
+                        + '<th style="width: 10%">Логин</th>' + '<th style="width: 15%">Права</th>'
                         + '<th style="width: 10%">Email</th>' + '<th style="width: 10%">Телефон</th></tr>';
-
+       
                     for (var i = 0; i < json_parse.length; i++) {
-                        block = block + '<tr value=' + json_parse[i]["UserID"] + '><td>' + json_parse[i]["FirstName"]
+                        block = block + '<tr value=' + json_parse[i]["UserID"] + '><td><img src="../Content/Style/Files/' + json_parse[i]["Picture"]
+                            + '" width="100" height="100" alt="Изображение не добавлено"></td><td>' + json_parse[i]["FirstName"]
                             + ' ' + json_parse[i]["Name"] + ' ' + json_parse[i]["Patronymic"] + '</td><td>'
                             + json_parse[i]["Login"] + '</td>';
 
@@ -174,6 +177,8 @@ else
                     block = block + '</table>';
                     //Добавляем в div
                     document.getElementById('usertable').innerHTML += block;
+                    $(".remove-user").button();
+                    $(".red").button();
                 }
             })
         })

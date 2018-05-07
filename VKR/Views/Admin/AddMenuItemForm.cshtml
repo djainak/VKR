@@ -46,7 +46,7 @@
                 @foreach (var menuItem in ViewBag.MenuItems)
                 {
                 <tr value=@menuItem.Id>
-                    <td><img src="~/Content/Style/Files/@menuItem.Picture" alt="Изображение не добавлено"></td>
+                    <td><img src="~/Content/Style/Files/@menuItem.Picture"  width="100" height="100" alt="Изображение не добавлено"></td>
                     <td>@menuItem.Name</td>
                     <td>@menuItem.Ingredients</td>
                     <td>@menuItem.Category.Name</td>

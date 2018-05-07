@@ -154,13 +154,14 @@ namespace VKR.Controllers
         /// </summary>
         /// <returns>Переадресация на страницу со списком пунктов нового меню</returns>
         [HttpPost]
-        public ActionResult AddMenu()
+        public ActionResult AddMenu(HttpPostedFileBase upload)
         {
             //Считываем данные из формы
             string name = HttpContext.Request.Form["Name"];
             string description = HttpContext.Request.Form["Description"];
             bool IsMainMenu = Convert.ToBoolean(HttpContext.Request.Form["UseThisMenu"]);
             bool flag = false;
+            string pic = "NoPhoto.jpg";
 
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
@@ -170,6 +171,14 @@ namespace VKR.Controllers
             menu.Name = name;
             menu.Description = description;
 
+            if (upload != null)
+            {
+                pic = Path.GetFileName(upload.FileName);
+
+                // сохраняем файл в папку Files в проекте
+                upload.SaveAs(Server.MapPath("~/Content/Style/Files/" + pic));
+            }
+            menu.Picture = pic;
             //Добавляем новое меню в БД
             using (var db = new Contexts())
             {
@@ -345,7 +354,7 @@ namespace VKR.Controllers
             string category = HttpContext.Request.Form["Category"];
             string ingredients = HttpContext.Request.Form["Ingredients"];
             int price = Convert.ToInt32(HttpContext.Request.Form["Price"]);
-            string pic = ""; 
+            string pic = "NoPhoto.jpg"; 
             MenuItem menuItem = new MenuItem();
             
             if (upload != null)
@@ -396,13 +405,14 @@ namespace VKR.Controllers
         /// </summary>
         /// <returns>Перенаправляет на страницу со списком меню</returns>
         [HttpPost]
-        public ActionResult ChMenu()
+        public ActionResult ChMenu(HttpPostedFileBase upload)
         {
             //Считываем данные из формы
             string name = HttpContext.Request.Form["Name"];
             string description = HttpContext.Request.Form["Description"];
             bool IsMainMenu = Convert.ToBoolean(HttpContext.Request.Form["UseThisMenu"]);
             bool flag = false;
+            string pic = "";
 
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
@@ -415,6 +425,14 @@ namespace VKR.Controllers
             {
                 db.Menues.Find(m_id).Name = name;
                 db.Menues.Find(m_id).Description = description;
+                if (upload != null)
+                {
+                    pic = Path.GetFileName(upload.FileName);
+
+                    // сохраняем файл в папку Files в проекте
+                    upload.SaveAs(Server.MapPath("~/Content/Style/Files/" + pic));
+                    db.Menues.Find(m_id).Picture = pic;
+                }
                 if (IsMainMenu)
                 {
                     foreach(Menu menu in db.Menues)
@@ -486,6 +504,7 @@ namespace VKR.Controllers
             //Изменяем пункт меню в БД
             using (var db = new Contexts())
             {
+                
                 if (upload != null)
                 {
                     pic = Path.GetFileName(upload.FileName);
@@ -561,12 +580,13 @@ namespace VKR.Controllers
         /// </summary>
         /// <returns>Перенаправление на страницу со списком пользователей</returns>
         [HttpPost]
-        public ActionResult ChUser()
+        public ActionResult ChUser(HttpPostedFileBase upload)
         {
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
             int RedUserId = Convert.ToInt32(HttpContext.Request.Params["ID"]);
             string Entitlement = HttpContext.Request.Form["Entitlement"];
+            string pic = "";
             int status;
             if (Entitlement == "Покупатель")
                 status = 0;
@@ -579,6 +599,15 @@ namespace VKR.Controllers
                 using (var db = new Contexts())
             {
                 User user = db.Users.Find(RedUserId);
+                if (upload != null)
+                {
+                    pic = Path.GetFileName(upload.FileName);
+
+                    // сохраняем файл в папку Files в проекте
+                    upload.SaveAs(Server.MapPath("~/Content/Style/Files/" + pic));
+                    user.Picture = pic;
+                }
+                
                 user.Login = HttpContext.Request.Form["Login"];
                 user.Email = HttpContext.Request.Form["Email"];
                 user.FirstName = HttpContext.Request.Form["FirstName"];

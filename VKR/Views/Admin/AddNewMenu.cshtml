@@ -22,7 +22,7 @@
         <br />
     </div>
     <div class="allform">
-        <form method="post" action="./AddMenu?UserId=@ViewBag.UserID">
+        <form method="post" action="./AddMenu?UserId=@ViewBag.UserID" enctype="multipart/form-data">
             <h2>Добавление нового меню</h2>
             <input type="hidden" value="@ViewBag.MenuId" name="MenuId" />
             <p>Введите название меню:</p>
@@ -38,6 +38,10 @@
                 <span class="checkbox-custom"></span>
                 <span class="label">Выбрать данное меню основным</span>
             </label>
+            <br />
+            <br />
+            <p>Добавить изображение</p>
+            <input type="file" name="upload" accept="image/jpeg,image/png">
             <br />
             <br />
             <input type="submit" class="but" />
