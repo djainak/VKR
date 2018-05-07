@@ -37,6 +37,7 @@
             </p>
             <table style="width: 95%; border: 1px solid gray" border="1">
                 <tr>
+                    <th style="width: 10%">Изображение</th>
                     <th style="width: 20%">Название</th>
                     <th style="width: 50%">Состав</th>
                     <th style="width: 10%">Категория</th>
@@ -44,14 +45,15 @@
                 </tr>
                 @foreach (var menuItem in ViewBag.MenuItems)
                 {
-                    <tr value=@menuItem.Id>
-                        <td>@menuItem.Name</td>
-                        <td>@menuItem.Ingredients</td>
-                        <td>@menuItem.Category.Name</td>
-                        <td>@menuItem.Price</td>
-                        <td><a href="../Admin/ChangeMenuItem?UserId=@ViewBag.UserID&MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId" class="but">Редактировать</a></td>
-                        <td><input type="button" value="Удалить" class="remove-menu-item" /></td>
-                    </tr>
+                <tr value=@menuItem.Id>
+                    <td><img src="@menuItem.Picture" alt="Изображение не добавлено"></td>
+                    <td>@menuItem.Name</td>
+                    <td>@menuItem.Ingredients</td>
+                    <td>@menuItem.Category.Name</td>
+                    <td>@menuItem.Price</td>
+                    <td><a href="../Admin/ChangeMenuItem?UserId=@ViewBag.UserID&MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId" class="but">Редактировать</a></td>
+                    <td><input type="button" value="Удалить" class="remove-menu-item" /></td>
+                </tr>
                 }
             </table>
 

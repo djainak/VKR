@@ -333,7 +333,7 @@ namespace VKR.Controllers
         /// </summary>
         /// <returns>Переадресация к списку пунктов данного меню</returns>
         [HttpPost]
-        public ActionResult NewMenuItem()
+        public ActionResult NewMenuItem(HttpPostedFileBase upload)
         {
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
@@ -344,7 +344,8 @@ namespace VKR.Controllers
             string category = HttpContext.Request.Form["Category"];
             string ingredients = HttpContext.Request.Form["Ingredients"];
             int price = Convert.ToInt32(HttpContext.Request.Form["Price"]);
-            
+            string pic = HttpContext.Request.Form["pic"];
+
 
             //Создаем объект пункта Меню и заполняем данными из формы
             MenuItem menuItem = new MenuItem();
@@ -352,6 +353,7 @@ namespace VKR.Controllers
             menuItem.Name = name;
             menuItem.Ingredients = ingredients;
             menuItem.Price = price;
+            //menuItem.Picture = pic;
 
             //Добавляем новый пункт меню в БД
             using (var db = new Contexts())

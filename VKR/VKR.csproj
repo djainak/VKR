@@ -251,6 +251,14 @@
     <Compile Include="Migrations\201805031843512_DB_0305183.Designer.cs">
       <DependentUpon>201805031843512_DB_0305183.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805070940294_070518.cs" />
+    <Compile Include="Migrations\201805070940294_070518.Designer.cs">
+      <DependentUpon>201805070940294_070518.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071049016_0705182.cs" />
+    <Compile Include="Migrations\201805071049016_0705182.Designer.cs">
+      <DependentUpon>201805071049016_0705182.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contexts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -415,6 +423,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805031843512_DB_0305183.resx">
       <DependentUpon>201805031843512_DB_0305183.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805070940294_070518.resx">
+      <DependentUpon>201805070940294_070518.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071049016_0705182.resx">
+      <DependentUpon>201805071049016_0705182.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

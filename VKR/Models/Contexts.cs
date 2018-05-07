@@ -45,6 +45,37 @@ namespace VKR.Models
         /// Коллекция данных, загружаемая из БД, с данными о рабочих и нерабочих днях
         /// </summary>
         public DbSet<DayWork> DayWork { get; set; }
+
+        /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными о корзинах пользователей
+        /// </summary>
+        public DbSet<Cart> Cart { get; set; }
+
+        /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными о картинках
+        /// </summary>
+        public DbSet<Picture> Picture { get; set; }
+    }
+
+    /// <summary>
+    /// Класс картинки
+    /// </summary>
+    public class Picture
+    {
+        /// <summary>
+        /// Уникальный идентификатор картинки
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Название картинки
+        /// </summary>
+        public string Name { get; set; } 
+
+        /// <summary>
+        /// Картинка
+        /// </summary>
+        public byte[] Image { get; set; }
     }
 
     /// <summary>
@@ -76,6 +107,11 @@ namespace VKR.Models
         /// Товары, входящие в меню
         /// </summary>
         public virtual List<MenuItem> MenuItems { get; set; }
+
+        /// <summary>
+        /// Картинка
+        /// </summary>
+        public Picture Picture { get; set; }
     }
 
     /// <summary>
@@ -122,6 +158,11 @@ namespace VKR.Models
         /// Объект меню, на который ссылается пункт
         /// </summary>
         public Menu Menu { get; set; }
+
+        /// <summary>
+        /// Картинка
+        /// </summary>
+        public Picture Picture { get; set; }
     }
 
     /// <summary>
@@ -191,6 +232,11 @@ namespace VKR.Models
         /// Номер телефона
         /// </summary>
         public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Картинка
+        /// </summary>
+        public Picture Picture { get; set; }
     }
 
     /// <summary>
@@ -333,5 +379,31 @@ namespace VKR.Models
         /// </summary>
         public int DinningRoomID { get; set; }
 
+    }
+
+    /// <summary>
+    /// Класс корзины
+    /// </summary>
+    public class Cart
+    {
+        /// <summary>
+        /// Уникальный идентификатор 
+        /// </summary>
+        public int CartID { get; set; }
+
+        /// <summary>
+        /// Товар
+        /// </summary>
+        public MenuItem Product { get; set; }
+
+        /// <summary>
+        /// Количество товара
+        /// </summary>
+        public int Amount { get; set; }
+
+        /// <summary>
+        /// Внешний ключ на пользователя, добавившего товар в корзину
+        /// </summary>
+        public int UserId { get; set; }
     }
 }
