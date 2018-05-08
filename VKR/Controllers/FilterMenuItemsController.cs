@@ -52,18 +52,33 @@ namespace VKR.Controllers
         /// </summary>
         /// <param name="id_product"></param>
         /// <param name="amount"></param>
-        /// <returns></returns>
-        public string Post(int id_product, int amount)
+        public void Post(int id_product, int amount)
         {
-            string id_user = "";
+            int id_user;
             
             CookieHeaderValue cookie = Request.Headers.GetCookies("user_token").FirstOrDefault();
             if (cookie != null)
             {
-                id_user = cookie["user_token"].Value;
-            }
+                id_user = Convert.ToInt32(cookie["user_token"].Value);
 
-            return id_user;
+                using (var db = new Contexts())
+                {
+                    Cart tmp = db.Cart.Where(c => c.UserId == id_user && c.Product.Id == id_product).FirstOrDefault();
+                    if (tmp != null)
+                    {
+                        tmp.Amount = tmp.Amount + amount;
+                    }
+                    else
+                    {
+                        Cart cart = new Cart();
+                        cart.Product = db.MenuItems.Find(id_product);
+                        cart.UserId = id_user;
+                        cart.Amount = amount;
+                        db.Cart.Add(cart);
+                    }
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }
