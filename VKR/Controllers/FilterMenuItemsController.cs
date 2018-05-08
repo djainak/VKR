@@ -12,12 +12,6 @@ namespace VKR.Controllers
 {
     public class FilterMenuItemsController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         /// <summary>
         /// Возвращает позиции меню по определенной категории
         /// </summary>
@@ -49,6 +43,11 @@ namespace VKR.Controllers
             }
 
             return res;
+        }
+
+        public string Post()
+        {
+            return "";
         }
     }
 }

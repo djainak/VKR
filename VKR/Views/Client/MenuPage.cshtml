@@ -7,11 +7,10 @@
 
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/Style/css/menuPage.css" rel="stylesheet" />
     <title>Меню</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="~/Content/Style/js/plusminus.js"></script>
 </head>
 <body>
     <div>
@@ -46,7 +45,8 @@
                         var block = '<div value="' + json_parse[i]["Id"] + '" class="left"><p>'
                             + json_parse[i]["Name"] + '</p><p>' + json_parse[i]["Price"]
                             + '<span class="rub">Р</span><div class="minus">-</div>'
-                            + '<input type = "text" value = "1" class="count_field"><div class="plus"> +</div><p>Ингредиенты: </p>'
+                            + '<input type = "text" id="count_field_' + json_parse[i]["Id"] +
+                            '" value = "1" class="count_field"><div class="plus"> +</div><p>Ингредиенты: </p>'
                             + json_parse[i]["Ingredients"] + '</br><input type="button" value="Добавить в корзину" class="add-to-cart"/>'
                             + '</div>';
 
@@ -67,6 +67,23 @@
                         $input.change();
                         return false;
                     });
+                    $('.add-to-cart').on("click", function () {
+                        var id = $(this).parent().attr('value');
+                        var a = $('#count_field_' + id).val();
+                        $.ajax({
+                            url: "../api/filterMenuItems",
+                            type: "POST",
+                            data:
+                                {
+                                    id_product: id,
+                                    amount: a,
+                                },
+                            dataType: "text",
+                            success: function () {
+                                
+                            }
+                        })
+                    })
                 }
             })
         })
