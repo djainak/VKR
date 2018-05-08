@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -45,9 +47,23 @@ namespace VKR.Controllers
             return res;
         }
 
-        public string Post()
+        /// <summary>
+        /// Метод, обрабатывающий добавление товара в корзину
+        /// </summary>
+        /// <param name="id_product"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public string Post(int id_product, int amount)
         {
-            return "";
+            string id_user = "";
+            
+            CookieHeaderValue cookie = Request.Headers.GetCookies("user_token").FirstOrDefault();
+            if (cookie != null)
+            {
+                id_user = cookie["user_token"].Value;
+            }
+
+            return id_user;
         }
     }
 }

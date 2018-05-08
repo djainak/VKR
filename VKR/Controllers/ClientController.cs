@@ -19,6 +19,10 @@ namespace VKR.Controllers
         [HttpGet]
         public ActionResult MenuPage()
         {
+            //Добавляем данные о пользователе в куки
+            HttpCookie token = new HttpCookie("user_token", "1");
+            HttpContext.Response.Cookies.Add(token);
+
             using (var db = new Contexts())
             {
                 ViewBag.Category = db.CategoryMenuItem.ToList();

@@ -70,17 +70,13 @@
                     $('.add-to-cart').on("click", function () {
                         var id = $(this).parent().attr('value');
                         var a = $('#count_field_' + id).val();
+                        var s = "../api/filterMenuItems?id_product=" + id + "&amount=" + a;
                         $.ajax({
-                            url: "../api/filterMenuItems",
+                            url: s,
                             type: "POST",
-                            data:
-                                {
-                                    id_product: id,
-                                    amount: a,
-                                },
                             dataType: "text",
-                            success: function () {
-                                
+                            success: function (text) {
+                                console.log(text);
                             }
                         })
                     })
