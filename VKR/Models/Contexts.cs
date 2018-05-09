@@ -417,8 +417,8 @@ namespace VKR.Models
         public int cur_amount {get; set;}
 
         /// <summary>
-        /// Ключ к точке питания
+        /// Ключ к рабочему дню
         /// </summary>
-        public int DinningRoomId { get; set; }
+        public int DayWorkID { get; set; }
     }
 }
