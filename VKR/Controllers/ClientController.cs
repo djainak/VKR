@@ -29,5 +29,32 @@ namespace VKR.Controllers
             }
             return View();
         }
+
+        /// <summary>
+        /// Метод, обрабатывающий страницу корзины пользователя
+        /// </summary>
+        /// <returns>Страница с корзиной пользователя</returns>
+        [HttpGet]
+        public ActionResult CartPage()
+        {
+            int allprice = 0;
+            List<Cart> cart = new List<Cart>();
+            int id_user = Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value);
+            using (var db = new Contexts())
+            {
+                cart = db.Cart.Where(c => c.UserId == id_user).ToList();
+                foreach (var c in cart)
+                {
+                    c.Product = db.MenuItems.Where(cc => cc.Id == c.MenuItemId).FirstOrDefault();
+                    c.Product.Category = db.CategoryMenuItem.Where(cc => cc.CategoryMenuItemID == c.Product.CategoryMenuItemId).FirstOrDefault();
+                    allprice = allprice + c.Product.Price * c.Amount;
+                }
+            }
+            if (cart.Count == 0)
+                ViewBag.Empty = "true";
+            ViewBag.Cart = cart;
+            ViewBag.AllPrice = allprice;
+            return View();
+        }
     }
 }

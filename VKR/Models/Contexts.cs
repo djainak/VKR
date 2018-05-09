@@ -379,5 +379,10 @@ namespace VKR.Models
         /// Внешний ключ на пользователя, добавившего товар в корзину
         /// </summary>
         public int UserId { get; set; }
+
+        /// <summary>
+        /// Ключ к блюду
+        /// </summary>
+        public int MenuItemId { get; set; }
     }
 }

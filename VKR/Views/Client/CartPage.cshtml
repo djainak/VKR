@@ -1,0 +1,141 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Корзина</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
+</head>
+<body>
+    <div>
+        <h2>Корзина</h2>
+        <br />
+        <a href="../Client/MenuPage" class="but" id="backtomenu">Вернуться к меню</a>
+        <br />
+        <br />
+        <div id="tablecart">
+            @if (ViewBag.Empty == "true")
+    {
+        <p>Ваша корзина пуста. Добавьте хотя бы один товар.</p>
+}
+else
+{
+        <table style="width: 95%; border: 1px solid gray" border="1">
+            <tr>
+                <th style="width: 20%">Название</th>
+                <th style="width: 50%">Состав</th>
+                <th style="width: 10%">Категория</th>
+                <th style="width: 10%">Количество</th>
+                <th style="width: 10%">Цена</th>
+            </tr>
+            @foreach (var cart in ViewBag.Cart)
+    {
+            <tr value="@cart.CartID">
+                <input type="text" id="price_field_@cart.CartID" value="@cart.Product.Price"  hidden>
+                <td>@cart.Product.Name</td>
+                <td>@cart.Product.Ingredients</td>
+                <td>@cart.Product.Category.Name</td>
+                <td>
+                    <div class="minus">-</div>
+                    <input type="text" id="count_field_@cart.CartID" value="@cart.Amount" class="count_field">
+                    <div class="plus"> +</div>
+                </td>
+                <td id="@cart.CartID">
+                    <p class="price">
+                        <script>document.write(@cart.Product.Price * @cart.Amount)</script>
+                    </p>
+                </td>
+                <td><input type="button" value="Удалить" class="remove-cart-item" /></td>
+            </tr>
+}
+        </table>
+        <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice</p>
+        <input type="button" value="Очистить корзину" class="remove-cart" />
+        <br />
+        <br />
+        
+}
+        </div>
+    </div>
+    <script>
+        $(".but").button();
+        $(".remove-cart-item").button();
+        $(".remove-cart-item").on("click", function () {
+            var button = $(this);
+            var str = button.parent().parent();
+            $.ajax({
+                url: "../api/CartChosing?id=" + str.attr("value"),
+                type: "POST",
+                dataType: "text",
+                success: function (text) {
+                    str.remove();
+                    console.log(text);
+                    if (text == "true") {
+                        $("#tablecart").empty();
+                        var block = '<p>Ваша корзина пуста. Добавьте хотя бы один товар.</p>';
+                        document.getElementById('tablecart').innerHTML += block;
+                    }
+                }
+            })
+        })
+        $(".remove-cart").on("click", function () {
+            var button = $(this);
+            var str = button.parent().parent();
+            $.ajax({
+                url: "../api/CartChosing",
+                type: "POST",
+                dataType: "text",
+                success: function () {
+                    $("#tablecart").empty();
+                    var block = '<p>Ваша корзина пуста. Добавьте хотя бы один товар.</p>';
+                    document.getElementById('tablecart').innerHTML += block;
+                }
+            })
+        })
+        $('.minus').click(function () {
+            var $input = $(this).parent().find('input.count_field');
+            var count = parseInt($input.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $input.val(count);
+            $input.change();
+            return false;
+        });
+        $('.plus').click(function () {
+            var $input = $(this).parent().find('input.count_field');
+            $input.val(parseInt($input.val()) + 1);
+            $input.change();
+            return false;
+        });
+        $('.count_field').change(function () {
+            var v = $(this).val();
+            var id_it = $(this).parent().parent().attr("value");
+            var s = "../api/CartChosing?id=" + id_it
+                + "&amount=" + v;
+            var p = $('#price_field_' + id_it).val();
+            $.ajax({
+                url: s,
+                type: "POST",
+                dataType: "text",
+                success: function () {
+                    $('#' + id_it).empty();
+                    var block = '<p class="price">' + v * p + '</p>';
+                    document.getElementById(id_it).innerHTML += block;
+                    var sum = 0;
+                    $.each($('.price'), function (index, value) {
+                        sum = sum + $(this).val;
+                        console.log(sum);
+                    });
+                }
+            })
+        });
+        
+    </script>
+</body>
+</html>

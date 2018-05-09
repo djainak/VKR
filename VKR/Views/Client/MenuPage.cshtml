@@ -8,18 +8,25 @@
 <html>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/Style/css/menuPage.css" rel="stylesheet" />
     <title>Меню</title>
 </head>
 <body>
     <div>
+        <h2>Меню</h2>
+        <br />
+        <a href="../Client/CartPage" class="but">Корзина</a>
+        <br />
+        <br />
         <table style="width: 100%; border: 0px" border="1">
             <tr>
                 @foreach (var category in ViewBag.Category)
-                {
-                    <td><a class="category-filter" id="@category.CategoryMenuItemID">@category.Name</a></td>
-                }
+            {
+                <td><a class="category-filter" id="@category.CategoryMenuItemID">@category.Name</a></td>
+        }
             </tr>
         </table>
     </div>
@@ -27,6 +34,8 @@
 
     </div>
     <script>
+        $(".but").button();
+        $(".add-to-cart").button();
         $(".category-filter").on("click", function () {
             var id = $(this).attr("id")
             $.ajax({
@@ -53,6 +62,8 @@
                         //Добавляем в div
                         document.getElementById('div').innerHTML += block;
                     }
+                    $(".but").button();
+                    $(".add-to-cart").button();
                     $('.minus').click(function () {
                         var $input = $(this).parent().find('input.count_field');
                         var count = parseInt($input.val()) - 1;
