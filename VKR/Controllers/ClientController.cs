@@ -56,5 +56,15 @@ namespace VKR.Controllers
             ViewBag.AllPrice = allprice;
             return View();
         }
+
+        /// <summary>
+        /// Метод, обрабатывающий страницу с оформлением заказа
+        /// </summary>
+        /// <returns>Страница оформления заказа</returns>
+        [HttpGet]
+        public ActionResult AddOrder()
+        {
+            return View();
+        }
     }
 }

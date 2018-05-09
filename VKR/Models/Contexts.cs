@@ -50,6 +50,11 @@ namespace VKR.Models
         /// Коллекция данных, загружаемая из БД, с данными о корзинах пользователей
         /// </summary>
         public DbSet<Cart> Cart { get; set; }
+
+        /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными о доступном для заказа времени
+        /// </summary>
+        public DbSet<FreeTime> FreeTime { get; set; }
     }
 
     /// <summary>
@@ -384,5 +389,36 @@ namespace VKR.Models
         /// Ключ к блюду
         /// </summary>
         public int MenuItemId { get; set; }
+    }
+
+    /// <summary>
+    /// Класс доступного времени для заказа
+    /// </summary>
+    public class FreeTime
+    {
+        /// <summary>
+        /// Уникальный идентификатор
+        /// </summary>
+        public int FreeTimeID { get; set; }
+
+        /// <summary>
+        /// Время для заказа
+        /// </summary>
+        public string Time { get; set; }
+
+        /// <summary>
+        /// Максимальное количество заказов к этому времени
+        /// </summary>
+        public int max_amount { get; set; }
+
+        /// <summary>
+        /// Текущее количество заказов к указанному времени
+        /// </summary>
+        public int cur_amount {get; set;}
+
+        /// <summary>
+        /// Ключ к точке питания
+        /// </summary>
+        public int DinningRoomId { get; set; }
     }
 }

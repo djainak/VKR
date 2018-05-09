@@ -269,6 +269,10 @@
     <Compile Include="Migrations\201805082002402_080518.Designer.cs">
       <DependentUpon>201805082002402_080518.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805091730039_090518.cs" />
+    <Compile Include="Migrations\201805091730039_090518.Designer.cs">
+      <DependentUpon>201805091730039_090518.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contexts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -403,6 +407,7 @@
     <Content Include="Views\Admin\ListUsers.cshtml" />
     <Content Include="Views\Admin\ChangeUser.cshtml" />
     <Content Include="Views\Client\CartPage.cshtml" />
+    <Content Include="Views\Client\AddOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801172013451_initial.resx">
@@ -446,6 +451,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805082002402_080518.resx">
       <DependentUpon>201805082002402_080518.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091730039_090518.resx">
+      <DependentUpon>201805091730039_090518.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

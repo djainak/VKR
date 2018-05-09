@@ -33,40 +33,43 @@ else
                 <th style="width: 50%">Состав</th>
                 <th style="width: 10%">Категория</th>
                 <th style="width: 10%">Количество</th>
-                <th style="width: 10%">Цена</th>
+                <th style="width: 10%">Стоимость</th>
             </tr>
             @foreach (var cart in ViewBag.Cart)
     {
-            <tr value="@cart.CartID">
-                <input type="text" id="price_field_@cart.CartID" value="@cart.Product.Price"  hidden>
-                <td>@cart.Product.Name</td>
-                <td>@cart.Product.Ingredients</td>
-                <td>@cart.Product.Category.Name</td>
-                <td>
-                    <div class="minus">-</div>
-                    <input type="text" id="count_field_@cart.CartID" value="@cart.Amount" class="count_field">
-                    <div class="plus"> +</div>
-                </td>
-                <td id="@cart.CartID">
-                    <p class="price">
-                        <script>document.write(@cart.Product.Price * @cart.Amount)</script>
-                    </p>
-                </td>
-                <td><input type="button" value="Удалить" class="remove-cart-item" /></td>
-            </tr>
+        <tr value="@cart.CartID">
+            <input type="text" id="price_field_@cart.CartID" value="@cart.Product.Price" hidden>
+            <td>@cart.Product.Name</td>
+            <td>@cart.Product.Ingredients</td>
+            <td>@cart.Product.Category.Name</td>
+            <td>
+                <div class="minus">-</div>
+                <input type="text" id="count_field_@cart.CartID" value="@cart.Amount" class="count_field">
+                <div class="plus"> +</div>
+            </td>
+            <td id="@cart.CartID">
+                <p class="price">
+                    @(cart.Product.Price * cart.Amount)
+                </p>
+            </td>
+            <td><input type="button" value="Удалить" class="remove-cart-item" /></td>
+        </tr>
 }
         </table>
         <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice</p>
         <input type="button" value="Очистить корзину" class="remove-cart" />
+        <a href="../Client/AddOrder" class="but" id="backtomenu">Оформить заказ</a>
         <br />
         <br />
-        
+
 }
         </div>
     </div>
     <script>
         $(".but").button();
         $(".remove-cart-item").button();
+        $(".remove-cart").button();
+        $(".add-order").button();
         $(".remove-cart-item").on("click", function () {
             var button = $(this);
             var str = button.parent().parent();
@@ -129,9 +132,11 @@ else
                     document.getElementById(id_it).innerHTML += block;
                     var sum = 0;
                     $.each($('.price'), function (index, value) {
-                        sum = sum + $(this).val;
-                        console.log(sum);
+                        sum = sum + parseInt($(this).html());
                     });
+                    $('#allprice').empty();
+                    block = 'Общая сумма заказа: ' + sum;
+                    document.getElementById('allprice').innerHTML += block;
                 }
             })
         });
