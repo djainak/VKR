@@ -62,7 +62,7 @@ else
             <p>Выберите время готовности: </p>
             @foreach (var time in ViewBag.Times)
             {
-                <p class="time">@time</p>
+                <p class="time" id="@time.FreeTimeID">@time.Time</p>
             }
         </div>
         <a href="../Client/AddOrder" class="but" id="backtomenu">Оформить заказ</a>

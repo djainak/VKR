@@ -39,7 +39,7 @@ namespace VKR.Controllers
         {
             int allprice = 0;
             List<Cart> cart = new List<Cart>();
-            List<string> times = new List<string>();
+            List<FreeTime> times = new List<FreeTime>();
             int id_user = Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value);
             
             Dictionary<string, string> dayName = new Dictionary<string, string>(7);
@@ -66,12 +66,8 @@ namespace VKR.Controllers
                 }
 
                 //Выгружаем доступное время
-                List<FreeTime> tmp = new List<FreeTime>();
-                tmp = db.FreeTime.Where(t => t.DayWork.Name == Today && t.cur_amount < t.max_amount).ToList();
-                foreach(var t in tmp)
-                {
-                    times.Add(t.Time);
-                }
+                times = db.FreeTime.Where(t => t.DayWork.Name == Today && t.cur_amount < t.max_amount).ToList();
+                
             }
             if (cart.Count == 0)
                 ViewBag.Empty = "true";
