@@ -58,10 +58,16 @@ else
         </table>
         <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice</p>
         <input type="button" value="Очистить корзину" class="remove-cart" />
+        <div>
+            <p>Выберите время готовности: </p>
+            @foreach (var time in ViewBag.Times)
+            {
+                <p class="time">@time</p>
+            }
+        </div>
         <a href="../Client/AddOrder" class="but" id="backtomenu">Оформить заказ</a>
         <br />
         <br />
-
 }
         </div>
     </div>
