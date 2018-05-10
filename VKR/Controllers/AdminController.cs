@@ -112,6 +112,7 @@ namespace VKR.Controllers
             string login = HttpContext.Request.Form["Login"];
             int Dishes = Convert.ToInt32(HttpContext.Request.Form["Dishes"]);
             int Interval = Convert.ToInt32(HttpContext.Request.Form["Interval"]);
+            bool flag = false;
 
             //Вытаскиваем ид из адреса
             ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
@@ -146,13 +147,35 @@ namespace VKR.Controllers
                     else
                         day.IsWorkDay = false;
 
-                    day.StartDayHour = HttpContext.Request.Params["StDH_" + day.DayWorkID];
-                    day.StartDayMin = HttpContext.Request.Params["StDM_" + day.DayWorkID];
-                    day.EndDayHour = HttpContext.Request.Params["EDH_" + day.DayWorkID];
-                    day.EndDayMin = HttpContext.Request.Params["EDM_" + day.DayWorkID];
+                    //Если изменилось рабочее время дня, то необходимо тоже обновить сетку
+                    if (day.StartDayHour != HttpContext.Request.Params["StDH_" + day.DayWorkID])
+                    {
+                        day.StartDayHour = HttpContext.Request.Params["StDH_" + day.DayWorkID];
+                        flag = true;
+                    }
+                    
+                    if (day.StartDayMin != HttpContext.Request.Params["StDM_" + day.DayWorkID])
+                    {
+                        day.StartDayMin = HttpContext.Request.Params["StDM_" + day.DayWorkID];
+                        flag = true;
+                    }
+                    
+                    if(day.EndDayHour != HttpContext.Request.Params["EDH_" + day.DayWorkID])
+                    {
+                        day.EndDayHour = HttpContext.Request.Params["EDH_" + day.DayWorkID];
+                        flag = true;
+                    }
+                    
+                    if (day.EndDayMin != HttpContext.Request.Params["EDM_" + day.DayWorkID])
+                    {
+                        day.EndDayMin = HttpContext.Request.Params["EDM_" + day.DayWorkID];
+                        flag = true;
+                    }
+                    
                 }
 
-                if (db.DinningRooms.FirstOrDefault().Interval != Interval)
+                //Если изменился интервал или время рабочего дня
+                if (db.DinningRooms.FirstOrDefault().Interval != Interval || flag)
                 {
                     db.DinningRooms.FirstOrDefault().Interval = Interval;
 
