@@ -417,6 +417,11 @@ namespace VKR.Models
         public int cur_amount {get; set;}
 
         /// <summary>
+        /// День недели
+        /// </summary>
+        public DayWork DayWork { get; set; }
+
+        /// <summary>
         /// Ключ к рабочему дню
         /// </summary>
         public int DayWorkID { get; set; }

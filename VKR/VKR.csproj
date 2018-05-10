@@ -273,9 +273,9 @@
     <Compile Include="Migrations\201805091730039_090518.Designer.cs">
       <DependentUpon>201805091730039_090518.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805091844227_0905182.cs" />
-    <Compile Include="Migrations\201805091844227_0905182.Designer.cs">
-      <DependentUpon>201805091844227_0905182.cs</DependentUpon>
+    <Compile Include="Migrations\201805101029009_100518.cs" />
+    <Compile Include="Migrations\201805101029009_100518.Designer.cs">
+      <DependentUpon>201805101029009_100518.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contexts.cs" />
@@ -459,8 +459,8 @@
     <EmbeddedResource Include="Migrations\201805091730039_090518.resx">
       <DependentUpon>201805091730039_090518.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805091844227_0905182.resx">
-      <DependentUpon>201805091844227_0905182.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805101029009_100518.resx">
+      <DependentUpon>201805101029009_100518.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

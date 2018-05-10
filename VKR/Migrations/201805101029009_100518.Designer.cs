@@ -7,13 +7,13 @@ namespace VKR.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class _0905182 : IMigrationMetadata
+    public sealed partial class _100518 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_0905182));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_100518));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805091844227_0905182"; }
+            get { return "201805101029009_100518"; }
         }
         
         string IMigrationMetadata.Source

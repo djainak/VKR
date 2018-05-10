@@ -54,6 +54,51 @@ namespace VKR.Controllers
         }
 
         /// <summary>
+        /// Метод, реализующий заполнение таблицы с возможными временами готовности заказов
+        /// </summary>
+        /// <param name="Interval">Величина интервала</param>
+        /// <param name="Dishes">Количество блюд в указанный интервал</param>
+        public void SetFreeTime(int Interval, int Dishes)
+        {
+            using (var db = new Contexts())
+            {
+                //Заполняем информацию по интервалам для каждого дня
+                foreach (var day in db.DayWork)
+                {
+                    string start_h = day.StartDayHour;
+                    string start_m = day.StartDayMin;
+                    int st_h = Convert.ToInt32(start_h);
+                    int st_m = Convert.ToInt32(start_m);
+                    int fin_h = Convert.ToInt32(day.EndDayHour);
+                    int fin_m = Convert.ToInt32(day.EndDayMin);
+
+                    //Повторяем пока текущий час меньше финального или, если уже равны, то сравниваем минуты
+                    while (st_h < fin_h || st_h == fin_h && st_m <= fin_m)
+                    {
+                        FreeTime tmp = new FreeTime();
+                        tmp.cur_amount = 0;
+                        tmp.DayWork = day;
+                        tmp.max_amount = Dishes;
+                        tmp.Time = start_h + ":" + start_m;
+                        db.FreeTime.Add(tmp);
+
+                        //Рассчитываем следующее доступное время
+                        st_m = st_m + Interval;
+                        st_h = st_h + st_m / 60;
+                        st_m = st_m % 60;
+                        start_h = st_h.ToString();
+                        start_m = st_m.ToString();
+
+                        //Если число минут меньше десяти, то в начале нужно приписать 0
+                        if (st_m < 10)
+                            start_m = "0" + start_m;
+                    }
+                }
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
         /// Обработка изменения настроек точки питания
         /// </summary>
         /// <returns>Возвращает на страницу с информацией о точке питания</returns>
@@ -77,10 +122,20 @@ namespace VKR.Controllers
                 db.DinningRooms.FirstOrDefault().Adress = Adress;
                 db.DinningRooms.FirstOrDefault().PhoneNum = Phone;
                 db.DinningRooms.FirstOrDefault().Email = Email;
-                db.DinningRooms.FirstOrDefault().Dishes = Dishes;
-                db.DinningRooms.FirstOrDefault().Interval = Interval;
-                db.DinningRooms.FirstOrDefault().Manager = db.Users.Where(c => c.Login == login).FirstOrDefault();
 
+                //Если изменяется количество блюд в интервал, обновляем данные в таблице доступного для заказа времени
+                if (db.DinningRooms.FirstOrDefault().Dishes != Dishes)
+                {
+                    db.DinningRooms.FirstOrDefault().Dishes = Dishes;
+                    foreach (FreeTime f in db.FreeTime)
+                    {
+                        f.max_amount = Dishes;
+                    }
+                }
+
+                db.DinningRooms.FirstOrDefault().Manager = db.Users.Where(c => c.Login == login).FirstOrDefault();
+                
+                //Заполняем информацию по каждому дню недели о начале и конце дня
                 foreach (var day in db.DayWork)
                 {
                     int id = Convert.ToInt32(HttpContext.Request.Params[day.DayWorkID.ToString()]);
@@ -93,12 +148,25 @@ namespace VKR.Controllers
 
                     day.StartDayHour = HttpContext.Request.Params["StDH_" + day.DayWorkID];
                     day.StartDayMin = HttpContext.Request.Params["StDM_" + day.DayWorkID];
-                    day.EndDayHour = HttpContext.Request.Params["EDH_" + day.DayWorkID]; 
+                    day.EndDayHour = HttpContext.Request.Params["EDH_" + day.DayWorkID];
                     day.EndDayMin = HttpContext.Request.Params["EDM_" + day.DayWorkID];
+                }
+
+                if (db.DinningRooms.FirstOrDefault().Interval != Interval)
+                {
+                    db.DinningRooms.FirstOrDefault().Interval = Interval;
+
+                    //Очищаем старые промежутки
+                    foreach (FreeTime f in db.FreeTime)
+                    {
+                        db.FreeTime.Remove(f);
+                    }
+                    db.SaveChanges();
+                    //Заполняем таблицу доступного для заказа времени новыми данными
+                    SetFreeTime(Interval, Dishes);
                 }
                 db.SaveChanges();
             }
-
             return Redirect("../Admin/Home?UserId=" + ViewBag.UserID);
         }
 
