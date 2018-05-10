@@ -230,8 +230,8 @@ namespace VKR.Models
 
         /// <summary>
         /// Упаковка заказа
-        /// 0 - с собой
-        /// 1 - на вынос
+        /// false - с собой
+        /// true - на месте
         /// </summary>
         public bool WhereEat { get; set; }
 
@@ -243,7 +243,7 @@ namespace VKR.Models
         /// <summary>
         /// Время готовности заказа
         /// </summary>
-        public DateTime ReadyTime { get; set; }
+        public string ReadyTime { get; set; }
 
         /// <summary>
         /// Заметки к заказу
@@ -263,6 +263,11 @@ namespace VKR.Models
         /// Внешний ключ на покупателя
         /// </summary>
         public int UserId { get; set; }
+
+        /// <summary>
+        /// Покупатель
+        /// </summary>
+        public User User { get; set; }
 
         /// <summary>
         /// Товары, входящие в заказ и их количество

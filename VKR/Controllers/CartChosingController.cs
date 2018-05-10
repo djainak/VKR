@@ -72,5 +72,66 @@ namespace VKR.Controllers
                 db.SaveChanges();
             }
         }
+
+        public string Post(string time, string notes, string where_eat)
+        {
+            Dictionary<string, string> dayName = new Dictionary<string, string>(7);
+            dayName.Add("Monday", "Понедельник");
+            dayName.Add("Tuesday", "Вторник");
+            dayName.Add("Wednesday", "Среда");
+            dayName.Add("Thursday", "Четверг");
+            dayName.Add("Friday", "Пятница");
+            dayName.Add("Saturday", "Суббота");
+            dayName.Add("Sunday", "Воскресенье");
+            string Today = dayName[DateTime.Now.DayOfWeek.ToString()];
+
+            using (var db = new Contexts())
+            {
+                DayWork day = new DayWork();
+                day =  db.DayWork.Where(d => d.Name == Today).FirstOrDefault();
+                FreeTime t = new FreeTime();
+                t = db.FreeTime.Where(c => c.Time == time && c.DayWorkID == day.DayWorkID)
+                    .FirstOrDefault();
+                if (t.cur_amount + 1 <= t.max_amount)
+                {
+                    ++t.cur_amount;
+
+                    int id_user;
+
+                    CookieHeaderValue cookie = Request.Headers.GetCookies("user_token").FirstOrDefault();
+                    if (cookie != null)
+                    {
+                        id_user = Convert.ToInt32(cookie["user_token"].Value);
+                        Order order = new Order();
+                        List<Cart> cart = db.Cart.Where(c => c.UserId == id_user).ToList();
+                        foreach (Cart c in cart)
+                        {
+                            order.CartMenuItems.Add(c.Product, c.Amount);
+                        }
+                        //order.CartMenuItems
+                        order.Notes = notes;
+                        order.OrderTime = DateTime.Now;
+                        order.ReadyTime = time;
+                        order.Status = 0;
+                        order.UserId = id_user;
+                        if (where_eat == "true")
+                            order.WhereEat = true;
+                        else
+                            order.WhereEat = false;
+                        db.Orders.Add(order);
+
+                        //Чистим корзину
+                        foreach(Cart c in cart)
+                        {
+                            db.Cart.Remove(c);
+                        }
+                        db.SaveChanges();
+                    }
+                    return "true";
+                }
+                else
+                    return "false";
+            }
+        }
     }
 }

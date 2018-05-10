@@ -61,11 +61,17 @@ else
         <div>
             <p>Выберите время готовности: </p>
             @foreach (var time in ViewBag.Times)
-            {
-                <p class="time" id="@time.FreeTimeID">@time.Time</p>
-            }
+    {
+        <p><input name="time" type="radio" id="@time.FreeTimeID" value="@time.Time"> @time.Time</p>
+}
+            <p>Собрать заказ:
+            <p><input name="place" type="radio" id="0" value="false" checked>С собой</p>
+            <p><input name="place" type="radio" id="1" value="true">На месте</p>
+            </p>
+            <p>Заметки к заказу:</p>
+            <input type="text" id="notes"/>
         </div>
-        <a href="../Client/AddOrder" class="but" id="backtomenu">Оформить заказ</a>
+        <input type="button" value="Оформить заказ" class="new-order" />
         <br />
         <br />
 }
@@ -146,7 +152,27 @@ else
                 }
             })
         });
-        
+        $('.new-order').on("click", function () {
+            var notes = $('#notes').val();
+            var where_eat = $('input[name=place]:checked').val();
+            var time = $('input[name=time]:checked').val()
+            $.ajax({
+                url: "../api/CartChosing?time=" + time + "&notes=" + notes + "&where_eat=" + where_eat,
+                type: "POST",
+                dataType: "text",
+                success: function (flag) {
+                    if (flag == "false") {
+                        //ошибка + перезагрузка
+                        alert("К сожалению, данное время уже заняли. Выберите другое.");
+                        location.reload();
+                    }
+                    else {
+                        //переадресация в список заказов пользователя
+                        window.location = '../Client/AddOrder';
+                    }
+                }
+            })
+        })
     </script>
 </body>
 </html>
