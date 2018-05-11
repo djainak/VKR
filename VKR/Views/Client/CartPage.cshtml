@@ -161,14 +161,15 @@ else
                 type: "POST",
                 dataType: "text",
                 success: function (flag) {
+                    console.log(typeof (flag));
                     if (flag == "false") {
                         //ошибка + перезагрузка
                         alert("К сожалению, данное время уже заняли. Выберите другое.");
-                        location.reload();
+                        //location.reload();
                     }
                     else {
                         //переадресация в список заказов пользователя
-                        window.location = '../Client/AddOrder';
+                       // window.location = '../Client/AddOrder';
                     }
                 }
             })

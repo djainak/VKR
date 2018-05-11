@@ -73,7 +73,7 @@ namespace VKR.Controllers
             }
         }
 
-        public string Post(string time, string notes, string where_eat)
+        public bool Post(string time, string notes, string where_eat)
         {
             Dictionary<string, string> dayName = new Dictionary<string, string>(7);
             dayName.Add("Monday", "Понедельник");
@@ -83,15 +83,22 @@ namespace VKR.Controllers
             dayName.Add("Friday", "Пятница");
             dayName.Add("Saturday", "Суббота");
             dayName.Add("Sunday", "Воскресенье");
+
+            //Название сегодняшнего дня
             string Today = dayName[DateTime.Now.DayOfWeek.ToString()];
 
             using (var db = new Contexts())
             {
+                //Выбираю день с названием сегодняшнего
                 DayWork day = new DayWork();
                 day =  db.DayWork.Where(d => d.Name == Today).FirstOrDefault();
+
+                //Выбираю из доступных времен заказов только сегодняшнее и по выбранному времени
                 FreeTime t = new FreeTime();
                 t = db.FreeTime.Where(c => c.Time == time && c.DayWorkID == day.DayWorkID)
                     .FirstOrDefault();
+
+                //Проверяю, не успели ли его занять
                 if (t.cur_amount + 1 <= t.max_amount)
                 {
                     ++t.cur_amount;
@@ -101,14 +108,16 @@ namespace VKR.Controllers
                     CookieHeaderValue cookie = Request.Headers.GetCookies("user_token").FirstOrDefault();
                     if (cookie != null)
                     {
-                        id_user = Convert.ToInt32(cookie["user_token"].Value);
+                        //Уникальный идентификатор пользователя из куки
+                        id_user = Convert.ToInt32(cookie["user_token"].Value); 
+
+                        //Заполняю заказ
                         Order order = new Order();
                         List<Cart> cart = db.Cart.Where(c => c.UserId == id_user).ToList();
                         foreach (Cart c in cart)
                         {
                             order.CartMenuItems.Add(c.Product, c.Amount);
                         }
-                        //order.CartMenuItems
                         order.Notes = notes;
                         order.OrderTime = DateTime.Now;
                         order.ReadyTime = time;
@@ -127,10 +136,10 @@ namespace VKR.Controllers
                         }
                         db.SaveChanges();
                     }
-                    return "true";
+                    return true;
                 }
-                else
-                    return "false";
+                else //Если успели
+                    return false;
             }
         }
     }

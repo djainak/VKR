@@ -272,7 +272,7 @@ namespace VKR.Models
         /// <summary>
         /// Товары, входящие в заказ и их количество
         /// </summary>
-        public virtual Dictionary<MenuItem, int> CartMenuItems { get; set; }
+        public Dictionary<MenuItem, int> CartMenuItems { get; set; }
     }
 
     /// <summary>
