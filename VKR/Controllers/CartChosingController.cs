@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -73,7 +74,7 @@ namespace VKR.Controllers
             }
         }
 
-        public bool Post(string time, string notes, string where_eat)
+        public string Post(string time, string notes, string where_eat)
         {
             Dictionary<string, string> dayName = new Dictionary<string, string>(7);
             dayName.Add("Monday", "Понедельник");
@@ -114,10 +115,21 @@ namespace VKR.Controllers
                         //Заполняю заказ
                         Order order = new Order();
                         List<Cart> cart = db.Cart.Where(c => c.UserId == id_user).ToList();
-                        foreach (Cart c in cart)
+                        
+                        try
                         {
-                            order.CartMenuItems.Add(c.Product, c.Amount);
+                            order.CartMenuItems = new Dictionary<MenuItem, int>();
+                            foreach (Cart c in cart)
+                            {
+                                MenuItem item = db.MenuItems.Where(m => m.Id == c.MenuItemId).FirstOrDefault();
+                                order.CartMenuItems.Add(item, c.Amount);
+                            }
                         }
+                        catch(Exception ex)
+                        {
+                            return JsonConvert.SerializeObject(ex);
+                        }
+
                         order.Notes = notes;
                         order.OrderTime = DateTime.Now;
                         order.ReadyTime = time;
@@ -136,6 +148,7 @@ namespace VKR.Controllers
                         }
                         db.SaveChanges();
                     }
+                    
                     return true;
                 }
                 else //Если успели

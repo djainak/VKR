@@ -13,6 +13,15 @@ namespace VKR.Controllers
     /// </summary>
     public class AdminController : UserBasedController
     {
+        /// <summary>
+        /// Метод, отображающий страницу с поступивними в точку питания заказами
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult OrdersPage()
+        {
+            return View();
+        }
 
         /// <summary>
         /// Страница с данними о точке питания

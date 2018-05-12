@@ -85,7 +85,7 @@ namespace VKR.Models
         /// <summary>
         /// Товары, входящие в меню
         /// </summary>
-        public virtual List<MenuItem> MenuItems { get; set; }
+        public List<MenuItem> MenuItems { get; set; }
 
         /// <summary>
         /// Картинка
@@ -378,7 +378,7 @@ namespace VKR.Models
         /// <summary>
         /// Товар
         /// </summary>
-        public MenuItem Product { get; set; }
+        public MenuItem MenuItem { get; set; }
 
         /// <summary>
         /// Количество товара

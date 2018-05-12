@@ -63,7 +63,7 @@ namespace VKR.Controllers
 
                 using (var db = new Contexts())
                 {
-                    Cart tmp = db.Cart.Where(c => c.UserId == id_user && c.Product.Id == id_product).FirstOrDefault();
+                    Cart tmp = db.Cart.Where(c => c.UserId == id_user && c.MenuItem.Id == id_product).FirstOrDefault();
                     if (tmp != null)
                     {
                         tmp.Amount = tmp.Amount + amount;
@@ -71,7 +71,7 @@ namespace VKR.Controllers
                     else
                     {
                         Cart cart = new Cart();
-                        cart.Product = db.MenuItems.Find(id_product);
+                        cart.MenuItem = db.MenuItems.Find(id_product);
                         cart.UserId = id_user;
                         cart.Amount = amount;
                         db.Cart.Add(cart);

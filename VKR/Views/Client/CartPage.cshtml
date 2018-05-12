@@ -38,10 +38,10 @@ else
             @foreach (var cart in ViewBag.Cart)
     {
         <tr value="@cart.CartID">
-            <input type="text" id="price_field_@cart.CartID" value="@cart.Product.Price" hidden>
-            <td>@cart.Product.Name</td>
-            <td>@cart.Product.Ingredients</td>
-            <td>@cart.Product.Category.Name</td>
+            <input type="text" id="price_field_@cart.CartID" value="@cart.MenuItem.Price" hidden>
+            <td>@cart.MenuItem.Name</td>
+            <td>@cart.MenuItem.Ingredients</td>
+            <td>@cart.MenuItem.Category.Name</td>
             <td>
                 <div class="minus">-</div>
                 <input type="text" id="count_field_@cart.CartID" value="@cart.Amount" class="count_field">
@@ -49,7 +49,7 @@ else
             </td>
             <td id="@cart.CartID">
                 <p class="price">
-                    @(cart.Product.Price * cart.Amount)
+                    @(cart.MenuItem.Price * cart.Amount)
                 </p>
             </td>
             <td><input type="button" value="Удалить" class="remove-cart-item" /></td>
@@ -159,18 +159,32 @@ else
             $.ajax({
                 url: "../api/CartChosing?time=" + time + "&notes=" + notes + "&where_eat=" + where_eat,
                 type: "POST",
-                dataType: "text",
+                dataType: "json",
                 success: function (flag) {
-                    console.log(typeof (flag));
+                    var json_parse = JSON.parse(flag);
+                    console.log(json_parse);
+                    /*
+                    var status = 2;
                     if (flag == "false") {
+                        status = 0;
+                        
+                    }
+                    if (flag == "true") {
+                        status = 1;
+                    }
+
+                    if (status == 0) {
                         //ошибка + перезагрузка
                         alert("К сожалению, данное время уже заняли. Выберите другое.");
-                        //location.reload();
+                        location.reload();
+                    }
+                    else if (status == 1) {
+                        //переадресация в список заказов пользователя
+                        window.location = '../Client/AddOrder';
                     }
                     else {
-                        //переадресация в список заказов пользователя
-                       // window.location = '../Client/AddOrder';
-                    }
+                        alert("Произошла неизвестная ошибка");
+                    }*/
                 }
             })
         })

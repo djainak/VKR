@@ -60,9 +60,9 @@ namespace VKR.Controllers
                 //Выгружаем товары
                 foreach (var c in cart)
                 {
-                    c.Product = db.MenuItems.Where(cc => cc.Id == c.MenuItemId).FirstOrDefault();
-                    c.Product.Category = db.CategoryMenuItem.Where(cc => cc.CategoryMenuItemID == c.Product.CategoryMenuItemId).FirstOrDefault();
-                    allprice = allprice + c.Product.Price * c.Amount;
+                    c.MenuItem = db.MenuItems.Where(cc => cc.Id == c.MenuItemId).FirstOrDefault();
+                    c.MenuItem.Category = db.CategoryMenuItem.Where(cc => cc.CategoryMenuItemID == c.MenuItem.CategoryMenuItemId).FirstOrDefault();
+                    allprice = allprice + c.MenuItem.Price * c.Amount;
                 }
 
                 //Выгружаем доступное время

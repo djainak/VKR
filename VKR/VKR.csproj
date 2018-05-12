@@ -416,6 +416,7 @@
     <Content Include="Views\Admin\ChangeUser.cshtml" />
     <Content Include="Views\Client\CartPage.cshtml" />
     <Content Include="Views\Client\AddOrder.cshtml" />
+    <Content Include="Views\Admin\OrdersPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801172013451_initial.resx">
