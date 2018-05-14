@@ -74,7 +74,7 @@ namespace VKR.Controllers
             }
         }
 
-        public bool Post(string time, string notes, string where_eat)
+        public bool Post(string time, string notes, string where_eat, int allprice)
         {
             Dictionary<string, string> dayName = new Dictionary<string, string>(7);
             dayName.Add("Monday", "Понедельник");
@@ -121,12 +121,13 @@ namespace VKR.Controllers
                                 MenuItem item = db.MenuItems.Where(m => m.Id == c.MenuItemId).FirstOrDefault();
                                 order.CartMenuItems.Add(item, c.Amount);
                             }
-
+                            
                         order.Notes = notes;
                         order.OrderTime = DateTime.Now;
                         order.ReadyTime = time;
                         order.Status = 0;
                         order.UserId = id_user;
+                        order.Sum = allprice;
                         if (where_eat == "true")
                             order.WhereEat = true;
                         else
@@ -138,6 +139,10 @@ namespace VKR.Controllers
                         {
                             db.Cart.Remove(c);
                         }
+                        db.SaveChanges();
+                        order.NumberOrder = DateTime.Now.Year.ToString().Substring(2) + DateTime.Now.Month.ToString()
+                            + DateTime.Now.Day.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Hour.ToString()
+                            + order.OrderID;
                         db.SaveChanges();
                     }
                     

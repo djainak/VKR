@@ -229,6 +229,11 @@ namespace VKR.Models
         public int OrderID { get; set; }
 
         /// <summary>
+        /// Номер заказа, отображаемый пользователю
+        /// </summary>
+        public string NumberOrder { get; set; }
+
+        /// <summary>
         /// Упаковка заказа
         /// false - с собой
         /// true - на месте
@@ -258,6 +263,11 @@ namespace VKR.Models
         /// 4 - отменен
         /// </summary>
         public int Status { get; set; }
+
+        /// <summary>
+        /// Итоговая сумма заказа в рублях
+        /// </summary>
+        public double Sum { get; set; }
 
         /// <summary>
         /// Внешний ключ на покупателя

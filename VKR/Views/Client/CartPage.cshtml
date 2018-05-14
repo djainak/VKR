@@ -157,7 +157,8 @@ else
             var where_eat = $('input[name=place]:checked').val();
             var time = $('input[name=time]:checked').val()
             $.ajax({
-                url: "../api/CartChosing?time=" + time + "&notes=" + notes + "&where_eat=" + where_eat,
+                url: "../api/CartChosing?time=" + time + "&notes=" + notes + "&where_eat=" + where_eat
+                + "&allprice=" + @ViewBag.AllPrice,
                 type: "POST",
                 dataType: "text",
                 success: function (flag) {
@@ -177,7 +178,7 @@ else
                     }
                     else if (status == 1) {
                         //переадресация в список заказов пользователя
-                        window.location = '../Client/AddOrder';
+                        window.location = '../Client/ListOrders';
                     }
                     else {
                         alert("Произошла неизвестная ошибка");

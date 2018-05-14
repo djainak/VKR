@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Заказанные товары</title>
+</head>
+<body>
+    <div>
+        <h2>Товары заказа №@ViewBag.NumberOrder</h2>
+        <table style="width: 95%; border: 1px solid gray" border="1">
+            <tr>
+                <th style="width: 20%">Название</th>
+                <th style="width: 50%">Состав</th>
+                <th style="width: 10%">Категория</th>
+                <th style="width: 10%">Количество</th>
+                <th style="width: 10%">Стоимость</th>
+            </tr>
+            @foreach (var p in ViewBag.Products)
+        {
+            <tr>
+                <td>@p.Key.Name</td>
+                <td>@p.Key.Ingredients</td>
+                <td>@p.Key.Category.Name</td>
+                <td>@p.Value</td>
+                <td>
+                    <p class="price">
+                        @(p.Key.Price * p.Value)
+                    </p>
+                </td>
+            </tr>
+    }
+        </table>
+        <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice</p>
+    </div>
+</body>
+</html>

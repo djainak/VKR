@@ -86,7 +86,7 @@ namespace VKR.Controllers
         public ActionResult ListOrders()
         {
             int id_user;
-            id_user = Convert.ToInt32(HttpContext.Request.Cookies["id"].Value);
+            id_user = Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value);
             List<Order> orders = new List<Order>();
                 using (var db = new Contexts())
                 {
@@ -97,6 +97,28 @@ namespace VKR.Controllers
             ViewBag.Orders = orders;
                 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult ViewProducts()
+        {
+            int id_order = Convert.ToInt32(HttpContext.Request.Params["OrderId"]);
+            Dictionary<MenuItem, int> orderitems = new Dictionary<MenuItem, int>();
+
+            using (var db = new Contexts())
+            {
+                ViewBag.NumberOrder = db.Orders.Find(id_order).NumberOrder;
+                orderitems = db.Orders.Where(o=>o.OrderID == id_order).FirstOrDefault()
+                    .CartMenuItems;
+                /*
+                foreach (var o in orderitems)
+                {
+                    o.Key = db.MenuItems.Where(m => m.Id == o.Key.Id).FirstOrDefault();
+                }*/
+                ViewBag.AllPrice = db.Orders.Find(id_order).Sum;
+                ViewBag.Products = orderitems;
+            }
+                return View();
         }
     }
 }
