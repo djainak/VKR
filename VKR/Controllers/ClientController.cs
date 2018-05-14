@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 using VKR.Models;
@@ -78,12 +79,23 @@ namespace VKR.Controllers
         }
 
         /// <summary>
-        /// Метод, обрабатывающий страницу с оформлением заказа
+        /// Метод, обрабатывающий страницу с заказами
         /// </summary>
-        /// <returns>Страница оформления заказа</returns>
+        /// <returns>Страница с заказами</returns>
         [HttpGet]
-        public ActionResult AddOrder()
+        public ActionResult ListOrders()
         {
+            int id_user;
+            id_user = Convert.ToInt32(HttpContext.Request.Cookies["id"].Value);
+            List<Order> orders = new List<Order>();
+                using (var db = new Contexts())
+                {
+                    orders = db.Orders.Where(o => o.UserId == id_user).ToList();
+                }
+            if (orders.Count == 0)
+                ViewBag.Empty = true;
+            ViewBag.Orders = orders;
+                
             return View();
         }
     }

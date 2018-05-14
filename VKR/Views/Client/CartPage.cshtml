@@ -159,11 +159,8 @@ else
             $.ajax({
                 url: "../api/CartChosing?time=" + time + "&notes=" + notes + "&where_eat=" + where_eat,
                 type: "POST",
-                dataType: "json",
+                dataType: "text",
                 success: function (flag) {
-                    var json_parse = JSON.parse(flag);
-                    console.log(json_parse);
-                    /*
                     var status = 2;
                     if (flag == "false") {
                         status = 0;
@@ -184,7 +181,7 @@ else
                     }
                     else {
                         alert("Произошла неизвестная ошибка");
-                    }*/
+                    }
                 }
             })
         })

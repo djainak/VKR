@@ -74,7 +74,7 @@ namespace VKR.Controllers
             }
         }
 
-        public string Post(string time, string notes, string where_eat)
+        public bool Post(string time, string notes, string where_eat)
         {
             Dictionary<string, string> dayName = new Dictionary<string, string>(7);
             dayName.Add("Monday", "Понедельник");
@@ -115,20 +115,12 @@ namespace VKR.Controllers
                         //Заполняю заказ
                         Order order = new Order();
                         List<Cart> cart = db.Cart.Where(c => c.UserId == id_user).ToList();
-                        
-                        try
-                        {
-                            order.CartMenuItems = new Dictionary<MenuItem, int>();
+                        order.CartMenuItems = new Dictionary<MenuItem, int>();
                             foreach (Cart c in cart)
                             {
                                 MenuItem item = db.MenuItems.Where(m => m.Id == c.MenuItemId).FirstOrDefault();
                                 order.CartMenuItems.Add(item, c.Amount);
                             }
-                        }
-                        catch(Exception ex)
-                        {
-                            return JsonConvert.SerializeObject(ex);
-                        }
 
                         order.Notes = notes;
                         order.OrderTime = DateTime.Now;

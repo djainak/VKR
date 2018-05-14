@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Заказы</title>
+</head>
+<body>
+    <div> 
+        <h2>Заказы</h2>
+        <div>
+            @if (ViewBag.Empty == "true")
+    {
+        <p>У вас нет еще ни одного заказа.</p>
+}
+else
+{
+        <table style="width: 95%; border: 1px solid gray" border="1">
+            <tr>
+                <th style="width: 20%">Номер заказа</th>
+                <th style="width: 10%">Время оформления</th>
+                <th style="width: 10%">Время готовности заказа</th>
+                <th style="width: 10%">Упаковка заказа</th>
+                <th style="width: 10%">Статус</th>
+                <th style="width: 30%">Заметки</th>
+                <th style="width: 10%">Товары в заказе</th>
+            </tr>
+            @foreach (var cart in ViewBag.Orders)
+    {
+        <tr value="@cart.CartID">
+            <input type="text" id="price_field_@cart.CartID" value="@cart.MenuItem.Price" hidden>
+            <td>@cart.MenuItem.Name</td>
+            <td>@cart.MenuItem.Ingredients</td>
+            <td>@cart.MenuItem.Category.Name</td>
+            <td>
+                <div class="minus">-</div>
+                <input type="text" id="count_field_@cart.CartID" value="@cart.Amount" class="count_field">
+                <div class="plus"> +</div>
+            </td>
+            <td id="@cart.CartID">
+                <p class="price">
+                    @(cart.MenuItem.Price * cart.Amount)
+                </p>
+            </td>
+            <td><input type="button" value="Удалить" class="remove-cart-item" /></td>
+        </tr>
+}
+        </table>
+            }
+        </div>
+    </div>
+</body>
+</html>
