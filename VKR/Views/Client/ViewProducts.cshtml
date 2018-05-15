@@ -12,6 +12,7 @@
 </head>
 <body>
     <div>
+        <a href="../Client/ListOrders" class="but">Вернуться к заказам</a>
         <h2>Товары заказа №@ViewBag.NumberOrder</h2>
         <table style="width: 95%; border: 1px solid gray" border="1">
             <tr>
@@ -24,15 +25,11 @@
             @foreach (var p in ViewBag.Products)
         {
             <tr>
-                <td>@p.Key.Name</td>
-                <td>@p.Key.Ingredients</td>
-                <td>@p.Key.Category.Name</td>
-                <td>@p.Value</td>
-                <td>
-                    <p class="price">
-                        @(p.Key.Price * p.Value)
-                    </p>
-                </td>
+                <td>@p.MenuItem.Name</td>
+                <td>@p.MenuItem.Ingredients</td>
+                <td>@p.MenuItem.Category.Name</td>
+                <td>@p.Amount</td>
+                <td>@p.Sum</td>
             </tr>
     }
         </table>

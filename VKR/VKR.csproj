@@ -289,6 +289,18 @@
     <Compile Include="Migrations\201805142048343_1405182.Designer.cs">
       <DependentUpon>201805142048343_1405182.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805151619270_150518.cs" />
+    <Compile Include="Migrations\201805151619270_150518.Designer.cs">
+      <DependentUpon>201805151619270_150518.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805152136510_160518.cs" />
+    <Compile Include="Migrations\201805152136510_160518.Designer.cs">
+      <DependentUpon>201805152136510_160518.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805152217565_1605182.cs" />
+    <Compile Include="Migrations\201805152217565_1605182.Designer.cs">
+      <DependentUpon>201805152217565_1605182.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contexts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -426,6 +438,9 @@
     <Content Include="Views\Admin\OrdersPage.cshtml" />
     <Content Include="Views\Client\ListOrders.cshtml" />
     <Content Include="Views\Client\ViewProducts.cshtml" />
+    <Content Include="Views\Client\Profile.cshtml" />
+    <Content Include="Views\Client\ChangeProfile.cshtml" />
+    <Content Include="Views\Client\Contacts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801172013451_initial.resx">
@@ -484,6 +499,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805142048343_1405182.resx">
       <DependentUpon>201805142048343_1405182.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805151619270_150518.resx">
+      <DependentUpon>201805151619270_150518.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805152136510_160518.resx">
+      <DependentUpon>201805152136510_160518.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805152217565_1605182.resx">
+      <DependentUpon>201805152217565_1605182.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

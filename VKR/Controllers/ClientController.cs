@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 using VKR.Models;
@@ -99,26 +99,112 @@ namespace VKR.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Метод, обрабатывающий страницу со списком заказанных товаров в определенном заказе
+        /// </summary>
+        /// <returns>Страницу с информацией о заказанных товарах</returns>
         [HttpGet]
         public ActionResult ViewProducts()
         {
             int id_order = Convert.ToInt32(HttpContext.Request.Params["OrderId"]);
-            Dictionary<MenuItem, int> orderitems = new Dictionary<MenuItem, int>();
+            List<OrderItems> orderitems = new List<OrderItems>();
 
             using (var db = new Contexts())
             {
                 ViewBag.NumberOrder = db.Orders.Find(id_order).NumberOrder;
-                orderitems = db.Orders.Where(o=>o.OrderID == id_order).FirstOrDefault()
-                    .CartMenuItems;
-                /*
+
+                orderitems = db.OrderItems.Where(o => o.OrderId == id_order).ToList();
+                
                 foreach (var o in orderitems)
                 {
-                    o.Key = db.MenuItems.Where(m => m.Id == o.Key.Id).FirstOrDefault();
-                }*/
+                    o.MenuItem = db.MenuItems.Where(m => m.Id == o.MenuItemId).FirstOrDefault();
+                    o.MenuItem.Category = db.CategoryMenuItem.Where(cc => cc.CategoryMenuItemID == o.MenuItem.CategoryMenuItemId).FirstOrDefault();
+                }
                 ViewBag.AllPrice = db.Orders.Find(id_order).Sum;
                 ViewBag.Products = orderitems;
             }
                 return View();
+        }
+
+        /// <summary>
+        /// Метод, обрабатывающий профиль пользователя
+        /// </summary>
+        /// <returns>Страницу с профилем пользователя</returns>
+        [HttpGet]
+        public ActionResult Profile()
+        {
+            int id_user;
+            id_user = Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value);
+            using (var db = new Contexts())
+            {
+                ViewBag.User = db.Users.Find(id_user);
+            }
+            return View();
+        }
+
+        /// <summary>
+        /// метод, обрабатывающий страницу редактирования данных профиля
+        /// </summary>
+        /// <returns>Страница редактирования данных профиля</returns>
+        [HttpGet]
+        public ActionResult ChangeProfile()
+        {
+            using (var db = new Contexts())
+            {
+                ViewBag.RedUser = db.Users.Find(Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value));
+            }
+            return View();
+        }
+
+        /// <summary>
+        /// Метод, обрабатывающий изменения информации в профиле пользователя
+        /// </summary>
+        /// <param name="upload">Фотография</param>
+        /// <returns>Переадресация на обновленный профиль пользователя</returns>
+        [HttpPost]
+        public ActionResult ChProfile(HttpPostedFileBase upload)
+        {
+            int RedUserId = Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value);
+            string pic = "";
+
+            using (var db = new Contexts())
+            {
+                User user = db.Users.Find(RedUserId);
+                if (upload != null)
+                {
+                    pic = Path.GetFileName(upload.FileName);
+
+                    // сохраняем файл в папку Files в проекте
+                    upload.SaveAs(Server.MapPath("~/Content/Style/Files/" + pic));
+                    user.Picture = pic;
+                }
+
+                user.Login = HttpContext.Request.Form["Login"];
+                user.Email = HttpContext.Request.Form["Email"];
+                user.FirstName = HttpContext.Request.Form["FirstName"];
+                user.Name = HttpContext.Request.Form["Name"];
+                user.Patronymic = HttpContext.Request.Form["Patronymic"];
+                user.PhoneNumber = HttpContext.Request.Form["PhoneNumber"];
+                db.SaveChanges();
+            }
+
+            return Redirect("../Client/Profile");
+        }
+
+        /// <summary>
+        /// Метод, обрабатывающий страницу обратной связи
+        /// </summary>
+        /// <returns>Страница обратной связи</returns>
+        [HttpGet]
+        public ActionResult Contacts()
+        {
+            using (var db = new Contexts())
+            {
+                ViewBag.DR = db.DinningRooms.FirstOrDefault();
+                @ViewBag.Manager = db.Users.Where(c => c == db.DinningRooms.FirstOrDefault().Manager).FirstOrDefault();
+            }
+
+            return View();
         }
     }
 }

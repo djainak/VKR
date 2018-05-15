@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Контакты</title>
+</head>
+<body>
+    <div>
+        <h2>Контакты</h2>
+        <p>Телефон: @ViewBag.DR.PhoneNum</p>
+        <p>E-mail: @ViewBag.DR.Email</p>
+        <p>Адрес: @ViewBag.DR.Adress</p>
+        <p><label>Контактное лицо: </label>@ViewBag.Manager.FirstName @ViewBag.Manager.Name @ViewBag.Manager.Patronymic</p>
+        <br />
+    </div>
+</body>
+</html>

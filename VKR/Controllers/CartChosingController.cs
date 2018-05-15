@@ -92,7 +92,7 @@ namespace VKR.Controllers
             {
                 //Выбираю день с названием сегодняшнего
                 DayWork day = new DayWork();
-                day =  db.DayWork.Where(d => d.Name == Today).FirstOrDefault();
+                day = db.DayWork.Where(d => d.Name == Today).FirstOrDefault();
 
                 //Выбираю из доступных времен заказов только сегодняшнее и по выбранному времени
                 FreeTime t = new FreeTime();
@@ -110,18 +110,11 @@ namespace VKR.Controllers
                     if (cookie != null)
                     {
                         //Уникальный идентификатор пользователя из куки
-                        id_user = Convert.ToInt32(cookie["user_token"].Value); 
+                        id_user = Convert.ToInt32(cookie["user_token"].Value);
 
                         //Заполняю заказ
                         Order order = new Order();
                         List<Cart> cart = db.Cart.Where(c => c.UserId == id_user).ToList();
-                        order.CartMenuItems = new Dictionary<MenuItem, int>();
-                            foreach (Cart c in cart)
-                            {
-                                MenuItem item = db.MenuItems.Where(m => m.Id == c.MenuItemId).FirstOrDefault();
-                                order.CartMenuItems.Add(item, c.Amount);
-                            }
-                            
                         order.Notes = notes;
                         order.OrderTime = DateTime.Now;
                         order.ReadyTime = time;
@@ -133,9 +126,19 @@ namespace VKR.Controllers
                         else
                             order.WhereEat = false;
                         db.Orders.Add(order);
+                        db.SaveChanges();
+                        foreach (Cart c in cart)
+                        {
+                            OrderItems orderItems = new OrderItems();
+                            orderItems.Amount = c.Amount;
+                            orderItems.MenuItem = db.MenuItems.Where(m => m.Id == c.MenuItemId).FirstOrDefault();
+                            orderItems.Sum = c.Amount * orderItems.MenuItem.Price;
+                            orderItems.OrderId = order.OrderID;
+                            db.OrderItems.Add(orderItems);
+                        }
 
                         //Чистим корзину
-                        foreach(Cart c in cart)
+                        foreach (Cart c in cart)
                         {
                             db.Cart.Remove(c);
                         }
@@ -145,7 +148,7 @@ namespace VKR.Controllers
                             + order.OrderID;
                         db.SaveChanges();
                     }
-                    
+
                     return true;
                 }
                 else //Если успели

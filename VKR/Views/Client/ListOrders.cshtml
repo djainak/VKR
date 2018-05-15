@@ -11,66 +11,73 @@
     <title>Заказы</title>
 </head>
 <body>
-    <div> 
+    <div>
+        <ul>
+            <li><a href="../Client/Profile">Профиль</a></li>
+            <li><a href="../Client/ListOrders">Заказы</a></li>
+            <li><a href="../Client/Contacts">Контакты</a></li>
+        </ul>
+    </div>
+    <div>
         <h2>Заказы</h2>
         <div>
             @if (ViewBag.Empty == "true")
-    {
-        <p>У вас нет еще ни одного заказа.</p>
-}
-else
-{
-        <table style="width: 95%; border: 1px solid gray" border="1">
-            <tr>
-                <th style="width: 10%">Номер заказа</th>
-                <th style="width: 10%">Время оформления</th>
-                <th style="width: 10%">Время готовности заказа</th>
-                <th style="width: 10%">Упаковка заказа</th>
-                <th style="width: 10%">Статус</th>
-                <th style="width: 10%">Стоимость</th>
-                <th style="width: 30%">Заметки</th>
-                <th style="width: 10%">Товары в заказе</th>
-            </tr>
-            @foreach (var order in ViewBag.Orders)
-    {
-            <tr value="@order.OrderID">
-                <td>@order.NumberOrder</td>
-                <td>@order.OrderTime</td>
-                <td>@order.ReadyTime</td>
-                @if (@order.WhereEat == false)
-    {
-            <td><p>С собой</p></td>
-}
-else
-{
-            <td><p>На месте</p></td>
-}
-                @if (order.Status == 0)
-    {
-            <td><p>Обработка</p></td>
-}
-else if (order.Status == 1)
-{
-            <td><p>Подтвержден</p></td>
-}
-else if (order.Status == 2)
-{
-            <td><p>Ожидает выдачи</p></td>
-}
-else if (order.Status == 3)
-{
-            <td><p>Выполнен</p></td>
-}
-else if (order.Status == 4)
-{
-            <td><p>Удален</p></td>
-}
-                <td><p>@order.Sum</p></td>
-                <td><p>@order.Notes</p></td>
-                <td><a href="../Client/ViewProducts?OrderId=@order.OrderID" class="but">Заказанные товары</a></td>
-            </tr>
-}
-        </table>
+            {
+                <p>У вас нет еще ни одного заказа.</p>
+            }
+            else
+            {
+                <table style="width: 95%; border: 1px solid gray" border="1">
+                    <tr>
+                        <th style="width: 10%">Номер заказа</th>
+                        <th style="width: 10%">Время оформления</th>
+                        <th style="width: 10%">Время готовности заказа</th>
+                        <th style="width: 10%">Упаковка заказа</th>
+                        <th style="width: 10%">Статус</th>
+                        <th style="width: 10%">Стоимость</th>
+                        <th style="width: 30%">Заметки</th>
+                        <th style="width: 10%">Товары в заказе</th>
+                    </tr>
+                    @foreach (var order in ViewBag.Orders)
+                    {
+                        <tr value="@order.OrderID">
+                            <td>@order.NumberOrder</td>
+                            <td>@order.OrderTime</td>
+                            <td>@order.ReadyTime</td>
+                            @if (@order.WhereEat == false)
+                            {
+                                <td><p>С собой</p></td>
+                            }
+                            else
+                            {
+                                <td><p>На месте</p></td>
+                            }
+                            @if (order.Status == 0)
+                            {
+                                <td><p>Обработка</p></td>
+                            }
+                            else if (order.Status == 1)
+                            {
+                                <td><p>Подтвержден</p></td>
+                            }
+                            else if (order.Status == 2)
+                            {
+                                <td><p>Ожидает выдачи</p></td>
+                            }
+                            else if (order.Status == 3)
+                            {
+                                <td><p>Выполнен</p></td>
+                            }
+                            else if (order.Status == 4)
+                            {
+                                <td><p>Удален</p></td>
+                            }
+                            <td><p>@order.Sum</p></td>
+                            <td><p>@order.Notes</p></td>
+                            <td><a href="../Client/ViewProducts?OrderId=@order.OrderID" class="but">Заказанные товары</a></td>
+                        </tr>
+                    }
+                </table>
             }
         </div>
     </div>

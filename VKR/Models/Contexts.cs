@@ -37,6 +37,11 @@ namespace VKR.Models
         public DbSet<Order> Orders { get; set; }
 
         /// <summary>
+        /// Коллекция данных, загружаемая из БД, с данными о заказанных товарах и их количестве
+        /// </summary>
+        public DbSet<OrderItems> OrderItems { get; set; }
+
+        /// <summary>
         /// Коллекция данных, загружаемая из БД, с данными из таблицы точек питания
         /// </summary>
         public DbSet<DinningRoom> DinningRooms { get; set; }
@@ -278,11 +283,6 @@ namespace VKR.Models
         /// Покупатель
         /// </summary>
         public User User { get; set; }
-
-        /// <summary>
-        /// Товары, входящие в заказ и их количество
-        /// </summary>
-        public Dictionary<MenuItem, int> CartMenuItems { get; set; }
     }
 
     /// <summary>
@@ -440,5 +440,41 @@ namespace VKR.Models
         /// Ключ к рабочему дню
         /// </summary>
         public int DayWorkID { get; set; }
+    }
+
+    /// <summary>
+    /// Класс товаров и их количества, заказанных в рамках определенного заказа
+    /// </summary>
+    public class OrderItems
+    {
+        /// <summary>
+        /// Уникальный идентификатор 
+        /// </summary>
+        public int OrderItemsId { get; set; }
+
+        /// <summary>
+        /// Товар
+        /// </summary>
+        public MenuItem MenuItem { get; set; }
+
+        /// <summary>
+        /// Количество товара
+        /// </summary>
+        public int Amount { get; set; }
+
+        /// <summary>
+        /// Стоимость с учетом количества купленных товаров
+        /// </summary>
+        public double Sum { get; set; }
+
+        /// <summary>
+        /// Уникальный идентификатор товара
+        /// </summary>
+        public int MenuItemId { get; set; }
+
+        /// <summary>
+        /// Уникальный идентификатор заказа, к которому относится данный товар
+        /// </summary>
+        public int OrderId { get; set; }
     }
 }
