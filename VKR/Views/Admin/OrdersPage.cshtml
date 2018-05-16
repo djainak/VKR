@@ -21,6 +21,7 @@
                 <ul>
                     <li><a href="../Admin/Home?UserId=@ViewBag.UserID">О точке питания</a></li>
                     <li><a href="../Admin/MenuList?UserId=@ViewBag.UserID">Меню</a></li>
+                    <li><a href="../Admin/OrdersPage?UserId=@ViewBag.UserID">Заказы</a></li>
                     <li><a href="../Admin/PersonalAccount?UserId=@ViewBag.UserID">Личный кабинет</a></li>
                     <li><a href="../Admin/ListUsers?UserId=@ViewBag.UserID">Настройка прав пользователей</a></li>
                 </ul>
@@ -47,7 +48,7 @@
             </tr>
             @foreach (var order in ViewBag.Orders)
         {
-            <tr value="@order.OrderID">
+            <tr class="tr" value="@order.OrderID">
                 <td>@order.NumberOrder</td>
                 <td>@order.OrderTime</td>
                 <td>@order.ReadyTime</td>
@@ -61,23 +62,63 @@
     }
                 @if (order.Status == 0)
             {
-                <td><p>Обработка</p></td>
+                <td>
+                    <select id="status_@order.OrderID" class="status" name="status" required>
+                        <option id="0" value="0" selected="">Обработка</option>
+                        <option id="1" value="1">Подтвержден</option>
+                        <option id="2" value="2">Ожидает выдачи</option>
+                        <option id="3" value="3">Выполнен</option>
+                        <option id="4" value="4">Удален</option>
+                    </select>
+                </td>
         }
         else if (order.Status == 1)
         {
-            <td><p>Подтвержден</p></td>
+            <td>
+                <select id="status_@order.OrderID" class="status" name="status" required>
+                    <option id="0" value="0">Обработка</option>
+                    <option id="1" value="1" selected="">Подтвержден</option>
+                    <option id="2" value="2">Ожидает выдачи</option>
+                    <option id="3" value="3">Выполнен</option>
+                    <option id="4" value="4">Удален</option>
+                </select>
+            </td>
     }
     else if (order.Status == 2)
     {
-        <td><p>Ожидает выдачи</p></td>
+        <td>
+            <select id="status_@order.OrderID" class="status" name="status" required>
+                <option id="0" value="0">Обработка</option>
+                <option id="1" value="1">Подтвержден</option>
+                <option id="2" value="2" selected="">Ожидает выдачи</option>
+                <option id="3" value="3">Выполнен</option>
+                <option id="4" value="4">Удален</option>
+            </select>
+        </td>
 }
 else if (order.Status == 3)
 {
-    <td><p>Выполнен</p></td>
+    <td>
+        <select id="status_@order.OrderID" class="status" name="status" required>
+            <option id="0" value="0">Обработка</option>
+            <option id="1" value="1">Подтвержден</option>
+            <option id="2" value="2">Ожидает выдачи</option>
+            <option id="3" value="3" selected="">Выполнен</option>
+            <option id="4" value="4">Удален</option>
+        </select>
+    </td>
 }
 else if (order.Status == 4)
 {
-    <td><p>Удален</p></td>
+    <td>
+        <select id="status_@order.OrderID" class="status" name="status" required>
+            <option id="0" value="0">Обработка</option>
+            <option id="1" value="1">Подтвержден</option>
+            <option id="2" value="2">Ожидает выдачи</option>
+            <option id="3" value="3">Выполнен</option>
+            <option id="4" value="4" selected="">Удален</option>
+        </select>
+    </td>
 }
                 <td><p>@order.Sum</p></td>
                 <td><p>@order.Notes</p></td>
@@ -87,13 +128,25 @@ else if (order.Status == 4)
         </table>
 }
         </div>
-    </div>
-    <script>
-        function refresh() {
-            alert('Привет');
-        }
+        <script>
+            $(".status").change (function () {
+                var st = $(this).val();
+                var id = $(this).closest('.tr').attr('value');
+                $.ajax({
+                    url: "../api/Order?status=" + st + "&order_id=" + id,
+                    type: "POST",
+                    dataType: "text"
+                })
+            });
 
-        setTimeout(refresh, 5000);
-    </script>
+            /*
+            function refresh() {
+                alert('Привет');
+            }
+
+            setTimeout(refresh, 5000);
+            */
+        </script>
+    </div>
 </body>
 </html>

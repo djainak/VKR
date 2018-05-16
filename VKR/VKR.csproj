@@ -207,6 +207,7 @@
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FilterMenuItemsController.cs" />
     <Compile Include="Controllers\FilterUsersController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\UserBasedController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
