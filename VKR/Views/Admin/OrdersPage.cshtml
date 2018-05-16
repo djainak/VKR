@@ -8,10 +8,92 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
     <title>Заказы</title>
 </head>
 <body>
-    <div> 
+    <div>
+        <div>
+            <nav role='navigation'>
+                <ul>
+                    <li><a href="../Admin/Home?UserId=@ViewBag.UserID">О точке питания</a></li>
+                    <li><a href="../Admin/MenuList?UserId=@ViewBag.UserID">Меню</a></li>
+                    <li><a href="../Admin/PersonalAccount?UserId=@ViewBag.UserID">Личный кабинет</a></li>
+                    <li><a href="../Admin/ListUsers?UserId=@ViewBag.UserID">Настройка прав пользователей</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="mainstyle">
+            @if (ViewBag.Empty == "true")
+        {
+            <p>У вас нет еще ни одного заказа.</p>
+    }
+    else
+    {
+        <h2>Актуальные заказы</h2>
+        <table style="width: 95%; border: 1px solid gray" border="1">
+            <tr>
+                <th style="width: 10%">Номер заказа</th>
+                <th style="width: 10%">Время оформления</th>
+                <th style="width: 10%">Время готовности заказа</th>
+                <th style="width: 10%">Упаковка заказа</th>
+                <th style="width: 10%">Статус</th>
+                <th style="width: 10%">Стоимость</th>
+                <th style="width: 30%">Заметки</th>
+                <th style="width: 10%">Товары в заказе</th>
+            </tr>
+            @foreach (var order in ViewBag.Orders)
+        {
+            <tr value="@order.OrderID">
+                <td>@order.NumberOrder</td>
+                <td>@order.OrderTime</td>
+                <td>@order.ReadyTime</td>
+                @if (@order.WhereEat == false)
+            {
+                <td><p>С собой</p></td>
+        }
+        else
+        {
+            <td><p>На месте</p></td>
+    }
+                @if (order.Status == 0)
+            {
+                <td><p>Обработка</p></td>
+        }
+        else if (order.Status == 1)
+        {
+            <td><p>Подтвержден</p></td>
+    }
+    else if (order.Status == 2)
+    {
+        <td><p>Ожидает выдачи</p></td>
+}
+else if (order.Status == 3)
+{
+    <td><p>Выполнен</p></td>
+}
+else if (order.Status == 4)
+{
+    <td><p>Удален</p></td>
+}
+                <td><p>@order.Sum</p></td>
+                <td><p>@order.Notes</p></td>
+                <td><a href="../Admin/ViewProducts?OrderId=@order.OrderID" class="but">Подробнее</a></td>
+            </tr>
+    }
+        </table>
+}
+        </div>
     </div>
+    <script>
+        function refresh() {
+            alert('Привет');
+        }
+
+        setTimeout(refresh, 5000);
+    </script>
 </body>
 </html>

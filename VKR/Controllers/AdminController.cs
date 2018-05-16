@@ -16,10 +16,49 @@ namespace VKR.Controllers
         /// <summary>
         /// Метод, отображающий страницу с поступивними в точку питания заказами
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Страница со списком заказов</returns>
         [HttpGet]
         public ActionResult OrdersPage()
         {
+            using (var db = new Contexts())
+            {
+                List<Order> orders = new List<Order>();
+                orders = db.Orders.Where(o => o.Status == 0 || o.Status == 1 || o.Status == 2)
+                    .ToList();
+                if (orders.Count == 0)
+                    ViewBag.Empty = "true";
+                else
+                    ViewBag.Empty = "false";
+
+                ViewBag.Orders = orders;
+            }
+                return View();
+        }
+
+        /// <summary>
+        /// Метод, отображающий заказанные товары в рамках определенного заказа
+        /// </summary>
+        /// <returns>Страница с заказанными товарами</returns>
+        [HttpGet]
+        public ActionResult ViewProducts()
+        {
+            int id_order = Convert.ToInt32(HttpContext.Request.Params["OrderId"]);
+            List<OrderItems> orderitems = new List<OrderItems>();
+
+            using (var db = new Contexts())
+            {
+                ViewBag.Order = db.Orders.Find(id_order);
+
+                orderitems = db.OrderItems.Where(o => o.OrderId == id_order).ToList();
+
+                foreach (var o in orderitems)
+                {
+                    o.MenuItem = db.MenuItems.Where(m => m.Id == o.MenuItemId).FirstOrDefault();
+                    o.MenuItem.Category = db.CategoryMenuItem.Where(cc => cc.CategoryMenuItemID == o.MenuItem.CategoryMenuItemId).FirstOrDefault();
+                }
+                ViewBag.AllPrice = db.Orders.Find(id_order).Sum;
+                ViewBag.Products = orderitems;
+            }
             return View();
         }
 
