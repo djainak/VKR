@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -25,6 +26,23 @@ namespace VKR.Controllers
                 db.Orders.Find(order_id).Status = status;
                 db.SaveChanges();
             }
+        }
+
+        /// <summary>
+        /// Метод, выгружающий новые заказы 
+        /// </summary>
+        /// <param name="last_id">Уникальный идентификатор последнего выгруженного заказа</param>
+        /// <returns>Уникальный идентификатор последнего выгруженного заказа после применения
+        /// метода</returns>
+        public string Get(int last_id)
+        {
+            List<Order> orders = new List<Order>();
+            using (var db = new Contexts())
+            {
+                orders = db.Orders.Where(o => o.OrderID > last_id && (o.Status == 0 || o.Status == 1 || o.Status == 2))
+                    .ToList();
+            }
+            return JsonConvert.SerializeObject(orders);
         }
     }
 }

@@ -25,6 +25,7 @@ namespace VKR.Controllers
                 List<Order> orders = new List<Order>();
                 orders = db.Orders.Where(o => o.Status == 0 || o.Status == 1 || o.Status == 2)
                     .ToList();
+                ViewBag.LastId = db.Orders.ToList().Last().OrderID;
                 if (orders.Count == 0)
                     ViewBag.Empty = "true";
                 else
