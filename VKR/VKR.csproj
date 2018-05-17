@@ -206,6 +206,7 @@
     <Compile Include="Controllers\CartChosingController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FilterMenuItemsController.cs" />
+    <Compile Include="Controllers\FilterOrdersController.cs" />
     <Compile Include="Controllers\FilterUsersController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />

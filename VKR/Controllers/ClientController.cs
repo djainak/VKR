@@ -111,10 +111,10 @@ namespace VKR.Controllers
 
             using (var db = new Contexts())
             {
-                ViewBag.NumberOrder = db.Orders.Find(id_order).NumberOrder;
+                ViewBag.Order = db.Orders.Find(id_order);
 
                 orderitems = db.OrderItems.Where(o => o.OrderId == id_order).ToList();
-                
+
                 foreach (var o in orderitems)
                 {
                     o.MenuItem = db.MenuItems.Where(m => m.Id == o.MenuItemId).FirstOrDefault();
