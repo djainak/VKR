@@ -14,6 +14,24 @@ namespace VKR.Controllers
     public class AdminController : UserBasedController
     {
         /// <summary>
+        /// Метод, отображающий страницу с архивом заказов 
+        /// </summary>
+        /// <returns>Страница архива заказов</returns>
+        [HttpGet]
+        public ActionResult ArchiveOrders()
+        {
+            List<Order> orders = new List<Order>();
+            using (var db = new Contexts())
+            {
+                orders = db.Orders.Where(o => o.Status == 3 || o.Status == 4).ToList();
+            }
+            if (orders.Count == 0)
+                ViewBag.Empty = true;
+            ViewBag.Orders = orders;
+            return View();
+        }
+
+        /// <summary>
         /// Метод, отображающий страницу с поступивними в точку питания заказами
         /// </summary>
         /// <returns>Страница со списком заказов</returns>
@@ -43,6 +61,7 @@ namespace VKR.Controllers
         [HttpGet]
         public ActionResult ViewProducts()
         {
+            ViewBag.URL = HttpContext.Request.Params["Url_page"];
             int id_order = Convert.ToInt32(HttpContext.Request.Params["OrderId"]);
             List<OrderItems> orderitems = new List<OrderItems>();
 

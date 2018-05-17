@@ -29,12 +29,36 @@
         </div>
         <div class="mainstyle">
             @if (ViewBag.Empty == "true")
-        {
-            <p>У вас нет еще ни одного заказа.</p>
-    }
-    else
     {
+        <p>У вас нет еще ни одного заказа.</p>
+}
+else
+{
         <h2>Актуальные заказы</h2>
+        <div class="mainstyle">
+            <p>Фильтры:</p>
+            <p>
+                Номер заказа: <input type="number" id="OrderNumber" />
+            </p>
+            <label style="font-weight: 500">
+                <input class="checkbox" type="checkbox" id="0" value="Обработка" checked>
+                <span class="checkbox-custom"></span>
+                <span class="label">Обработка</span>
+            </label>
+            <label style="font-weight: 500">
+                <input class="checkbox" type="checkbox" id="1" value="Подтвержден" checked>
+                <span class="checkbox-custom"></span>
+                <span class="label">Подтвержден</span>
+            </label>
+            <label style="font-weight: 500">
+                <input class="checkbox" type="checkbox" id="2" value="Ожидает выдачи" checked>
+                <span class="checkbox-custom"></span>
+                <span class="label">Ожидает выдачи</span>
+            </label>
+            <button type="submit" id="search"></button>
+        </div>
+        <a href="../Admin/ArchiveOrders" class="but">Архив заказов</a>
+
         <div id="changelastid">
             <input type="text" value="@ViewBag.LastId" id="lastid" hidden />
         </div>
@@ -50,45 +74,45 @@
                 <th style="width: 10%">Товары в заказе</th>
             </tr>
             @foreach (var order in ViewBag.Orders)
-        {
-            <tr class="tr" value="@order.OrderID">
-                <td>@order.NumberOrder</td>
-                <td>@order.OrderTime</td>
-                <td>@order.ReadyTime</td>
-                @if (order.WhereEat == false)
-            {
-                <td><p>С собой</p></td>
-        }
-        else
-        {
-            <td><p>На месте</p></td>
-    }
-                @if (order.Status == 0)
-            {
-                <td>
-                    <select id="status_@order.OrderID" class="status" name="status" required>
-                        <option id="0" value="0" selected="">Обработка</option>
-                        <option id="1" value="1">Подтвержден</option>
-                        <option id="2" value="2">Ожидает выдачи</option>
-                        <option id="3" value="3">Выполнен</option>
-                        <option id="4" value="4">Удален</option>
-                    </select>
-                </td>
-        }
-        else if (order.Status == 1)
-        {
-            <td>
-                <select id="status_@order.OrderID" class="status" name="status" required>
-                    <option id="0" value="0">Обработка</option>
-                    <option id="1" value="1" selected="">Подтвержден</option>
-                    <option id="2" value="2">Ожидает выдачи</option>
-                    <option id="3" value="3">Выполнен</option>
-                    <option id="4" value="4">Удален</option>
-                </select>
-            </td>
-    }
-    else if (order.Status == 2)
     {
+        <tr class="tr" value="@order.OrderID">
+            <td>@order.NumberOrder</td>
+            <td>@order.OrderTime</td>
+            <td>@order.ReadyTime</td>
+            @if (order.WhereEat == false)
+    {
+        <td><p>С собой</p></td>
+}
+else
+{
+        <td><p>На месте</p></td>
+}
+            @if (order.Status == 0)
+    {
+        <td>
+            <select id="status_@order.OrderID" class="status" name="status" required>
+                <option id="0" value="0" selected="">Обработка</option>
+                <option id="1" value="1">Подтвержден</option>
+                <option id="2" value="2">Ожидает выдачи</option>
+                <option id="3" value="3">Выполнен</option>
+                <option id="4" value="4">Удален</option>
+            </select>
+        </td>
+}
+else if (order.Status == 1)
+{
+        <td>
+            <select id="status_@order.OrderID" class="status" name="status" required>
+                <option id="0" value="0">Обработка</option>
+                <option id="1" value="1" selected="">Подтвержден</option>
+                <option id="2" value="2">Ожидает выдачи</option>
+                <option id="3" value="3">Выполнен</option>
+                <option id="4" value="4">Удален</option>
+            </select>
+        </td>
+}
+else if (order.Status == 2)
+{
         <td>
             <select id="status_@order.OrderID" class="status" name="status" required>
                 <option id="0" value="0">Обработка</option>
@@ -101,38 +125,38 @@
 }
 else if (order.Status == 3)
 {
-    <td>
-        <select id="status_@order.OrderID" class="status" name="status" required>
-            <option id="0" value="0">Обработка</option>
-            <option id="1" value="1">Подтвержден</option>
-            <option id="2" value="2">Ожидает выдачи</option>
-            <option id="3" value="3" selected="">Выполнен</option>
-            <option id="4" value="4">Удален</option>
-        </select>
-    </td>
+        <td>
+            <select id="status_@order.OrderID" class="status" name="status" required>
+                <option id="0" value="0">Обработка</option>
+                <option id="1" value="1">Подтвержден</option>
+                <option id="2" value="2">Ожидает выдачи</option>
+                <option id="3" value="3" selected="">Выполнен</option>
+                <option id="4" value="4">Удален</option>
+            </select>
+        </td>
 }
 else if (order.Status == 4)
 {
-    <td>
-        <select id="status_@order.OrderID" class="status" name="status" required>
-            <option id="0" value="0">Обработка</option>
-            <option id="1" value="1">Подтвержден</option>
-            <option id="2" value="2">Ожидает выдачи</option>
-            <option id="3" value="3">Выполнен</option>
-            <option id="4" value="4" selected="">Удален</option>
-        </select>
-    </td>
+        <td>
+            <select id="status_@order.OrderID" class="status" name="status" required>
+                <option id="0" value="0">Обработка</option>
+                <option id="1" value="1">Подтвержден</option>
+                <option id="2" value="2">Ожидает выдачи</option>
+                <option id="3" value="3">Выполнен</option>
+                <option id="4" value="4" selected="">Удален</option>
+            </select>
+        </td>
 }
-                <td><p>@order.Sum</p></td>
-                <td><p>@order.Notes</p></td>
-                <td><a href="../Admin/ViewProducts?OrderId=@order.OrderID" class="but">Подробнее</a></td>
-            </tr>
-    }
+            <td><p>@order.Sum</p></td>
+            <td><p>@order.Notes</p></td>
+            <td><a href="../Admin/ViewProducts?OrderId=@order.OrderID&Url_page=../Admin/OrdersPage" class="but">Подробнее</a></td>
+        </tr>
+}
         </table>
 }
         </div>
         <script>
-            $(".status").change (function () {
+            $(".status").change(function () {
                 var st = $(this).val();
                 var t = $(this).closest('.tr');
                 var id = t.attr('value');
@@ -143,7 +167,7 @@ else if (order.Status == 4)
                     success: function () {
                         if (st == "3" || st == "4") {
                             setTimeout(
-                                function () {}, 5000);
+                                function () { }, 5000);
                             t.remove();
                         }
                     }
@@ -152,6 +176,14 @@ else if (order.Status == 4)
 
             var last_id = $('#lastid').attr('value');
             setTimeout(function refresh() {
+                var statuses = new Array();
+                $.ajax({
+                    url: "../api/Order",
+                    type: "GET",
+                    dataType: "text",
+                    success: function () {
+                    }
+                })
                 $.ajax({
                     url: "../api/Order?last_id=" + last_id,
                     type: "GET",
@@ -241,6 +273,126 @@ else if (order.Status == 4)
                 setTimeout(refresh, 5000);
             }, 5000);
 
+        </script>
+        <script>
+        $("#search").on("click", function () {
+            $.ajax({
+                url: "../api/Order",
+                data: {
+                    number_order: $("#OrderNumber").val(),
+                    status0: $("#0").prop("checked"),
+                    status1: $("#1").prop("checked"),
+                    status2: $("#2").prop("checked")
+                },
+                type: "GET",
+                dataType: "json",
+                success: function (json) {
+                    //Очищаем
+                    $("#tableorders").empty();
+
+                    //Преобразовываем JSON
+                    var json_parse = JSON.parse(json);
+
+                    //Шапка таблицы
+                    var block = '<table id="tableorders" style="width: 95%; border: 0px" border="1"><tr>'
+                        + '<th style="width: 10%">Номер заказа</th>'
+                        + '<th style="width: 10%">Время оформления</th>'
+                        + '<th style="width: 10%">Время готовности заказа</th>'
+                        + '<th style="width: 10%">Упаковка заказа</th>'
+                        + '<th style="width: 10%">Статус</th>'
+                        + '<th style="width: 10%">Стоимость</th>'
+                        + '<th style="width: 30%">Заметки</th>'
+                        + '<th style="width: 10%">Товары в заказе</th></tr>';
+                    document.getElementById('tableorders').innerHTML += block;
+
+                    for (var i = 0; i < json_parse.length; i++) {
+                            block = '<tr class="tr" value="' + json_parse[i]["OrderID"]
+                            + '"><td>' + json_parse[i]["NumberOrder"] + '</td><td>'
+                            + json_parse[i]["OrderTime"] + '</td><td>' + json_parse[i]["ReadyTime"]
+                            + '</td><td>';
+                        if (json_parse[i]["WhereEat"] == "false") {
+                            block += '<p>С собой</p></td>';
+                        }
+                        else {
+                            block += '<p>На месте</p></td>';
+                        }
+                        if (json_parse[i]["Status"] == 0) {
+                            block += '<td><select id="status_' + json_parse[i]["OrderID"]
+                                + '" class="status" name="status" required>'
+                                + '<option id="0" value="0" selected="">Обработка</option>'
+                                + '<option id="1" value="1">Подтвержден</option>'
+                                + '<option id="2" value="2">Ожидает выдачи</option>'
+                                + '<option id="3" value="3">Выполнен</option>'
+                                + '<option id="4" value="4">Удален</option>'
+                                + '</select></td>';
+
+                        }
+                        else if (json_parse[i]["Status"] == 1) {
+                            block += '<td><select id="status_' + json_parse[i]["OrderID"]
+                                + '" class="status" name="status" required>'
+                                + '<option id="0" value="0">Обработка</option>'
+                                + '<option id="1" value="1" selected="">Подтвержден</option>'
+                                + '<option id="2" value="2">Ожидает выдачи</option>'
+                                + '<option id="3" value="3">Выполнен</option>'
+                                + '<option id="4" value="4">Удален</option>'
+                                + '</select></td>';
+                        }
+                        else if (json_parse[i]["Status"] == 2) {
+                            block += '<td><select id="status_' + json_parse[i]["OrderID"]
+                                + '" class="status" name="status" required>'
+                                + '<option id="0" value="0">Обработка</option>'
+                                + '<option id="1" value="1">Подтвержден</option>'
+                                + '<option id="2" value="2" selected="">Ожидает выдачи</option>'
+                                + '<option id="3" value="3">Выполнен</option>'
+                                + '<option id="4" value="4">Удален</option>'
+                                + '</select></td>';
+                        }
+                        else if (json_parse[i]["Status"] == 3) {
+                            block += '<td><select id="status_' + json_parse[i]["OrderID"]
+                                + '" class="status" name="status" required>'
+                                + '<option id="0" value="0">Обработка</option>'
+                                + '<option id="1" value="1">Подтвержден</option>'
+                                + '<option id="2" value="2">Ожидает выдачи</option>'
+                                + '<option id="3" value="3" selected="">Выполнен</option>'
+                                + '<option id="4" value="4">Удален</option>'
+                                + '</select></td>';
+                        }
+                        else if (json_parse[i]["Status"] == 4) {
+                            block += '<td><select id="status_' + json_parse[i]["OrderID"]
+                                + '" class="status" name="status" required>'
+                                + '<option id="0" value="0">Обработка</option>'
+                                + '<option id="1" value="1">Подтвержден</option>'
+                                + '<option id="2" value="2">Ожидает выдачи</option>'
+                                + '<option id="3" value="3">Выполнен</option>'
+                                + '<option id="4" value="4" selected="">Удален</option>'
+                                + '</select></td>';
+                        }
+                        block += '<td><p>' + json_parse[i]["Sum"] + '</p></td><td><p>';
+                        if (json_parse[i]["Notes"] == null) {
+                            block += ' ';
+                        }
+                        else {
+                            block += json_parse[i]["Notes"];
+                        }
+
+                        block += '</p></td><td><a href="../Admin/ViewProducts?OrderId='
+                            + json_parse[i]["OrderID"] + '" class="but">Подробнее</a></td></tr>';
+                        document.getElementById('tableorders').innerHTML += block;
+                    }
+                    if (json_parse.length != 0) {
+                        if (last_id < json_parse[json_parse.length - 1]["OrderID"])
+                            last_id = json_parse[json_parse.length - 1]["OrderID"];
+                    }
+                }
+            })
+            })
+            $(function () {
+                $("#search").button({
+                    icons: {
+                        primary: "ui-icon-search"
+                    }
+                });
+            });
         </script>
     </div>
 </body>
