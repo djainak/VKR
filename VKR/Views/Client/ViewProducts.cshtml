@@ -15,6 +15,16 @@
     <title>Заказанные товары</title>
 </head>
 <body>
+    <div class="navigation">
+        <table style="width: 100%; border: 0px" border="1">
+            <tr>
+                <td class="menu-item"><a href="../Client/MenuPage" class="menu_text">Меню</a></td>
+                <td class="menu-item"><a href="../Client/CartPage" class="menu_text">Корзина</a></td>
+                <td class="menu-item"><a href="../Client/Profile" class="menu_text">Личный кабинет</a></td>
+                <td class="menu-item"><a href="../Client/Contacts" class="menu_text">Контакты</a></td>
+            </tr>
+        </table>
+    </div>
     <div>
         <a href="../Client/ListOrders" class="but">Вернуться к заказам</a>
         <div id="printarea">
@@ -22,33 +32,33 @@
             <p>Время оформления: @ViewBag.Order.OrderTime</p>
             <p>Время готовности заказа: @ViewBag.Order.ReadyTime</p>
             @if (ViewBag.Order.WhereEat == false)
-        {
-            <p>Упаковка заказа: С собой</p>
-    }
-    else
-    {
-        <p>Упаковка заказа: На месте</p>
-}
+            {
+                <p>Упаковка заказа: С собой</p>
+            }
+            else
+            {
+                <p>Упаковка заказа: На месте</p>
+            }
             @if (ViewBag.Order.Status == 0)
-        {
-            <p>Статус: Обработка</p>
-    }
-    else if (ViewBag.Order.Status == 1)
-    {
-        <p>Статус: Подтвержден</p>
-}
-else if (ViewBag.Order.Status == 2)
-{
-    <p>Статус: Ожидает выдачи</p>
-}
-else if (ViewBag.Order.Status == 3)
-{
-    <p>Статус: Выполнен</p>
-}
-else if (ViewBag.Order.Status == 4)
-{
-    <p>Статус: Удален</p>
-}
+            {
+                <p>Статус: Обработка</p>
+            }
+            else if (ViewBag.Order.Status == 1)
+            {
+                <p>Статус: Подтвержден</p>
+            }
+            else if (ViewBag.Order.Status == 2)
+            {
+                <p>Статус: Ожидает выдачи</p>
+            }
+            else if (ViewBag.Order.Status == 3)
+            {
+                <p>Статус: Выполнен</p>
+            }
+            else if (ViewBag.Order.Status == 4)
+            {
+                <p>Статус: Удален</p>
+            }
             <p>Заметки: @ViewBag.Order.Notes</p>
             <table style="width: 95%; border: 1px solid gray" border="1">
                 <tr>
@@ -59,15 +69,15 @@ else if (ViewBag.Order.Status == 4)
                     <th style="width: 10%">Стоимость</th>
                 </tr>
                 @foreach (var p in ViewBag.Products)
-            {
-                <tr>
-                    <td>@p.MenuItem.Name</td>
-                    <td>@p.MenuItem.Ingredients</td>
-                    <td>@p.MenuItem.Category.Name</td>
-                    <td>@p.Amount</td>
-                    <td>@p.Sum руб.</td>
-                </tr>
-        }
+                {
+                    <tr>
+                        <td>@p.MenuItem.Name</td>
+                        <td>@p.MenuItem.Ingredients</td>
+                        <td>@p.MenuItem.Category.Name</td>
+                        <td>@p.Amount</td>
+                        <td>@p.Sum руб.</td>
+                    </tr>
+                }
             </table>
             <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice руб.</p>
         </div>

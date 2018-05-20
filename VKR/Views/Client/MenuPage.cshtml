@@ -16,12 +16,18 @@
 </head>
 <body>
     <div id="main-form" class="clearfix">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
+                <tr>
+                    <td class="menu-item"><a href="../Client/MenuPage" class="menu_text" id="link-1">Меню</a></td>
+                    <td class="menu-item"><a href="../Client/CartPage" class="menu_text" id="link-2">Корзина</a></td>
+                    <td class="menu-item"><a href="../Client/Profile" class="menu_text" id="link-3">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Client/Contacts" class="menu_text" id="link-4">Контакты</a></td>
+                </tr>
+            </table>
+        </div>
         <div>
             <h2>Меню</h2>
-            <br />
-            <a href="../Client/CartPage" class="but">Корзина</a>
-            <br />
-            <br />
             <table style="width: 100%; border: 0px" border="1">
                 <tr>
                     @foreach (var category in ViewBag.Category)
@@ -36,8 +42,12 @@
         </div>
     </div>
     <script>
-        $(".but").button();
-        $(".add-to-cart").button();
+        $('.menu-item').on('click', function () {
+            $(this).children('a')[0].click();
+        });
+        $('.category').on('click', function () {
+            $(this).children('a')[0].click();
+        });
         $(".category-filter").on("click", function () {
             var id = $(this).attr("id")
             $.ajax({
@@ -53,19 +63,18 @@
                     //Преобразовываем JSON
                     var json_parse = JSON.parse(json);
                     for (var i = 0; i < json_parse.length; i++) {
-                        var block = '<div value="' + json_parse[i]["Id"] + '" class="left"><h3>'
-                            + json_parse[i]["Name"] + '</h3><p>' + json_parse[i]["Price"]
-                            + '<span class="rub">Р</span><div class="minus">-</div>'
+                        var block = '<div value="' + json_parse[i]["Id"] + '" class="left"><h3 id="name">'
+                            + json_parse[i]["Name"] + '</h3><img src="../Content/Style/Files/'
+                            + json_parse[i]["Picture"] + '" class="photo_mi" alt="Изображение не добавлено"><div class="price"><p>'
+                            + json_parse[i]["Price"] + '<span class="rub">Р</span>' + '</div><div><div class="minus">-</div>'
                             + '<input type = "text" id="count_field_' + json_parse[i]["Id"] +
-                            '" value = "1" class="count_field"><div class="plus"> +</div><p>Ингредиенты: </p>'
+                            '" value = "1" class="count_field"><div class="plus"> +</div></div><h4>Ингредиенты: </h4>'
                             + json_parse[i]["Ingredients"] + '</br><input type="button" value="Добавить в корзину" class="add-to-cart"/>'
                             + '</div>';
-
+       
                         //Добавляем в div
                         document.getElementById('div').innerHTML += block;
                     }
-                    $(".but").button();
-                    $(".add-to-cart").button();
                     $('.minus').click(function () {
                         var $input = $(this).parent().find('input.count_field');
                         var count = parseInt($input.val()) - 1;
