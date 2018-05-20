@@ -12,87 +12,88 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="~/Content/Style/js/jquery-ui.js"></script>
     <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
+    <link href="~/Content/Style/css/menuPage.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navigation">
-        <table style="width: 100%; border: 0px" border="1">
-            <tr>
-                <td class="menu-item"><a href="../Client/MenuPage" class="menu_text">Меню</a></td>
-                <td class="menu-item"><a href="../Client/CartPage" class="menu_text">Корзина</a></td>
-                <td class="menu-item"><a href="../Client/Profile" class="menu_text">Личный кабинет</a></td>
-                <td class="menu-item"><a href="../Client/Contacts" class="menu_text">Контакты</a></td>
-            </tr>
-        </table>
-    </div>
-    <div>
-        <h2>Корзина</h2>
-        <br />
-        <a href="../Client/MenuPage" class="but" id="backtomenu">Вернуться к меню</a>
-        <br />
-        <br />
-        <div id="tablecart">
-            @if (ViewBag.Empty == "true")
+    <div id="main-form">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
+                <tr>
+                    <td class="menu-item"><a href="../Client/MenuPage" class="menu_text">Меню</a></td>
+                    <td class="menu-item"><a href="../Client/CartPage" class="menu_text">Корзина</a></td>
+                    <td class="menu-item"><a href="../Client/Profile" class="menu_text">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Client/Contacts" class="menu_text">Контакты</a></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h2>Корзина</h2>
+            <div id="tablecart">
+                @if (ViewBag.Empty == "true")
             {
                 <p>Ваша корзина пуста. Добавьте хотя бы один товар.</p>
-            }
-            else
+        }
+        else
+        {
+            <table class="table-with-items">
+                <tr>
+                    <th style="width: 20%">Название</th>
+                    <th style="width: 50%">Состав</th>
+                    <th style="width: 10%">Категория</th>
+                    <th style="width: 10%">Количество</th>
+                    <th style="width: 10%">Стоимость</th>
+                </tr>
+                @foreach (var cart in ViewBag.Cart)
             {
-                <table style="width: 95%; border: 1px solid gray" border="1">
-                    <tr>
-                        <th style="width: 20%">Название</th>
-                        <th style="width: 50%">Состав</th>
-                        <th style="width: 10%">Категория</th>
-                        <th style="width: 10%">Количество</th>
-                        <th style="width: 10%">Стоимость</th>
-                    </tr>
-                    @foreach (var cart in ViewBag.Cart)
-                    {
-                        <tr value="@cart.CartID">
-                            <input type="text" id="price_field_@cart.CartID" value="@cart.MenuItem.Price" hidden>
-                            <td>@cart.MenuItem.Name</td>
-                            <td>@cart.MenuItem.Ingredients</td>
-                            <td>@cart.MenuItem.Category.Name</td>
-                            <td>
-                                <div class="minus">-</div>
-                                <input type="text" id="count_field_@cart.CartID" value="@cart.Amount" class="count_field">
-                                <div class="plus"> +</div>
-                            </td>
-                            <td id="@cart.CartID">
-                                <p class="price">
-                                    @(cart.MenuItem.Price * cart.Amount)
-                                </p>
-                            </td>
-                            <td><input type="button" value="Удалить" class="remove-cart-item" /></td>
-                        </tr>
-                    }
-                </table>
-                <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice</p>
-                <input type="button" value="Очистить корзину" class="remove-cart" />
-                <div>
-                    <p>Выберите время готовности: </p>
-                    @foreach (var time in ViewBag.Times)
-                    {
-                        <p><input name="time" type="radio" id="@time.FreeTimeID" value="@time.Time"> @time.Time</p>
-                    }
-                    <p>Собрать заказ:
-                    <p><input name="place" type="radio" id="0" value="false" checked>С собой</p>
-                    <p><input name="place" type="radio" id="1" value="true">На месте</p>
-                    </p>
-                    <p>Заметки к заказу:</p>
-                    <input type="text" id="notes" />
-                </div>
-                <input type="button" value="Оформить заказ" class="new-order" />
-                <br />
-                <br />
-            }
+                <tr value="@cart.CartID">
+                    <input type="text" id="price_field_@cart.CartID" value="@cart.MenuItem.Price" hidden>
+                    <td>@cart.MenuItem.Name</td>
+                    <td>@cart.MenuItem.Ingredients</td>
+                    <td>@cart.MenuItem.Category.Name</td>
+                    <td>
+                        <div class="minus">-</div>
+                        <input type="text" id="count_field_@cart.CartID" value="@cart.Amount" class="count_field">
+                        <div class="plus"> +</div>
+                    </td>
+                    <td id="@cart.CartID">
+                        <p class="price">
+                            @(cart.MenuItem.Price * cart.Amount)
+                        </p>
+                    </td>
+                    <td class="remove-but"><input type="button" value="Удалить" class="remove-cart-item" /></td>
+                </tr>
+        }
+            </table>
+            <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice</p>
+            <input type="button" value="Очистить корзину" class="remove-cart" />
+            <div>
+                <p>Выберите время готовности: </p>
+                @foreach (var time in ViewBag.Times)
+            {
+                <p><input name="time" type="radio" id="@time.FreeTimeID" value="@time.Time"> @time.Time</p>
+        }
+                <p>Собрать заказ:
+                <p><input name="place" type="radio" id="0" value="false" checked>С собой</p>
+                <p><input name="place" type="radio" id="1" value="true">На месте</p>
+                </p>
+                <p>Заметки к заказу:</p>
+                <input type="text" id="notes" />
+            </div>
+            <input type="button" value="Оформить заказ" class="new-order" />
+            <br />
+            <br />
+    }
+            </div>
         </div>
     </div>
     <script>
-        $(".but").button();
-        $(".remove-cart-item").button();
-        $(".remove-cart").button();
-        $(".add-order").button();
-        $(".remove-cart-item").on("click", function () {
+        $('.menu-item').on('click', function () {
+            $(this).children('a')[0].click();
+        });
+        $('.remove-but').on('click', function () {
+            $(this).children('input')[0].click();
+        });
+        $(".remove-cart-item").on("click", function (event) {
             var button = $(this);
             var str = button.parent().parent();
             $.ajax({
@@ -101,14 +102,21 @@
                 dataType: "text",
                 success: function (text) {
                     str.remove();
-                    console.log(text);
                     if (text == "true") {
                         $("#tablecart").empty();
                         var block = '<p>Ваша корзина пуста. Добавьте хотя бы один товар.</p>';
                         document.getElementById('tablecart').innerHTML += block;
                     }
+                    var sum = 0;
+                    $.each($('.price'), function (index, value) {
+                        sum = sum + parseInt($(this).html());
+                    });
+                    $('#allprice').empty();
+                    block = 'Общая сумма заказа: ' + sum;
+                    document.getElementById('allprice').innerHTML += block;
                 }
             })
+            event.stopPropagation();
         })
         $(".remove-cart").on("click", function () {
             var button = $(this);

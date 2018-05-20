@@ -42,6 +42,9 @@
         </div>
     </div>
     <script>
+        $(window).load(function () {
+            $(".category-filter")[0].click();
+        });
         $('.menu-item').on('click', function () {
             $(this).children('a')[0].click();
         });
