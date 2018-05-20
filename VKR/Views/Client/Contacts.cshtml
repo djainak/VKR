@@ -7,27 +7,38 @@
 
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Style/css/menuPage.css" rel="stylesheet" />
     <title>Контакты</title>
 </head>
 <body>
-    <div class="navigation">
-        <table style="width: 100%; border: 0px" border="1">
-            <tr>
-                <td class="menu-item"><a href="../Client/MenuPage" class="menu_text">Меню</a></td>
-                <td class="menu-item"><a href="../Client/CartPage" class="menu_text">Корзина</a></td>
-                <td class="menu-item"><a href="../Client/Profile" class="menu_text">Личный кабинет</a></td>
-                <td class="menu-item"><a href="../Client/Contacts" class="menu_text">Контакты</a></td>
-            </tr>
-        </table>
+    <div id="main-form">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
+                <tr>
+                    <td class="menu-item"><a href="../Client/MenuPage" class="menu_text">Меню</a></td>
+                    <td class="menu-item"><a href="../Client/CartPage" class="menu_text">Корзина</a></td>
+                    <td class="menu-item"><a href="../Client/Profile" class="menu_text">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Client/Contacts" class="menu_text">Контакты</a></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h2>Контакты</h2>
+            <p><label style="font-weight:700">Телефон: </label>@ViewBag.DR.PhoneNum</p>
+            <p><label style="font-weight:700">E-mail: </label>@ViewBag.DR.Email</p>
+            <p><label style="font-weight:700">Адрес: </label>@ViewBag.DR.Adress</p>
+            <p><label style="font-weight:700">Контактное лицо: </label>@ViewBag.Manager.FirstName @ViewBag.Manager.Name @ViewBag.Manager.Patronymic</p>
+            <br />
+        </div>
     </div>
-    <div>
-        <h2>Контакты</h2>
-        <p>Телефон: @ViewBag.DR.PhoneNum</p>
-        <p>E-mail: @ViewBag.DR.Email</p>
-        <p>Адрес: @ViewBag.DR.Adress</p>
-        <p><label>Контактное лицо: </label>@ViewBag.Manager.FirstName @ViewBag.Manager.Name @ViewBag.Manager.Patronymic</p>
-        <br />
-    </div>
+    <script>
+        $('.menu-item').on('click', function () {
+            $(this).children('a')[0].click();
+        });
+    </script>
 </body>
 </html>

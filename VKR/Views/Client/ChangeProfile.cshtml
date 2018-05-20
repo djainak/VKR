@@ -8,47 +8,39 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Style/css/menuPage.css" rel="stylesheet" />
     <title>Редактировать профиль</title>
 </head>
 <body>
-    <div>
+    <div id="main-form">
         <form method="post" action="./ChProfile" enctype="multipart/form-data">
             <h2>Редактирование профиля</h2>
             <input type="number" name="ID" value="@ViewBag.RedUser.UserID" hidden />
-            <p>Логин:</p>
-            <input type="text" name="Login" id="Login" value="@ViewBag.RedUser.Login" required />
+            <p style="color: #000E1F; font-weight:700">Логин:</p>
+            <input type="text" class="form-input" name="Login" id="Login" value="@ViewBag.RedUser.Login" required />
             <br />
+            <p style="color: #000E1F; font-weight:700">Фамилия:</p>
+            <input type="text" class="form-input" name="FirstName" value="@ViewBag.RedUser.FirstName" required />
             <br />
-            <p>Фамилия:</p>
-            <input type="text" name="FirstName" value="@ViewBag.RedUser.FirstName" required />
+            <p style="color: #000E1F; font-weight:700">Имя:</p>
+            <input type="text" class="form-input" name="Name" value="@ViewBag.RedUser.Name" required />
             <br />
+            <p style="color: #000E1F; font-weight:700">Отчество:</p>
+            <input type="text" class="form-input" name="Patronymic" value="@ViewBag.RedUser.Patronymic" />
             <br />
-            <p>Имя:</p>
-            <input type="text" name="Name" value="@ViewBag.RedUser.Name" required />
+            <p style="color: #000E1F; font-weight:700">Email:</p>
+            <input type="email" class="form-input" name="Email" value="@ViewBag.RedUser.Email" required />
             <br />
+            <p style="color: #000E1F; font-weight:700">Телефон:</p>
+            <input type="tel" class="form-input" name="PhoneNumber" value="@ViewBag.RedUser.PhoneNumber" required />
             <br />
-            <p>Отчество:</p>
-            <input type="text" name="Patronymic" value="@ViewBag.RedUser.Patronymic" />
-            <br />
-            <br />
-            <p>Email:</p>
-            <input type="email" name="Email" value="@ViewBag.RedUser.Email" required />
-            <br />
-            <br />
-            <p>Телефон:</p>
-            <input type="tel" name="PhoneNumber" value="@ViewBag.RedUser.PhoneNumber" required />
-            <br />
-            <br />
-            <p>Текущее изображение:</p>
+            <p style="color: #000E1F; font-weight:700">Текущее изображение:</p>
             <img src="~/Content/Style/Files/@ViewBag.RedUser.Picture" width="100" height="100" alt="Изображение не добавлено">
-            <p>Загрузить новое изображение:</p>
-            <input type="file" name="upload" accept="image/jpeg,image/png">
-            <br />
-            <br />
-            <p>
-                <a href="../Client/Profile" class="but">Отмена</a>
-                <input type="submit" class="but" />
-            </p>
+            <p style="color: #000E1F; font-weight:700">Загрузить новое изображение:</p>
+            <input type="file" class="form-input" name="upload" accept="image/jpeg,image/png">
+            <br clear="all">
+            <a href="../Client/Profile" class="ord_but" style="float:right; margin-top: 10px;">Отмена</a>
+            <input type="submit" class="send"/>
         </form>
     </div>
 </body>

@@ -30,11 +30,11 @@
             <h2>Корзина</h2>
             <div id="tablecart">
                 @if (ViewBag.Empty == "true")
-            {
-                <p>Ваша корзина пуста. Добавьте хотя бы один товар.</p>
-        }
-        else
-        {
+    {
+            <p>Ваша корзина пуста. Добавьте хотя бы один товар.</p>
+}
+else
+{
             <table class="table-with-items">
                 <tr>
                     <th style="width: 20%">Название</th>
@@ -44,49 +44,61 @@
                     <th style="width: 10%">Стоимость</th>
                 </tr>
                 @foreach (var cart in ViewBag.Cart)
-            {
-                <tr value="@cart.CartID">
-                    <input type="text" id="price_field_@cart.CartID" value="@cart.MenuItem.Price" hidden>
-                    <td>@cart.MenuItem.Name</td>
-                    <td>@cart.MenuItem.Ingredients</td>
-                    <td>@cart.MenuItem.Category.Name</td>
-                    <td>
-                        <div class="minus">-</div>
-                        <input type="text" id="count_field_@cart.CartID" value="@cart.Amount" class="count_field">
-                        <div class="plus"> +</div>
-                    </td>
-                    <td id="@cart.CartID">
-                        <p class="price">
-                            @(cart.MenuItem.Price * cart.Amount)
-                        </p>
-                    </td>
-                    <td class="remove-but"><input type="button" value="Удалить" class="remove-cart-item" /></td>
-                </tr>
-        }
+    {
+            <tr value="@cart.CartID">
+                <input type="text" id="price_field_@cart.CartID" value="@cart.MenuItem.Price" hidden>
+                <td>@cart.MenuItem.Name</td>
+                <td>@cart.MenuItem.Ingredients</td>
+                <td>@cart.MenuItem.Category.Name</td>
+                <td>
+                    <div class="minus">- </div>
+                    <input type="text" id="count_field_@cart.CartID" value="@cart.Amount" class="count_field">
+                    <div class="plus"> +</div>
+                </td>
+                <td id="@cart.CartID">
+                    <p class="price">
+                        @(cart.MenuItem.Price * cart.Amount)
+                    </p>
+                </td>
+                <td class="remove-but"><input type="button" value="Удалить" class="remove-cart-item" /></td>
+            </tr>
+}
             </table>
             <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice</p>
             <input type="button" value="Очистить корзину" class="remove-cart" />
             <div>
-                <p>Выберите время готовности: </p>
-                @foreach (var time in ViewBag.Times)
-            {
-                <p><input name="time" type="radio" id="@time.FreeTimeID" value="@time.Time"> @time.Time</p>
-        }
-                <p>Собрать заказ:
+                <h4>Выберите время готовности: </h4>
+                <div id="times">
+                    @foreach (var time in ViewBag.Times)
+        {
+            <div class="time-blocks">
+                <p class="time-str"><input name="time" type="radio" id="@time.FreeTimeID" value="@time.Time"> @time.Time</p>
+            </div>
+}
+                </div>
+            </div>
+            <br clear="all">
+            <div style="clear:both;">
+                <p><h4>Собрать заказ:</h4>
                 <p><input name="place" type="radio" id="0" value="false" checked>С собой</p>
                 <p><input name="place" type="radio" id="1" value="true">На месте</p>
                 </p>
-                <p>Заметки к заказу:</p>
+                <h4>Заметки к заказу:</h4>
                 <input type="text" id="notes" />
+                <br clear="all">
+                <input type="button" value="Оформить заказ" class="new-order" />
             </div>
-            <input type="button" value="Оформить заказ" class="new-order" />
-            <br />
-            <br />
-    }
+            <div class="clear"></div>
+}
             </div>
         </div>
     </div>
     <script>
+        $(window).load(function () {
+            if ($('input[name=time]').first() != null) {
+                $('input[name=time]').first().attr("checked", true);
+            }
+        });
         $('.menu-item').on('click', function () {
             $(this).children('a')[0].click();
         });

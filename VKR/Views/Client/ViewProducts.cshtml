@@ -11,64 +11,65 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="~/Content/Style/js/jquery-ui.js"></script>
     <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
-    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
+    <link href="~/Content/Style/css/menuPage.css" rel="stylesheet" />
     <title>Заказанные товары</title>
 </head>
 <body>
-    <div class="navigation">
-        <table style="width: 100%; border: 0px" border="1">
-            <tr>
-                <td class="menu-item"><a href="../Client/MenuPage" class="menu_text">Меню</a></td>
-                <td class="menu-item"><a href="../Client/CartPage" class="menu_text">Корзина</a></td>
-                <td class="menu-item"><a href="../Client/Profile" class="menu_text">Личный кабинет</a></td>
-                <td class="menu-item"><a href="../Client/Contacts" class="menu_text">Контакты</a></td>
-            </tr>
-        </table>
-    </div>
-    <div>
-        <a href="../Client/ListOrders" class="but">Вернуться к заказам</a>
-        <div id="printarea">
-            <h2>Товары заказа №@ViewBag.Order.NumberOrder</h2>
-            <p>Время оформления: @ViewBag.Order.OrderTime</p>
-            <p>Время готовности заказа: @ViewBag.Order.ReadyTime</p>
-            @if (ViewBag.Order.WhereEat == false)
-            {
-                <p>Упаковка заказа: С собой</p>
-            }
-            else
-            {
-                <p>Упаковка заказа: На месте</p>
-            }
-            @if (ViewBag.Order.Status == 0)
-            {
-                <p>Статус: Обработка</p>
-            }
-            else if (ViewBag.Order.Status == 1)
-            {
-                <p>Статус: Подтвержден</p>
-            }
-            else if (ViewBag.Order.Status == 2)
-            {
-                <p>Статус: Ожидает выдачи</p>
-            }
-            else if (ViewBag.Order.Status == 3)
-            {
-                <p>Статус: Выполнен</p>
-            }
-            else if (ViewBag.Order.Status == 4)
-            {
-                <p>Статус: Удален</p>
-            }
-            <p>Заметки: @ViewBag.Order.Notes</p>
-            <table style="width: 95%; border: 1px solid gray" border="1">
+    <div id="main-form">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
                 <tr>
-                    <th style="width: 20%">Название</th>
-                    <th style="width: 50%">Состав</th>
-                    <th style="width: 10%">Категория</th>
-                    <th style="width: 10%">Количество</th>
-                    <th style="width: 10%">Стоимость</th>
+                    <td class="menu-item"><a href="../Client/MenuPage" class="menu_text">Меню</a></td>
+                    <td class="menu-item"><a href="../Client/CartPage" class="menu_text">Корзина</a></td>
+                    <td class="menu-item"><a href="../Client/Profile" class="menu_text">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Client/Contacts" class="menu_text">Контакты</a></td>
                 </tr>
-                @foreach (var p in ViewBag.Products)
+            </table>
+        </div>
+        <div>
+            <a href="../Client/ListOrders" class="ord_but">Вернуться к заказам</a>
+            <div id="printarea">
+                <h2>Товары заказа №@ViewBag.Order.NumberOrder</h2>
+                <p><label style="font-weight:700">Время оформления: </label>@ViewBag.Order.OrderTime</p>
+                <p><label style="font-weight:700">Время готовности заказа: </label>@ViewBag.Order.ReadyTime</p>
+                @if (ViewBag.Order.WhereEat == false)
+            {
+                <p><label style="font-weight:700">Упаковка заказа: </label>С собой</p>
+        }
+        else
+        {
+            <p><label style="font-weight:700">Упаковка заказа: </label>На месте</p>
+    }
+                @if (ViewBag.Order.Status == 0)
+            {
+                <p><label style="font-weight:700">Статус: </label>Обработка</p>
+        }
+        else if (ViewBag.Order.Status == 1)
+        {
+            <p><label style="font-weight:700">Статус: </label>Подтвержден</p>
+    }
+    else if (ViewBag.Order.Status == 2)
+    {
+        <p><label style="font-weight:700">Статус: </label>Ожидает выдачи</p>
+}
+else if (ViewBag.Order.Status == 3)
+{
+    <p><label style="font-weight:700">Статус: </label>Выполнен</p>
+}
+else if (ViewBag.Order.Status == 4)
+{
+    <p><label style="font-weight:700">Статус: </label>Удален</p>
+}
+                <p><label style="font-weight:700">Заметки: </label>@ViewBag.Order.Notes</p>
+                <table>
+                    <tr>
+                        <th style="width: 20%">Название</th>
+                        <th style="width: 50%">Состав</th>
+                        <th style="width: 10%">Категория</th>
+                        <th style="width: 10%">Количество</th>
+                        <th style="width: 10%">Стоимость</th>
+                    </tr>
+                    @foreach (var p in ViewBag.Products)
                 {
                     <tr>
                         <td>@p.MenuItem.Name</td>
@@ -77,14 +78,17 @@
                         <td>@p.Amount</td>
                         <td>@p.Sum руб.</td>
                     </tr>
-                }
-            </table>
-            <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice руб.</p>
+            }
+                </table>
+                <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice руб.</p>
+            </div>
+            <input type="button" value="Печать" class="send" onclick="PrintElem('#printarea')" />
         </div>
-        <input type="button" value="Печать" class="but" onclick="PrintElem('#printarea')" />
     </div>
     <script>
-        $('.but').button();
+        $('.menu-item').on('click', function () {
+            $(this).children('a')[0].click();
+        });
         function PrintElem(elem) {
             Popup($(elem).html());
         }
