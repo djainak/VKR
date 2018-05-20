@@ -91,11 +91,11 @@ else
     {
         <td>
             <select id="status_@order.OrderID" class="status" name="status" required>
-                <option id="0" value="0" selected="">Обработка</option>
-                <option id="1" value="1">Подтвержден</option>
-                <option id="2" value="2">Ожидает выдачи</option>
-                <option id="3" value="3">Выполнен</option>
-                <option id="4" value="4">Удален</option>
+                <option id="0_@order.OrderID" value="0" selected="">Обработка</option>
+                <option id="1_@order.OrderID" value="1">Подтвержден</option>
+                <option id="2_@order.OrderID" value="2">Ожидает выдачи</option>
+                <option id="3_@order.OrderID" value="3">Выполнен</option>
+                <option id="4_@order.OrderID" value="4">Удален</option>
             </select>
         </td>
 }
@@ -103,11 +103,11 @@ else if (order.Status == 1)
 {
         <td>
             <select id="status_@order.OrderID" class="status" name="status" required>
-                <option id="0" value="0">Обработка</option>
-                <option id="1" value="1" selected="">Подтвержден</option>
-                <option id="2" value="2">Ожидает выдачи</option>
-                <option id="3" value="3">Выполнен</option>
-                <option id="4" value="4">Удален</option>
+                <option id="0_@order.OrderID" value="0">Обработка</option>
+                <option id="1_@order.OrderID" value="1" selected="">Подтвержден</option>
+                <option id="2_@order.OrderID" value="2">Ожидает выдачи</option>
+                <option id="3_@order.OrderID" value="3">Выполнен</option>
+                <option id="4_@order.OrderID" value="4">Удален</option>
             </select>
         </td>
 }
@@ -115,11 +115,11 @@ else if (order.Status == 2)
 {
         <td>
             <select id="status_@order.OrderID" class="status" name="status" required>
-                <option id="0" value="0">Обработка</option>
-                <option id="1" value="1">Подтвержден</option>
-                <option id="2" value="2" selected="">Ожидает выдачи</option>
-                <option id="3" value="3">Выполнен</option>
-                <option id="4" value="4">Удален</option>
+                <option id="0_@order.OrderID" value="0">Обработка</option>
+                <option id="1_@order.OrderID" value="1">Подтвержден</option>
+                <option id="2_@order.OrderID" value="2" selected="">Ожидает выдачи</option>
+                <option id="3_@order.OrderID" value="3">Выполнен</option>
+                <option id="4_@order.OrderID" value="4">Удален</option>
             </select>
         </td>
 }
@@ -127,11 +127,11 @@ else if (order.Status == 3)
 {
         <td>
             <select id="status_@order.OrderID" class="status" name="status" required>
-                <option id="0" value="0">Обработка</option>
-                <option id="1" value="1">Подтвержден</option>
-                <option id="2" value="2">Ожидает выдачи</option>
-                <option id="3" value="3" selected="">Выполнен</option>
-                <option id="4" value="4">Удален</option>
+                <option id="0_@order.OrderID" value="0">Обработка</option>
+                <option id="1_@order.OrderID" value="1">Подтвержден</option>
+                <option id="2_@order.OrderID" value="2">Ожидает выдачи</option>
+                <option id="3_@order.OrderID" value="3" selected="">Выполнен</option>
+                <option id="4_@order.OrderID" value="4">Удален</option>
             </select>
         </td>
 }
@@ -139,11 +139,11 @@ else if (order.Status == 4)
 {
         <td>
             <select id="status_@order.OrderID" class="status" name="status" required>
-                <option id="0" value="0">Обработка</option>
-                <option id="1" value="1">Подтвержден</option>
-                <option id="2" value="2">Ожидает выдачи</option>
-                <option id="3" value="3">Выполнен</option>
-                <option id="4" value="4" selected="">Удален</option>
+                <option id="0_@order.OrderID" value="0">Обработка</option>
+                <option id="1_@order.OrderID" value="1">Подтвержден</option>
+                <option id="2_@order.OrderID" value="2">Ожидает выдачи</option>
+                <option id="3_@order.OrderID" value="3">Выполнен</option>
+                <option id="4_@order.OrderID" value="4" selected="">Удален</option>
             </select>
         </td>
 }
@@ -156,34 +156,30 @@ else if (order.Status == 4)
 }
         </div>
         <script>
-            $(".status").change(function () {
-                var st = $(this).val();
-                var t = $(this).closest('.tr');
-                var id = t.attr('value');
-                $.ajax({
-                    url: "../api/Order?status=" + st + "&order_id=" + id,
-                    type: "POST",
-                    dataType: "text",
-                    success: function () {
-                        if (st == "3" || st == "4") {
-                            setTimeout(
-                                function () { }, 5000);
-                            t.remove();
-                        }
-                    }
-                })
-            });
 
             var last_id = $('#lastid').attr('value');
             setTimeout(function refresh() {
-                var statuses = new Array();
-                $.ajax({
-                    url: "../api/Order",
-                    type: "GET",
-                    dataType: "text",
-                    success: function () {
-                    }
-                })
+                $.each($('.status'), function (index, value) {
+                    var st = $(this).val();
+                    var o_id = $(this).attr('id');
+                    var t = $(this).closest('.tr');
+                    $.ajax({
+                        url: "../api/RefreshStatuses?select_id=" + o_id,
+                        type: "GET",
+                        dataType: "text",
+                        success: function (text) {
+                            if (st != text) {
+                                $('#' + st + '_' + o_id.substr(7)).attr('selected', false);
+                                $('#' + parseInt(text) + '_' + o_id.substr(7)).attr('selected', true);
+                                if (text == "3" || text == "4") {
+                                    setTimeout(
+                                        function () { }, 5000);
+                                    t.remove();
+                                }
+                            }
+                        }
+                        })
+                });
                 $.ajax({
                     url: "../api/Order?last_id=" + last_id,
                     type: "GET",
@@ -277,6 +273,24 @@ else if (order.Status == 4)
                     }
                 })
                 setTimeout(refresh, 5000);
+                $(".status").change(function () {
+                    var st = $(this).val();
+                    var t = $(this).closest('.tr');
+                    var o_id = $(this).attr('id');
+                    var id = t.attr('value');
+                    $.ajax({
+                        url: "../api/Order?status=" + st + "&order_id=" + id,
+                        type: "POST",
+                        dataType: "text",
+                        success: function () {
+                            if (st == "3" || st == "4") {
+                                setTimeout(
+                                    function () { }, 5000);
+                                t.remove();
+                            }
+                        }
+                    })
+                });
             }, 5000);
 
         </script>
@@ -398,6 +412,25 @@ else if (order.Status == 4)
                         primary: "ui-icon-search"
                     }
                 });
+            });
+
+            $(".status").change(function () {
+                var st = $(this).val();
+                var t = $(this).closest('.tr');
+                var o_id = $(this).attr('id');
+                var id = t.attr('value');
+                $.ajax({
+                    url: "../api/Order?status=" + st + "&order_id=" + id,
+                    type: "POST",
+                    dataType: "text",
+                    success: function () {
+                        if (st == "3" || st == "4") {
+                            setTimeout(
+                                function () { }, 5000);
+                            t.remove();
+                        }
+                    }
+                })
             });
         </script>
     </div>

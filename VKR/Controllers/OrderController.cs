@@ -44,10 +44,5 @@ namespace VKR.Controllers
             }
             return JsonConvert.SerializeObject(orders);
         }
-
-        public void Get()
-        {
-
-        }
     }
 }
