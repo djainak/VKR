@@ -17,12 +17,12 @@
 <body>
     <div class="mainstyle">
         <br />
-        <a href="../Admin/MenuList?UserId=@ViewBag.UserID" class="but">Вернуться к списку меню</a>
+        <a href="../Admin/MenuList" class="but">Вернуться к списку меню</a>
         <br />
         <br />
     </div>
     <div class="allform">
-        <form method="post" action="./ChMenu?UserId=@ViewBag.UserID&MenuId=@ViewBag.Menu.Id" enctype="multipart/form-data">
+        <form method="post" action="./ChMenu?MenuId=@ViewBag.Menu.Id" enctype="multipart/form-data">
             <h2>Редактирование меню</h2>
             <p>Введите название меню:</p>
             <input type="text" name="Name" value="@ViewBag.Menu.Name" required />

@@ -14,10 +14,11 @@
     <div>
         <nav role='navigation'>
             <ul>
-                <li><a href="../Admin/Home?UserId=@ViewBag.UserID">О точке питания</a></li>
-                <li><a href="../Admin/MenuList?UserId=@ViewBag.UserID">Меню</a></li>
-                <li><a href="../Admin/PersonalAccount?UserId=@ViewBag.UserID">Личный кабинет</a></li>
-                <li><a href="../Admin/ListUsers?UserId=@ViewBag.UserID">Настройка прав пользователей</a></li>
+                <li><a href="../Admin/Home">О точке питания</a></li>
+                <li><a href="../Admin/MenuList">Меню</a></li>
+                <li><a href="../Admin/OrdersPage">Заказы</a></li>
+                <li><a href="../Admin/PersonalAccount">Личный кабинет</a></li>
+                <li><a href="../Admin/ListUsers">Настройка прав пользователей</a></li>
             </ul>
         </nav>
     </div>
@@ -25,13 +26,13 @@
         <h2>Список пунктов меню</h2>
         @if (ViewBag.isError)
         {
-            <p style="color: red; font-size: 18px;">Данное меню не существует</p>
+            <p style="font-size: 18px;">Данное меню не существует</p>
         }
         else
         {
             <p>
-                <a href="../Admin/ListMenuItems?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID" class="but">Добавить пункт меню</a>
-                <a href="../Admin/MenuList?UserId=@ViewBag.UserID" class="but">Вернуться к списку меню</a>
+                <a href="../Admin/ListMenuItems?MenuId=@ViewBag.MenuId" class="but">Добавить пункт меню</a>
+                <a href="../Admin/MenuList" class="but">Вернуться к списку меню</a>
                 <br />
                 <br />
             </p>
@@ -51,7 +52,7 @@
                     <td>@menuItem.Ingredients</td>
                     <td>@menuItem.Category.Name</td>
                     <td>@menuItem.Price</td>
-                    <td><a href="../Admin/ChangeMenuItem?UserId=@ViewBag.UserID&MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId" class="but">Редактировать</a></td>
+                    <td><a href="../Admin/ChangeMenuItem?MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId" class="but">Редактировать</a></td>
                     <td><input type="button" value="Удалить" class="remove-menu-item" /></td>
                 </tr>
                 }
@@ -62,7 +63,6 @@
         $(".remove-menu-item").on("click", function () {
             var button = $(this);
             var str = button.parent().parent();
-            // +"&UserId=@ViewBag.UserID";
             $.ajax({
                 url: "../Admin/RemoveMenuItem?id=" + str.attr("value")+"&MenuId=@ViewBag.MenuId",
                 type: "POST",

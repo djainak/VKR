@@ -16,12 +16,12 @@
 </head>
 <body>
     <div class="mainstyle">
-        <a href="../Admin/AddMenuItemForm?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID" class="but">Вернуться к списку блюд</a>
+        <a href="../Admin/AddMenuItemForm?MenuId=@ViewBag.MenuId" class="but">Вернуться к списку блюд</a>
         <br />
         <br />
     </div>
     <div class="allform">
-        <form method="post" action="./ChMenuItem?MenuId=@ViewBag.MenuId&UserId=@ViewBag.UserID&MenuItemId=@ViewBag.MenuItemId" enctype="multipart/form-data">
+        <form method="post" action="./ChMenuItem?MenuId=@ViewBag.MenuId&MenuItemId=@ViewBag.MenuItemId" enctype="multipart/form-data">
             <h2>Редактирование пункта меню</h2>
             <p>Введите название блюда:</p>
             <input type="text" name="Name" value="@ViewBag.MenuItem.Name" required />

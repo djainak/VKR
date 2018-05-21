@@ -18,7 +18,7 @@
     <div>
         <div class="allform">
             <h2>Настройка точки питания</h2>
-            <form method="post" action="./SetDR?UserId=@ViewBag.UserID">
+            <form method="post" action="./SetDR">
                 <div>
                     <p>Адрес точки: </p>
                     <input type="text" name="Adress" value="@ViewBag.DinningRoom.Adress" required>
@@ -53,7 +53,7 @@ else
 }
                 </div>
                 <p>
-                    <a href="../Admin/Home?UserId=@ViewBag.UserID" class="but">Отмена</a>
+                    <a href="../Admin/Home" class="but">Отмена</a>
                     <input type="submit" value="Сохранить" class="but">
                 </p>
             </form>
