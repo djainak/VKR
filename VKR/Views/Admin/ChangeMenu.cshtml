@@ -15,21 +15,17 @@
     <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="mainstyle">
-        <br />
-        <a href="../Admin/MenuList" class="but">Вернуться к списку меню</a>
-        <br />
-        <br />
-    </div>
+    <div id="main-form">
     <div class="allform">
         <form method="post" action="./ChMenu?MenuId=@ViewBag.Menu.Id" enctype="multipart/form-data">
             <h2>Редактирование меню</h2>
+            <br/>
             <p>Введите название меню:</p>
-            <input type="text" name="Name" value="@ViewBag.Menu.Name" required />
+            <input type="text" name="Name" value="@ViewBag.Menu.Name" class="form-input" required />
             <br />
             <br />
             <p>Введите описание меню:</p>
-            <input type="text" name="Description" value="@ViewBag.Menu.Description" />
+            <input type="text" name="Description" value="@ViewBag.Menu.Description" class="form-input" />
             <br />
             <br />
             <label style="font-weight:500">
@@ -42,14 +38,13 @@
             <p>Текущее изображение:</p>
             <img src="~/Content/Style/Files/@ViewBag.Menu.Picture" width="100" height="100" alt="Изображение не добавлено">
             <p>Загрузить новое изображение:</p>
-            <input type="file" name="upload" accept="image/jpeg,image/png">
+            <input type="file" name="upload" accept="image/jpeg,image/png" class="form-input" style="height: 38px">
             <br />
             <br />
-            <input type="submit" class="but" />
+            <a href="../Admin/MenuList" class="link-but" style="width:230px; float: right">Вернуться к списку меню</a>
+            <input type="submit" class="link-but" />
         </form>
-        <script>
-            $(".but").button();
-        </script>
+    </div>
     </div>
 </body>
 </html>

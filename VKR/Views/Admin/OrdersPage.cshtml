@@ -15,17 +15,17 @@
     <title>Заказы</title>
 </head>
 <body>
-    <div>
-        <div>
-            <nav role='navigation'>
-                <ul>
-                    <li><a href="../Admin/Home">О точке питания</a></li>
-                    <li><a href="../Admin/MenuList">Меню</a></li>
-                    <li><a href="../Admin/OrdersPage">Заказы</a></li>
-                    <li><a href="../Admin/PersonalAccount">Личный кабинет</a></li>
-                    <li><a href="../Admin/ListUsers">Настройка прав пользователей</a></li>
-                </ul>
-            </nav>
+    <div id="main-form">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
+                <tr>
+                    <td class="menu-item"><a href="../Admin/Home" class="menu_text">О точке питания</a></td>
+                    <td class="menu-item"><a href="../Admin/OrdersPage" class="menu_text">Заказы</a></td>
+                    <td class="menu-item"><a href="../Admin/MenuList" class="menu_text">Меню</a></td>
+                    <td class="menu-item"><a href="../Admin/PersonalAccount" class="menu_text">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Admin/ListUsers" class="menu_text">Настройка прав пользователей</a></td>
+                </tr>
+            </table>
         </div>
         <div class="mainstyle">
             @if (ViewBag.Empty == "true")
@@ -34,35 +34,39 @@
 }
 else
 {
+        <br />
+        <a href="../Admin/ArchiveOrders" class="link-but" style="float:right; width: 125px">Архив заказов</a>
         <h2>Актуальные заказы</h2>
+        <br />
         <div class="mainstyle">
-            <p>Фильтры:</p>
+            <p style="font-weight: 700">Фильтры:</p>
+            <br />
             <p>
-                Номер заказа: <input type="number" id="OrderNumber" />
-            </p>
-            <label style="font-weight: 500">
-                <input class="checkbox" type="checkbox" id="0" value="Обработка" checked>
-                <span class="checkbox-custom"></span>
-                <span class="label">Обработка</span>
-            </label>
-            <label style="font-weight: 500">
-                <input class="checkbox" type="checkbox" id="1" value="Подтвержден" checked>
-                <span class="checkbox-custom"></span>
-                <span class="label">Подтвержден</span>
-            </label>
-            <label style="font-weight: 500">
-                <input class="checkbox" type="checkbox" id="2" value="Ожидает выдачи" checked>
-                <span class="checkbox-custom"></span>
-                <span class="label">Ожидает выдачи</span>
-            </label>
-            <button type="submit" id="search"></button>
-        </div>
-        <a href="../Admin/ArchiveOrders" class="but">Архив заказов</a>
+                Номер заказа: <input type="number" id="OrderNumber" class="form-input"/>
 
+                <label style="font-weight: 500">
+                    <input class="checkbox" type="checkbox" id="0" value="Обработка" checked>
+                    <span class="checkbox-custom"></span>
+                    <span class="label">Обработка</span>
+                </label>
+                <label style="font-weight: 500">
+                    <input class="checkbox" type="checkbox" id="1" value="Подтвержден" checked>
+                    <span class="checkbox-custom"></span>
+                    <span class="label">Подтвержден</span>
+                </label>
+                <label style="font-weight: 500">
+                    <input class="checkbox" type="checkbox" id="2" value="Ожидает выдачи" checked>
+                    <span class="checkbox-custom"></span>
+                    <span class="label">Ожидает выдачи</span>
+                </label>
+            </p>
+            <button type="submit" id="search" class="link-but">Поиск</button>
+            <br />
+        </div>
         <div id="changelastid">
             <input type="text" value="@ViewBag.LastId" id="lastid" hidden />
         </div>
-        <table id="tableorders" style="width: 95%; border: 1px solid gray" border="1">
+        <table id="tableorders">
             <tr>
                 <th style="width: 10%">Номер заказа</th>
                 <th style="width: 10%">Время оформления</th>
@@ -149,14 +153,19 @@ else if (order.Status == 4)
 }
             <td><p>@order.Sum</p></td>
             <td><p>@order.Notes</p></td>
-            <td><a href="../Admin/ViewProducts?OrderId=@order.OrderID&Url_page=../Admin/OrdersPage" class="but">Подробнее</a></td>
+            <td class="more-inf-td"><a href="../Admin/ViewProducts?OrderId=@order.OrderID&Url_page=../Admin/OrdersPage" class="more-inf">Подробнее</a></td>
         </tr>
 }
         </table>
 }
         </div>
         <script>
-
+            $('.more-inf-td').on('click', function () {
+                $(this).children('a')[0].click();
+            });
+            $('.menu-item').on('click', function () {
+                $(this).children('a')[0].click();
+            });
             var last_id = $('#lastid').attr('value');
             setTimeout(function refresh() {
                 $.each($('.status'), function (index, value) {
@@ -261,8 +270,8 @@ else if (order.Status == 4)
                                     block += json_parse[i]["Notes"];
                                 }
 
-                                block += '</p></td><td><a href="../Admin/ViewProducts?OrderId='
-                                    + json_parse[i]["OrderID"] + '&Url_page=../Admin/OrdersPage" class="but">Подробнее</a></td></tr>';
+                                block += '</p></td><td class="more-inf-td"><a href="../Admin/ViewProducts?OrderId='
+                                    + json_parse[i]["OrderID"] + '&Url_page=../Admin/OrdersPage" class="more-inf">Подробнее</a></td></tr>';
                                 document.getElementById('tableorders').innerHTML += block;
                             }
                         }
@@ -395,8 +404,8 @@ else if (order.Status == 4)
                             block += json_parse[i]["Notes"];
                         }
 
-                        block += '</p></td><td><a href="../Admin/ViewProducts?OrderId='
-                            + json_parse[i]["OrderID"] + '&Url_page=../Admin/OrdersPage" class="but">Подробнее</a></td></tr>';
+                        block += '</p></td><td class="more-inf-td"><a href="../Admin/ViewProducts?OrderId='
+                            + json_parse[i]["OrderID"] + '&Url_page=../Admin/OrdersPage" class="more-inf">Подробнее</a></td></tr>';
                         document.getElementById('tableorders').innerHTML += block;
                     }
                     if (json_parse.length != 0) {
@@ -406,14 +415,6 @@ else if (order.Status == 4)
                 }
             })
             })
-            $(function () {
-                $("#search").button({
-                    icons: {
-                        primary: "ui-icon-search"
-                    }
-                });
-            });
-
             $(".status").change(function () {
                 var st = $(this).val();
                 var t = $(this).closest('.tr');

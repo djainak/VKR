@@ -1,13 +1,9 @@
-﻿.allform {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    color: #000000;
-    font-size: 14px;
-    background: #F5D7BF;
-    width: 35%; /* устанавливаем ширину элемента */
-    padding: 20px; /* устанавливаем внутренние отступы элемента */
-    border: 2px solid #000000; /* устанавливаем границы элемента */
+﻿
+form {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 10px;
 }
-
 input {
     background-color: #ECE9E0;
 }
@@ -18,28 +14,6 @@ option {
 label{
     font-weight:700;
 }
-/*
-table {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    text-align: left;
-    border-collapse: separate;
-    border-spacing: 5px;
-    background: #ECE9E0;
-    color: #000000;
-    border: 16px solid #ECE9E0;
-    border-radius: 20px;
-}
-
-th {
-    font-size: 14px;
-    padding: 10px;
-}
-
-td {
-    background: #F5D7BF;
-    padding: 10px;
-    font-size: 14px;
-}*/
 
 img {
     object-fit: cover;
@@ -61,11 +35,11 @@ img {
     font-size: 17px;
     margin-left: calc(50% - 480px);
     background: #FFFCF7;
+    font-family: "Times New Roman", Times, serif;
 }
 .menu-item {
     cursor: pointer;
     border: 1px solid #A68244;
-    width: 25%;
     height: 25px;
     padding: 5px;
     background: #FFEED1;
@@ -74,10 +48,14 @@ img {
         background: #FFF2DD;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
+td.menu-item {
+    width: 20%;
+}
 .menu_text {
     text-decoration: none;
     color: #000000;
     width: 100%;
+    font-weight:500;
 }
 .link-but {
     background: #FFF2DD;
@@ -91,6 +69,8 @@ img {
     padding: 8px;
     padding-left: 10px;
     margin-top: 10px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
 }
     .link-but:hover {
         background: #FFEED1;
@@ -127,4 +107,50 @@ img {
     left: 2px;
     background: #413548; /* Добавляем фон. Если требуется, можете поставить сюда картинку в виде "галочки", которая будет символизировать, что чекбокс отмечен */
     border-radius: 2px;
+}
+
+td {
+    border: 1px solid #BFB29D;
+    height: 25px;
+    padding: 5px;
+    width: 200px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+th {
+    border: 1px solid #BFB29D;
+    background: #FFEED1;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+    height: 25px;
+    padding: 5px;
+    width: 200px;
+}
+.filter-table {
+    border: none;
+    box-shadow: none;
+}
+.more-inf, .red, .remove-user, .remove-menu, .remove-menu-item {
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 25px;
+    display: block;
+    padding: 5px;
+    color: #000000;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
+    background: #FFFCF7;
+}
+.more-inf-td:hover, remove-user-td:hover, .remove-menu-td:hover, .remove-menu-item-td:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+.form-input {
+    border: 1px solid #BFB29D;
+    height: 30px;
+    padding: 5px;
+    color: #000000;
+    background: #FFFCF7;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
 }

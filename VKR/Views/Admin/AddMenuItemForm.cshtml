@@ -11,32 +11,43 @@
     <script src="~/Content/Style/js/jquery-ui.js"></script>
 </head>
 <body>
-    <div>
-        <nav role='navigation'>
-            <ul>
-                <li><a href="../Admin/Home">О точке питания</a></li>
-                <li><a href="../Admin/MenuList">Меню</a></li>
-                <li><a href="../Admin/OrdersPage">Заказы</a></li>
-                <li><a href="../Admin/PersonalAccount">Личный кабинет</a></li>
-                <li><a href="../Admin/ListUsers">Настройка прав пользователей</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="mainstyle">
+    <div id="main-form">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
+                <tr>
+                    <td class="menu-item"><a href="../Admin/Home" class="menu_text">О точке питания</a></td>
+                    <td class="menu-item"><a href="../Admin/OrdersPage" class="menu_text">Заказы</a></td>
+                    <td class="menu-item"><a href="../Admin/MenuList" class="menu_text">Меню</a></td>
+                    <td class="menu-item"><a href="../Admin/PersonalAccount" class="menu_text">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Admin/ListUsers" class="menu_text">Настройка прав пользователей</a></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <div class="mainstyle">
+            @if (ViewBag.isError)
+    {
+        <p style="font-size: 17px;">Данное меню не существует</p>
+}
+else
+{
+        <a href="../Admin/ListMenuItems?MenuId=@ViewBag.MenuId" class="link-but" style="float: right; width: 190px">Добавить пункт меню</a>
+        <a href="../Admin/MenuList" class="link-but" style="float: left; width: 220px">Вернуться к списку меню</a>
+        <br clear="all">
+        <br />
         <h2>Список пунктов меню</h2>
-        @if (ViewBag.isError)
-        {
-            <p style="font-size: 18px;">Данное меню не существует</p>
-        }
-        else
-        {
-            <p>
-                <a href="../Admin/ListMenuItems?MenuId=@ViewBag.MenuId" class="but">Добавить пункт меню</a>
-                <a href="../Admin/MenuList" class="but">Вернуться к списку меню</a>
-                <br />
-                <br />
-            </p>
-            <table style="width: 95%; border: 1px solid gray" border="1">
+        <br />
+
+if (ViewBag.isMI)
+{
+        <div id="items">
+            <p style="font-size: 17px;">В данном меню пока нет товаров</p>
+        </div>
+}
+else
+{
+        <div id="items">
+            <table border="1" style="border-color: #BFB29D">
                 <tr>
                     <th style="width: 10%">Изображение</th>
                     <th style="width: 20%">Название</th>
@@ -45,39 +56,56 @@
                     <th style="width: 10%">Цена</th>
                 </tr>
                 @foreach (var menuItem in ViewBag.MenuItems)
-                {
-                <tr value=@menuItem.Id>
-                    <td><img src="~/Content/Style/Files/@menuItem.Picture"  width="100" height="100" alt="Изображение не добавлено"></td>
-                    <td>@menuItem.Name</td>
-                    <td>@menuItem.Ingredients</td>
-                    <td>@menuItem.Category.Name</td>
-                    <td>@menuItem.Price</td>
-                    <td><a href="../Admin/ChangeMenuItem?MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId" class="but">Редактировать</a></td>
-                    <td><input type="button" value="Удалить" class="remove-menu-item" /></td>
-                </tr>
-                }
+        {
+            <tr value=@menuItem.Id>
+                <td><img src="~/Content/Style/Files/@menuItem.Picture" width="100" height="100" alt="Изображение не добавлено"></td>
+                <td>@menuItem.Name</td>
+                <td>@menuItem.Ingredients</td>
+                <td>@menuItem.Category.Name</td>
+                <td>@menuItem.Price</td>
+                <td class="more-inf-td"><a href="../Admin/ChangeMenuItem?MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId" class="more-inf">Редактировать</a></td>
+                <td class="remove-menu-item-td"><input type="button" value="Удалить" class="remove-menu-item" /></td>
+            </tr>
+}
             </table>
-
-            <script>
-        $(".remove-menu-item").button();
-        $(".remove-menu-item").on("click", function () {
+        </div>
+            }
+        <script>
+            $('.more-inf-td').on('click', function () {
+                $(this).children('a')[0].click();
+            });
+            $('.remove-menu-item-td').on('click', function () {
+                $(this).children('input')[0].click();
+            });
+        $(".remove-menu-item").on("click", function (event) {
             var button = $(this);
             var str = button.parent().parent();
             $.ajax({
-                url: "../Admin/RemoveMenuItem?id=" + str.attr("value")+"&MenuId=@ViewBag.MenuId",
+                url: "../api/Values?id=" + str.attr("value")+"&MenuId=@ViewBag.MenuId",
                 type: "POST",
-                dataType: "text",
-                success: function () {
+                dataType: "json",
+                success: function (json) {
+                    //Преобразовываем JSON
+                    var json_parse = JSON.parse(json);
                     str.remove();
+                    if (json_parse == "false") {
+                        $('#items').empty();
+                        var block = '<p style="font-size: 17px;">В данном меню пока нет товаров</p>';
+                        document.getElementById('items').innerHTML += block;
+                    }
                 }
             })
+            event.stopPropagation();
         })
-            </script>
+        </script>
 
-        }
+}
+        </div>
     </div>
     <script>
-        $(".but").button();
+        $('.menu-item').on('click', function () {
+            $(this).children('a')[0].click();
+        });
     </script>
 </body>
 </html>

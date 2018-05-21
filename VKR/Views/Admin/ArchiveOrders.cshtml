@@ -15,77 +15,85 @@
     <title>Архив заказов</title>
 </head>
 <body>
-    <div>
-        <nav role='navigation'>
-            <ul>
-                <li><a href="../Admin/Home">О точке питания</a></li>
-                <li><a href="../Admin/MenuList">Меню</a></li>
-                <li><a href="../Admin/OrdersPage">Заказы</a></li>
-                <li><a href="../Admin/PersonalAccount">Личный кабинет</a></li>
-                <li><a href="../Admin/ListUsers">Настройка прав пользователей</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="mainstyle">
-        <h2>Архив заказов</h2>
-        <div class="mainstyle">
-            <p>Фильтры:</p>
-            <p>
-                Номер заказа: <input type="number" id="OrderNumber" />
-            </p>
-            <button type="submit" id="search"></button>
+    <div id="main-form">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
+                <tr>
+                    <td class="menu-item"><a href="../Admin/Home" class="menu_text">О точке питания</a></td>
+                    <td class="menu-item"><a href="../Admin/OrdersPage" class="menu_text">Заказы</a></td>
+                    <td class="menu-item"><a href="../Admin/MenuList" class="menu_text">Меню</a></td>
+                    <td class="menu-item"><a href="../Admin/PersonalAccount" class="menu_text">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Admin/ListUsers" class="menu_text">Настройка прав пользователей</a></td>
+                </tr>
+            </table>
         </div>
-        <div>
-            @if (ViewBag.Empty == "true")
+        <br/>
+        <div class="mainstyle">
+            <h2>Архив заказов</h2>
+            <br/>
+            <div class="mainstyle">
+                <p><label>Фильтры:</label></p>
+                <p>
+                    Номер заказа: <input type="number" id="OrderNumber" class="form-input"/>
+                </p>
+                <button type="submit" id="search" class="link-but">Поиск</button>
+                <br/>
+            </div>
+            <div>
+                @if (ViewBag.Empty == "true")
             {
                 <p>У вас нет еще ни одного архивного заказа.</p>
+        }
+        else
+        {
+            <table id="tableorders">
+                <tr>
+                    <th style="width: 10%">Номер заказа</th>
+                    <th style="width: 10%">Время оформления</th>
+                    <th style="width: 10%">Время готовности заказа</th>
+                    <th style="width: 10%">Упаковка заказа</th>
+                    <th style="width: 10%">Статус</th>
+                    <th style="width: 10%">Стоимость</th>
+                    <th style="width: 30%">Заметки</th>
+                    <th style="width: 10%">Товары в заказе</th>
+                </tr>
+                @foreach (var order in ViewBag.Orders)
+            {
+                <tr value="@order.OrderID">
+                    <td>@order.NumberOrder</td>
+                    <td>@order.OrderTime</td>
+                    <td>@order.ReadyTime</td>
+                    @if (@order.WhereEat == false)
+                {
+                    <td><p>С собой</p></td>
             }
             else
             {
-                <table id="tableorders" style="width: 95%; border: 1px solid gray" border="1">
-                    <tr>
-                        <th style="width: 10%">Номер заказа</th>
-                        <th style="width: 10%">Время оформления</th>
-                        <th style="width: 10%">Время готовности заказа</th>
-                        <th style="width: 10%">Упаковка заказа</th>
-                        <th style="width: 10%">Статус</th>
-                        <th style="width: 10%">Стоимость</th>
-                        <th style="width: 30%">Заметки</th>
-                        <th style="width: 10%">Товары в заказе</th>
-                    </tr>
-                    @foreach (var order in ViewBag.Orders)
-                    {
-                        <tr value="@order.OrderID">
-                            <td>@order.NumberOrder</td>
-                            <td>@order.OrderTime</td>
-                            <td>@order.ReadyTime</td>
-                            @if (@order.WhereEat == false)
-                            {
-                                <td><p>С собой</p></td>
-                            }
-                            else
-                            {
-                                <td><p>На месте</p></td>
-                            }
+                <td><p>На месте</p></td>
+        }
 
-                            @if (order.Status == 3)
-                            {
-                                <td><p>Выполнен</p></td>
-                            }
-                            else if (order.Status == 4)
-                            {
-                                <td><p>Удален</p></td>
-                            }
-                            <td><p>@order.Sum</p></td>
-                            <td><p>@order.Notes</p></td>
-                            <td><a href="../Admin/ViewProducts?OrderId=@order.OrderID&Url_page=../Admin/ArchiveOrders" class="but">Подробнее</a></td>
-                        </tr>
-                    }
-                </table>
+                    @if (order.Status == 3)
+                {
+                    <td><p>Выполнен</p></td>
             }
+            else if (order.Status == 4)
+            {
+                <td><p>Удален</p></td>
+        }
+                    <td><p>@order.Sum</p></td>
+                    <td><p>@order.Notes</p></td>
+                    <td class="more-inf-td"><a href="../Admin/ViewProducts?OrderId=@order.OrderID&Url_page=../Admin/ArchiveOrders" class="more-inf">Подробнее</a></td>
+                </tr>
+        }
+            </table>
+    }
+            </div>
         </div>
     </div>
     <script>
+        $('.more-inf-td').on('click', function () {
+            $(this).children('a')[0].click();
+        });
         $("#search").on("click", function () {
             $.ajax({
                 url: "../api/FilterOrders",
@@ -191,13 +199,6 @@
             
             })
         })
-        $(function () {
-            $("#search").button({
-                icons: {
-                    primary: "ui-icon-search"
-                }
-            });
-        });
     </script>
 </body>
 </html>

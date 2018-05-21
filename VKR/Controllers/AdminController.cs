@@ -410,53 +410,15 @@ namespace VKR.Controllers
                         c.Category = db.CategoryMenuItem.Where(cc =>cc.CategoryMenuItemID == c.CategoryMenuItemId).FirstOrDefault();
                         
                     }
+                    if (menuItems.Count == 0)
+                        ViewBag.isMI = true;
+                    else
+                        ViewBag.isMI = false;
                     ViewBag.MenuItems = menuItems;
                 }
             }
 
             return View();
-        }
-
-        /// <summary>
-        /// Реализация удаления пункта меню из БД
-        /// </summary>
-        /// <returns>Страничка без удаленного пункта меню</returns>
-        [HttpPost]
-        public ActionResult RemoveMenuItem()
-        {
-            //Вытаскиваем ид из адреса
-            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
-
-            int id = Convert.ToInt32(HttpContext.Request.Params["id"]);
-            int m_id = Convert.ToInt32(HttpContext.Request.Params["MenuId"]);
-            using (var db = new Contexts())
-            {
-                MenuItem menuItem = db.MenuItems.Find(id);
-                db.MenuItems.Remove(menuItem);
-                db.SaveChanges();
-            }
-
-            return Redirect("./AddMenuItemForm?MenuId=" + m_id + "&UserId=" + ViewBag.UserID);
-        }
-
-        /// <summary>
-        /// Реализация удаления меню из БД
-        /// </summary>
-        /// <returns>Страничка без удаленного меню</returns>
-        [HttpPost]
-        public ActionResult RemoveMenu()
-        {
-            //Вытаскиваем ид из адреса
-            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
-
-            int id = Convert.ToInt32(HttpContext.Request.Params["id"]);
-            using (var db = new Contexts())
-            {
-                Menu menu = db.Menues.Find(id);
-                db.Menues.Remove(menu);
-                db.SaveChanges();
-            }
-            return Redirect("./MenuList?UserId=" + ViewBag.UserID);
         }
 
         /// <summary>

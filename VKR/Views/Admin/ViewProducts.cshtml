@@ -15,62 +15,72 @@
     <title>Информация о заказе</title>
 </head>
 <body>
-    <div>
-        <nav role='navigation'>
-            <ul>
-                <li><a href="../Admin/Home">О точке питания</a></li>
-                <li><a href="../Admin/MenuList">Меню</a></li>
-                <li><a href="../Admin/OrdersPage">Заказы</a></li>
-                <li><a href="../Admin/PersonalAccount">Личный кабинет</a></li>
-                <li><a href="../Admin/ListUsers">Настройка прав пользователей</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div>
-        <a href="@ViewBag.URL" class="but">Вернуться к заказам</a>
-
-        <div id="printarea">
-            <h2>Заказ №@ViewBag.Order.NumberOrder</h2>
-            <p>Время оформления: @ViewBag.Order.OrderTime</p>
-            <p>Время готовности заказа: @ViewBag.Order.ReadyTime</p>
-            @if (ViewBag.Order.WhereEat == false)
+    <div id="main-form">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
+                <tr>
+                    <td class="menu-item"><a href="../Admin/Home" class="menu_text">О точке питания</a></td>
+                    <td class="menu-item"><a href="../Admin/OrdersPage" class="menu_text">Заказы</a></td>
+                    <td class="menu-item"><a href="../Admin/PersonalAccount" class="menu_text">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Admin/ListUsers" class="menu_text">Настройка прав пользователей</a></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <br />
+            <a href="@ViewBag.URL" class="link-but" style="float: right; width: 170px">Вернуться к заказам</a>
+            
+            <div id="printarea">
+                <h2>Заказ №@ViewBag.Order.NumberOrder</h2>
+                <br />
+                <p><label>Время оформления: </label>@ViewBag.Order.OrderTime</p>
+                <p><label>Время готовности заказа: </label>@ViewBag.Order.ReadyTime</p>
+                @if (ViewBag.Order.WhereEat == false)
     {
-        <p>Упаковка заказа: С собой</p>
+            <p><label> Упаковка заказа: </label>С собой</p>
 }
 else
 {
-        <p>Упаковка заказа: На месте</p>
+            <p><label>Упаковка заказа: </label>На месте</p>
 }
-            @if (ViewBag.Order.Status == 0)
+                @if (ViewBag.Order.Status == 0)
     {
-            <p>Статус: Обработка</p>
+            <p><label>Статус: </label>Обработка</p>
 }
 else if (ViewBag.Order.Status == 1)
 {
-            <p>Статус: Подтвержден</p>
+            <p><label>Статус: </label>Подтвержден</p>
 }
 else if (ViewBag.Order.Status == 2)
 {
-            <p>Статус: Ожидает выдачи</p>
+            <p><label>Статус: </label>Ожидает выдачи</p>
 }
 else if (ViewBag.Order.Status == 3)
 {
-            <p>Статус: Выполнен</p>
+            <p><label>Статус: </label>Выполнен</p>
 }
 else if (ViewBag.Order.Status == 4)
 {
-            <p>Статус: Удален</p>
+            <p><label>Статус: </label>Удален</p>
 }
-            <p>Заметки: @ViewBag.Order.Notes</p>
-            <table style="width: 95%; border: 1px solid gray" border="1">
-                <tr>
-                    <th style="width: 20%">Название</th>
-                    <th style="width: 50%">Состав</th>
-                    <th style="width: 10%">Категория</th>
-                    <th style="width: 10%">Количество</th>
-                    <th style="width: 10%">Стоимость</th>
-                </tr>
-                @foreach (var p in ViewBag.Products)
+                @if (@ViewBag.Order.Notes != null)
+    {
+            <p><label>Заметки: </label>@ViewBag.Order.Notes</p>
+}
+else
+{
+            <p><label>Заметки: </label>Нет</p>
+}
+                <br/>
+                <table border="1" style="border-color: #FFFCF7;">
+                    <tr>
+                        <th style="width: 20%">Название</th>
+                        <th style="width: 50%">Состав</th>
+                        <th style="width: 10%">Категория</th>
+                        <th style="width: 10%">Количество</th>
+                        <th style="width: 10%">Стоимость</th>
+                    </tr>
+                    @foreach (var p in ViewBag.Products)
         {
             <tr>
                 <td>@p.MenuItem.Name</td>
@@ -80,13 +90,17 @@ else if (ViewBag.Order.Status == 4)
                 <td>@p.Sum руб.</td>
             </tr>
 }
-            </table>
-            <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice руб.</p>
+                </table>
+                <br/>
+                <p id="allprice"><label>Общая сумма заказа: </label>@ViewBag.AllPrice руб.</p>
+            </div>
+            <input type="button" value="Печать" class="link-but" onclick="PrintElem('#printarea')" />
         </div>
-        <input type="button" value="Печать" class="but" onclick="PrintElem('#printarea')" />
     </div>
     <script>
-        $('.but').button();
+        $('.menu-item').on('click', function () {
+            $(this).children('a')[0].click();
+        });
         function PrintElem(elem) {
             Popup($(elem).html());
         }

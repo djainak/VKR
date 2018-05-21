@@ -15,104 +15,114 @@
     <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
-        <nav role='navigation'>
-            <ul>
-                <li><a href="../Admin/Home">О точке питания</a></li>
-                <li><a href="../Admin/MenuList">Меню</a></li>
-                <li><a href="../Admin/OrdersPage">Заказы</a></li>
-                <li><a href="../Admin/PersonalAccount">Личный кабинет</a></li>
-                <li><a href="../Admin/ListUsers">Настройка прав пользователей</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div>
-        <div class="mainstyle">
-            <h2>Настройка прав пользователей</h2>
-            <p>
-                Фамилия: <input type="text" id="FirstName" />
-                Имя: <input type="text" id="Name" />
-                Отчество: <input type="text" id="Patronymic" />
-            </p>
-            <p>
-                Логин: <input type="text" id="Login" />
-                E-mail: <input type="email" id="Email" />
-                Телефон: <input type="tel" id="PhoneNumber" />
-            </p>
-            <label style="font-weight: 500">
-                <input class="checkbox" type="checkbox" id="0" value="Покупатель" checked>
-                <span class="checkbox-custom"></span>
-                <span class="label">Покупатель</span>
-            </label>
-            <label style="font-weight: 500">
-                <input class="checkbox" type="checkbox" id="1" value="Модератор" checked>
-                <span class="checkbox-custom"></span>
-                <span class="label">Модератор</span>
-            </label>
-            <label style="font-weight: 500">
-                <input class="checkbox" type="checkbox" id="2" value="Администратор" checked>
-                <span class="checkbox-custom"></span>
-                <span class="label">Администратор</span>
-            </label>
-            <button type="submit" id="search"></button>
-        </div>
-
-        <div id="usertable">
-            <table style="width: 95%; border: 0px" border="1">
+    <div id="main-form">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
                 <tr>
-                    <th style="width: 20%">Изображение</th>
-                    <th style="width: 20%">ФИО</th>
-                    <th style="width: 10%">Логин</th>
-                    <th style="width: 15%">Права</th>
-                    <th style="width: 10%">Email</th>
-                    <th style="width: 10%">Телефон</th>
+                    <td class="menu-item"><a href="../Admin/Home" class="menu_text">О точке питания</a></td>
+                    <td class="menu-item"><a href="../Admin/OrdersPage" class="menu_text">Заказы</a></td>
+                    <td class="menu-item"><a href="../Admin/MenuList" class="menu_text">Меню</a></td>
+                    <td class="menu-item"><a href="../Admin/PersonalAccount" class="menu_text">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Admin/ListUsers" class="menu_text">Настройка прав пользователей</a></td>
                 </tr>
-                @foreach (var user in ViewBag.Users)
-                {
-                <tr value=@user.UserID>
-                    <td><img src="~/Content/Style/Files/@user.Picture" width="100" height="100" alt="Изображение не добавлено"></td>
-                    <td>@user.FirstName @user.Name @user.Patronymic</td>
-                    <td>@user.Login</td>
-                    @if (user.Status == 0)
-    {
-                <td>Покупатель</td>
-}
-else if (user.Status == 1)
-{
-                <td>Модератор</td>
-}
-else
-{
-                <td>Администратор</td>
-}
-                    <td>@user.Email</td>
-                    <td>@user.PhoneNumber</td>
-                    <td>
-                        <a href="../Admin/ChangeUser?RedUserId=@user.UserID" class="red">Редактировать</a>
-                    </td>
-                    <td>
-                        <input type="button" value="Удалить" class="remove-user" />
-                    </td>
-                </tr>
-                }
             </table>
         </div>
+        <div>
+            <br/>
+            <div class="mainstyle">
+                <h2>Настройка прав пользователей</h2>
+                <br/>
+                <table>
+                    <tr>
+                        <td class="filter-table">Фамилия: <input type="text" id="FirstName" class="form-input" /></td>
+                        <td class="filter-table">Имя: <input type="text" id="Name" class="form-input"/></td>
+                        <td class="filter-table">Отчество: <input type="text" id="Patronymic" class="form-input"/></td>
+                    </tr>
+                    <tr>
+                        <td class="filter-table">Логин: <input type="text" id="Login" class="form-input"/></td>
+                        <td class="filter-table">E-mail: <input type="email" id="Email" class="form-input"/></td>
+                        <td class="filter-table">Телефон: <input type="tel" id="PhoneNumber" class="form-input"/></td>
+                    </tr>
+                    <tr>
+                        <td class="filter-table">
+                            <label style="font-weight: 500">
+                                <input class="checkbox" type="checkbox" id="0" value="Покупатель" checked>
+                                <span class="checkbox-custom"></span>
+                                <span class="label">Покупатель</span>
+                            </label>
+                        </td>
+                        <td class="filter-table">
+                            <label style="font-weight: 500">
+                                <input class="checkbox" type="checkbox" id="1" value="Модератор" checked>
+                                <span class="checkbox-custom"></span>
+                                <span class="label">Модератор</span>
+                            </label>
+                        </td>
+                        <td class="filter-table">
+                            <label style="font-weight: 500">
+                                <input class="checkbox" type="checkbox" id="2" value="Администратор" checked>
+                                <span class="checkbox-custom"></span>
+                                <span class="label">Администратор</span>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit" id="search" class="link-but">Поиск</button>
+            </div>
+            <br/>
+            <div id="usertable">
+                <table border="1" style="border-color: #BFB29D">
+                    <tr>
+                        <th style="width: 20%">Изображение</th>
+                        <th style="width: 20%">ФИО</th>
+                        <th style="width: 10%">Логин</th>
+                        <th style="width: 15%">Права</th>
+                        <th style="width: 10%">Email</th>
+                        <th style="width: 10%">Телефон</th>
+                    </tr>
+                    @foreach (var user in ViewBag.Users)
+                {
+                    <tr value=@user.UserID>
+                        <td><img src="~/Content/Style/Files/@user.Picture" width="100" height="100" alt="Изображение не добавлено"></td>
+                        <td>@user.FirstName @user.Name @user.Patronymic</td>
+                        <td>@user.Login</td>
+                        @if (user.Status == 0)
+                    {
+                        <td>Покупатель</td>
+                }
+                else if (user.Status == 1)
+                {
+                    <td>Модератор</td>
+            }
+            else
+            {
+                <td>Администратор</td>
+        }
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                        <td class="more-inf-td">
+                            <a href="../Admin/ChangeUser?RedUserId=@user.UserID" class="red">Редактировать</a>
+                        </td>
+                        <td class="remove-user-td">
+                            <input type="button" value="Удалить" class="remove-user" />
+                        </td>
+                    </tr>
+            }
+                </table>
+            </div>
+        </div>
     </div>
     <script>
-        $(".remove-user").button();
-        $(".red").button();
-    </script>
-    <script>
-        $(function () {
-            $("#search").button({
-                icons: {
-                    primary: "ui-icon-search"
-                }
-            });
+        $('.remove-user-td').on('click', function () {
+            $(this).children('input')[0].click();
         });
-    </script>
-    <script>
-        $(".remove-user").on("click", function () {
+        $('.more-inf-td').on('click', function () {
+            $(this).children('a')[0].click();
+        });
+        $('.menu-item').on('click', function () {
+            $(this).children('a')[0].click();
+        });
+        $(".remove-user").on("click", function (event) {
             var button = $(this);
             var str = button.parent().parent();
             $.ajax({
@@ -123,6 +133,7 @@ else
                     str.remove();
                 }
             })
+            event.stopPropagation();
         })
     </script>
     <script>
@@ -177,8 +188,6 @@ else
                     block = block + '</table>';
                     //Добавляем в div
                     document.getElementById('usertable').innerHTML += block;
-                    $(".remove-user").button();
-                    $(".red").button();
                 }
             })
         })

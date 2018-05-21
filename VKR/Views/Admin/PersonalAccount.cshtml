@@ -13,40 +13,49 @@
     <title>Личный кабинет</title>
 </head>
 <body>
-    <div>
-        <nav role='navigation'>
-            <ul>
-                <li><a href="../Admin/Home">О точке питания</a></li>
-                <li><a href="../Admin/MenuList">Меню</a></li>
-                <li><a href="../Admin/OrdersPage">Заказы</a></li>
-                <li><a href="../Admin/PersonalAccount">Личный кабинет</a></li>
-                <li><a href="../Admin/ListUsers">Настройка прав пользователей</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="mainstyle">
-        <h2>Личный кабинет</h2>
-        <p>Текущее изображение:</p>
-        <img src="~/Content/Style/Files/@ViewBag.User.Picture" width="100" height="100" alt="Изображение не добавлено">
+    <div id="main-form">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
+                <tr>
+                    <td class="menu-item"><a href="../Admin/Home" class="menu_text">О точке питания</a></td>
+                    <td class="menu-item"><a href="../Admin/OrdersPage" class="menu_text">Заказы</a></td>
+                    <td class="menu-item"><a href="../Admin/MenuList" class="menu_text">Меню</a></td>
+                    <td class="menu-item"><a href="../Admin/PersonalAccount" class="menu_text">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Admin/ListUsers" class="menu_text">Настройка прав пользователей</a></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <div class="mainstyle">
+            <h2>Личный кабинет</h2>
+            <br />
+            <p><label>Текущее изображение:</label></p>
+            <img src="~/Content/Style/Files/@ViewBag.User.Picture" style="width: 200px; height: 200px" alt="Изображение не добавлено">
 
-        <p><label>Логин: </label>@ViewBag.User.Login</p>
-        <p><label>Фамилия: </label>@ViewBag.User.FirstName</p>
-        <p><label>Имя: </label>@ViewBag.User.Name</p>
-        <p><label>Отчество: </label>@ViewBag.User.Patronymic</p>
-        @if (@ViewBag.User.Status == 0)
-    {
-        <p><label>Статус: </label>Покупатель</p>
-}
-        @if (@ViewBag.User.Status == 1)
-    {
-        <p><label>Статус: </label>Модератор</p>
-}
-        @if (@ViewBag.User.Status == 2)
-    {
-        <p><label>Статус: </label>Администратор</p>
-}
-        <p><label>E-mail: </label>@ViewBag.User.Email</p>
-        <p><label>Телефон: </label>@ViewBag.User.PhoneNumber</p>
+            <p><label>Логин: </label>@ViewBag.User.Login</p>
+            <p><label>Фамилия: </label>@ViewBag.User.FirstName</p>
+            <p><label>Имя: </label>@ViewBag.User.Name</p>
+            <p><label>Отчество: </label>@ViewBag.User.Patronymic</p>
+            @if (@ViewBag.User.Status == 0)
+            {
+                <p><label>Статус: </label>Покупатель</p>
+            }
+            @if (@ViewBag.User.Status == 1)
+            {
+                <p><label>Статус: </label>Модератор</p>
+            }
+            @if (@ViewBag.User.Status == 2)
+            {
+                <p><label>Статус: </label>Администратор</p>
+            }
+            <p><label>E-mail: </label>@ViewBag.User.Email</p>
+            <p><label>Телефон: </label>@ViewBag.User.PhoneNumber</p>
+        </div>
     </div>
+    <script>
+        $('.menu-item').on('click', function () {
+            $(this).children('a')[0].click();
+        });
+    </script>
 </body>
 </html>

@@ -15,40 +15,35 @@
     <script src="~/Content/Style/js/jquery-ui.js"></script>
 </head>
 <body>
-    <div class="mainstyle">
-        <br />
-        <a href="../Admin/MenuList" class="but">Вернуться к списку меню</a>
-        <br />
-        <br />
+    <div id="main-form">
+        <div class="allform">
+            <form method="post" action="./AddMenu" enctype="multipart/form-data">
+                <h2>Добавление нового меню</h2>
+                <br />
+                <input type="hidden" value="@ViewBag.MenuId" name="MenuId" class="form-input"/>
+                <p>Введите название меню:</p>
+                <input type="text" name="Name" placeholder="Название меню" class="form-input" required />
+                <br />
+                <br />
+                <p>Введите описание меню:</p>
+                <input type="text" name="Description" placeholder="Описание меню" class="form-input"/>
+                <br />
+                <br />
+                <label style="font-weight:500">
+                    <input class="checkbox" type="checkbox" name="UseThisMenu" value="true">
+                    <span class="checkbox-custom"></span>
+                    <span class="label">Выбрать данное меню основным</span>
+                </label>
+                <br />
+                <br />
+                <p>Добавить изображение</p>
+                <input type="file" name="upload" accept="image/jpeg,image/png" class="form-input" style="height: 38px">
+                <br />
+                <br />
+                <a href="../Admin/MenuList" class="link-but" style="width:230px; float: right">Вернуться к списку меню</a>
+                <input type="submit" class="link-but" />
+            </form>
+        </div>
     </div>
-    <div class="allform">
-        <form method="post" action="./AddMenu" enctype="multipart/form-data">
-            <h2>Добавление нового меню</h2>
-            <input type="hidden" value="@ViewBag.MenuId" name="MenuId" />
-            <p>Введите название меню:</p>
-            <input type="text" name="Name" placeholder="Название меню" required />
-            <br />
-            <br />
-            <p>Введите описание меню:</p>
-            <input type="text" name="Description" placeholder="Описание меню" />
-            <br />
-            <br />
-            <label style="font-weight:500">
-                <input class="checkbox" type="checkbox" name="UseThisMenu" value="true">
-                <span class="checkbox-custom"></span>
-                <span class="label">Выбрать данное меню основным</span>
-            </label>
-            <br />
-            <br />
-            <p>Добавить изображение</p>
-            <input type="file" name="upload" accept="image/jpeg,image/png">
-            <br />
-            <br />
-            <input type="submit" class="but" />
-        </form>
-    </div>
-    <script>
-        $(".but").button();
-    </script>
 </body>
 </html>

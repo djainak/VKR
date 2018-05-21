@@ -15,46 +15,41 @@
     <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="mainstyle">
-        <br />
-        <a href="../Admin/AddMenuItemForm?MenuId=@ViewBag.MenuId" class="but">Вернуться к списку блюд</a>
-        <br />
-        <br />
-    </div>
-    <div class="allform">
-        <form method="post" action="./NewMenuItem?MenuId=@ViewBag.MenuId" enctype="multipart/form-data">
-            <h2>Добавление нового пункта меню</h2>
-            <p>Введите название блюда:</p>
-            <input type="text" name="Name" placeholder="  Название" required />
-            <br />
-            <br />
-            <p>Введите ингредиенты:</p>
-            <input type="text" name="Ingredients" placeholder="  Ингредиенты" />
-            <br />
-            <br />
-            <p>Выберите категорию:</p>
-            <select id="category" name="Category" required>
-                @foreach (var c in ViewBag.Category)
-            {
-                <option>@c</option>
-        }
-            </select>
-            <br />
-            <br />
-            <p>Введите цену:</p>
-            <input type="number" name="Price" placeholder="  Цена" required />
-            <br />
-            <br />
-            <p>Добавить изображение</p>
-            <input type="file" name="upload" accept="image/jpeg,image/png">
-            <br />
-            <br />
-            <input type="submit" class="but" />
-        </form>
-        <script>
-            $("#category").selectmenu();
-            $(".but").button();
-        </script>
+    <div id="main-form">
+        <div class="allform">
+            <form method="post" action="./NewMenuItem?MenuId=@ViewBag.MenuId" enctype="multipart/form-data">
+                <h2>Добавление нового пункта меню</h2>
+                <br/>
+                <p>Введите название блюда:</p>
+                <input type="text" name="Name" placeholder="Название" class="form-input" style="width: 265px" required />
+                <br />
+                <br />
+                <p>Введите ингредиенты:</p>
+                <input type="text" name="Ingredients" placeholder="Ингредиенты" class="form-input" style="width: 265px; height: 75px" />
+                <br />
+                <br />
+                <p>Выберите категорию:</p>
+                <select id="category" name="Category" class="form-input" style="width: 265px" required>
+                    @foreach (var c in ViewBag.Category)
+        {
+            <option>@c</option>
+}
+                </select>
+                <br />
+                <br />
+                <p>Введите цену:</p>
+                <input type="number" name="Price" placeholder="Цена" class="form-input" style="width: 265px" required />
+                <br />
+                <br />
+                <p>Добавить изображение</p>
+                <input type="file" name="upload" accept="image/jpeg,image/png" class="form-input" style="height: 38px">
+                <br />
+                <br />
+                <a href="../Admin/AddMenuItemForm?MenuId=@ViewBag.MenuId" class="link-but" style="width:230px; float: right">Вернуться к списку блюд</a>
+                <input type="submit" class="link-but" />
+
+            </form>
+        </div>
     </div>
 </body>
 </html>

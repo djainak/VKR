@@ -21,6 +21,7 @@
                 <tr>
                     <td class="menu-item"><a href="../Admin/Home" class="menu_text">О точке питания</a></td>
                     <td class="menu-item"><a href="../Admin/OrdersPage" class="menu_text">Заказы</a></td>
+                    <td class="menu-item"><a href="../Admin/MenuList" class="menu_text">Меню</a></td>
                     <td class="menu-item"><a href="../Admin/PersonalAccount" class="menu_text">Личный кабинет</a></td>
                     <td class="menu-item"><a href="../Admin/ListUsers" class="menu_text">Настройка прав пользователей</a></td>
                 </tr>
@@ -38,7 +39,7 @@
             <p><label>Количество блюд/интервал времени: </label>@ViewBag.DinningRoom.Dishes / @ViewBag.DinningRoom.Interval</p>
             <br />
             <h3>Рабочие дни: </h3>
-            <table style="width: 50%; border: 1px solid gray" border="1">
+            <table class="table-with-items">
                 <tr>
                     <th style="width: 30%">День</th>
                     <th style="width: 35%">Начало рабочего дня</th>
@@ -56,7 +57,9 @@
         </div>
     </div>
     <script>
-        $(".but").button();
+        $('.menu-item').on('click', function () {
+            $(this).children('a')[0].click();
+        });
     </script>
 </body>
 </html>
