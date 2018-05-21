@@ -15,25 +15,26 @@
     <title>О точке питания</title>
 </head>
 <body>
-    <div>
-        <nav role='navigation'>
-            <ul>
-                <li><a href="../Admin/Home">О точке питания</a></li>
-                <li><a href="../Admin/MenuList">Меню</a></li>
-                <li><a href="../Admin/OrdersPage">Заказы</a></li>
-                <li><a href="../Admin/PersonalAccount">Личный кабинет</a></li>
-                <li><a href="../Admin/ListUsers">Настройка прав пользователей</a></li>
-            </ul>
-        </nav>
-    </div>
+    <div id="main-form">
+        <div class="navigation">
+            <table style="width: 100%; border: 0px" border="1">
+                <tr>
+                    <td class="menu-item"><a href="../Admin/Home" class="menu_text">О точке питания</a></td>
+                    <td class="menu-item"><a href="../Admin/OrdersPage" class="menu_text">Заказы</a></td>
+                    <td class="menu-item"><a href="../Admin/PersonalAccount" class="menu_text">Личный кабинет</a></td>
+                    <td class="menu-item"><a href="../Admin/ListUsers" class="menu_text">Настройка прав пользователей</a></td>
+                </tr>
+            </table>
+        </div>
         <div class="mainstyle">
-            <a href="../Admin/SetDinningRoom" class="but">Настройки</a>
+            <br />
+            <a href="../Admin/SetDinningRoom" class="link-but" style="float: right">Настройки</a>
+            <h2>О точке питания</h2>
             <br />
             <p><label>Адрес точки: </label>@ViewBag.DinningRoom.Adress</p>
             <p><label>Телефон: </label>@ViewBag.DinningRoom.PhoneNum</p>
             <p><label>E-mail: </label>@ViewBag.DinningRoom.Email</p>
             <p><label>Контактное лицо: </label>@ViewBag.Manager.FirstName @ViewBag.Manager.Name @ViewBag.Manager.Patronymic</p>
-            <br />
             <p><label>Количество блюд/интервал времени: </label>@ViewBag.DinningRoom.Dishes / @ViewBag.DinningRoom.Interval</p>
             <br />
             <h3>Рабочие дни: </h3>
@@ -44,15 +45,16 @@
                     <th style="width: 35%">Окончание рабочего дня</th>
                 </tr>
                 @foreach (var day in ViewBag.WorkDays)
-    {
-                <tr value=@day.DayWorkID>
-                    <td>@day.Name</td>
-                    <td>@day.StartDayHour : @day.StartDayMin</td>
-                    <td>@day.EndDayHour : @day.EndDayMin</td>
-                </tr>
+        {
+            <tr value=@day.DayWorkID>
+                <td>@day.Name</td>
+                <td>@day.StartDayHour : @day.StartDayMin</td>
+                <td>@day.EndDayHour : @day.EndDayMin</td>
+            </tr>
 }
             </table>
         </div>
+    </div>
     <script>
         $(".but").button();
     </script>
