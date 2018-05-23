@@ -66,13 +66,13 @@
                     //Преобразовываем JSON
                     var json_parse = JSON.parse(json);
                     for (var i = 0; i < json_parse.length; i++) {
-                        var block = '<div value="' + json_parse[i]["Id"] + '" class="left"><h3 id="name">'
+                        var block = '<div value="' + json_parse[i]["Id"] + '" class="left" style="height: 450px"><h3 id="name">'
                             + json_parse[i]["Name"] + '</h3><img src="../Content/Style/Files/'
                             + json_parse[i]["Picture"] + '" class="photo_mi" alt="Изображение не добавлено"><div class="price"><p>'
                             + json_parse[i]["Price"] + '<span class="rub">Р</span>' + '</div><div><div class="minus">-</div>'
                             + '<input type = "text" id="count_field_' + json_parse[i]["Id"] +
                             '" value = "1" class="count_field"><div class="plus"> +</div></div><h4>Ингредиенты: </h4>'
-                            + json_parse[i]["Ingredients"] + '</br><input type="button" value="Добавить в корзину" class="add-to-cart"/>'
+                            + json_parse[i]["Ingredients"] + '</br><br clear="all"><input type="button" value="Добавить в корзину" class="add-to-cart"/>'
                             + '</div>';
        
                         //Добавляем в div

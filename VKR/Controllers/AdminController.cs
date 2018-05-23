@@ -83,7 +83,7 @@ namespace VKR.Controllers
         }
 
         /// <summary>
-        /// Страница с данними о точке питания
+        /// Страница с данными о точке питания
         /// </summary>
         /// <returns>Страница с данными о точке питания</returns>
         [HttpGet]
@@ -176,6 +176,7 @@ namespace VKR.Controllers
             string login = HttpContext.Request.Form["Login"];
             int Dishes = Convert.ToInt32(HttpContext.Request.Form["Dishes"]);
             int Interval = Convert.ToInt32(HttpContext.Request.Form["Interval"]);
+            int Min_time = Convert.ToInt32(HttpContext.Request.Form["Min_time"]);
             bool flag = false;
 
             //Добавляем новый пункт меню в БД
@@ -184,6 +185,7 @@ namespace VKR.Controllers
                 db.DinningRooms.FirstOrDefault().Adress = Adress;
                 db.DinningRooms.FirstOrDefault().PhoneNum = Phone;
                 db.DinningRooms.FirstOrDefault().Email = Email;
+                db.DinningRooms.FirstOrDefault().Min_time = Min_time;
 
                 //Если изменяется количество блюд в интервал, обновляем данные в таблице доступного для заказа времени
                 if (db.DinningRooms.FirstOrDefault().Dishes != Dishes)
@@ -271,17 +273,17 @@ namespace VKR.Controllers
                     {
                         if (menu.Status)
                         {
-                            @ViewBag.NameMenu = menu.Name;
+                            ViewBag.NameMenu = menu.Name;
                         }
                     }
-                    if (@ViewBag.NameMenu == null)
+                    if (ViewBag.NameMenu == null)
                     {
                         db.Menues.FirstOrDefault().Status = true;
-                        @ViewBag.NameMenu = db.Menues.FirstOrDefault().Name;
+                        ViewBag.NameMenu = db.Menues.FirstOrDefault().Name;
                     }
                 }
                 else
-                    @ViewBag.NameMenu = "Нет доступных меню";
+                    ViewBag.NameMenu = "Нет доступных меню";
             }
 
             return View();
@@ -428,9 +430,6 @@ namespace VKR.Controllers
         [HttpPost]
         public ActionResult RemoveUser()
         {
-            //Вытаскиваем ид из адреса
-            ViewBag.UserID = Convert.ToInt32(HttpContext.Request.Params["UserId"]);
-
             int id = Convert.ToInt32(HttpContext.Request.Params["id"]);
             using (var db = new Contexts())
             {
@@ -438,7 +437,7 @@ namespace VKR.Controllers
                 db.Users.Remove(user);
                 db.SaveChanges();
             }
-            return Redirect("./ListUsers?UserId=" + ViewBag.UserID);
+            return Redirect("./ListUsers");
         }
 
         /// <summary>

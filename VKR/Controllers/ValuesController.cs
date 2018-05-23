@@ -10,32 +10,10 @@ using VKR.Models;
 namespace VKR.Controllers
 {
     /// <summary>
-    /// Контроллер, выполняющий функции удаления меню и проверки логина на занятость
+    /// Контроллер, выполняющий функции удаления меню и пункта меню
     /// </summary>
     public class ValuesController : ApiController
     {
-
-        /// <summary>
-        /// Проверяет занятость логина
-        /// </summary>
-        /// <param name="Login">Логин</param>
-        /// <returns>1 - занят, 0 - свободен</returns>
-        public string Get(string Login)
-        {
-            string login = Login;
-            using (var db = new Contexts())
-            {
-                if (db.Users.Where(c => c.Login == Login).FirstOrDefault() == null)
-                {
-                    return "false";
-                }
-                else
-                {
-                    return "true";
-                }
-            }
-        }
-
         /// <summary>
         /// Метод, выполняющий удаление меню
         /// </summary>
@@ -97,6 +75,5 @@ namespace VKR.Controllers
 
             return JsonConvert.SerializeObject(ans);
         }
-
     }
 }

@@ -50,7 +50,7 @@
             $(document).ready(function () {
                 $("#Login").focusout(function () {
                     $.ajax({
-                        url: "../api/values",
+                        url: "../api/SignINUP",
                         data: "Login=" + $("#Login").val(),
                         dataType: "text",
                         success: function (text) {

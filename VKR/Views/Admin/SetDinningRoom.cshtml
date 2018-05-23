@@ -43,6 +43,9 @@
                     <p>/</p>
                     <input type="number" name="Interval" value="@ViewBag.DinningRoom.Interval" class="form-input" required>
                     <br />
+                    <br />
+                    <p>Минимальное время приготовления заказа в минутах: </p>
+                    <input type="text" name="Min_time" value="@ViewBag.DinningRoom.Min_time" class="form-input" required>
                 </div>
                 <br />
                 <br />
@@ -84,13 +87,10 @@ else
 }
                     </table>
                 </div>
-                    <a href="../Admin/Home" class="link-but" style="width:230px; float: right">Отмена</a>
+                    <a href="../Admin/Home" class="link-but" style="width:80px; float: right">Отмена</a>
                     <input type="submit" value="Сохранить" class="link-but">
             </form>
         </div>
     </div>
-    <script>
-        $(".but").button();
-    </script>
 </body>
 </html>

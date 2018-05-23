@@ -15,7 +15,7 @@ namespace VKR.Controllers
     public class FilterOrdersController : ApiController
     {
         /// <summary>
-        /// Метод, обрабатывающий фильтрациют заказов по номеру и статусам
+        /// Метод, обрабатывающий фильтрацию заказов по номеру и статусам
         /// </summary>
         /// <param name="number_order">Номер заказа</param>
         /// <param name="status0">Выбрана ли галочка "Обработка"</param>

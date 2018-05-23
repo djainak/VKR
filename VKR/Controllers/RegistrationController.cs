@@ -42,7 +42,7 @@ namespace VKR.Controllers
                 db.SaveChanges();
             }
             //В дальнейшем сделать переадресацию на личный кабинет, сейчас переадресация в админку
-            return Redirect("../Admin/Home?UserId=" + user.UserID);
+            return Redirect("../Admin/Home");
         }
     }
 }

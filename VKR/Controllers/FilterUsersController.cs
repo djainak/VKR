@@ -10,7 +10,7 @@ using VKR.Models;
 namespace VKR.Controllers
 {
     /// <summary>
-    /// Контроллер, обрабатывающий фильрацию пользователей в администраторской части приложения
+    /// Контроллер, обрабатывающий фильтрацию пользователей в администраторской части приложения
     /// </summary>
     public class FilterUsersController : ApiController
     {

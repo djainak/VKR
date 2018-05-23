@@ -32,8 +32,7 @@ namespace VKR.Controllers
         /// Метод, выгружающий новые заказы 
         /// </summary>
         /// <param name="last_id">Уникальный идентификатор последнего выгруженного заказа</param>
-        /// <returns>Уникальный идентификатор последнего выгруженного заказа после применения
-        /// метода</returns>
+        /// <returns>Новые заказы</returns>
         public string Get(int last_id)
         {
             List<Order> orders = new List<Order>();

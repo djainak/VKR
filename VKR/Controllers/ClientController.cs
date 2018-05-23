@@ -42,7 +42,10 @@ namespace VKR.Controllers
             List<Cart> cart = new List<Cart>();
             List<FreeTime> times = new List<FreeTime>();
             int id_user = Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value);
-            
+            int now_h = DateTime.Now.Hour;
+            int now_m = DateTime.Now.Minute;
+            List<FreeTime> tmp = new List<FreeTime>();
+
             Dictionary<string, string> dayName = new Dictionary<string, string>(7);
             dayName.Add("Monday", "Понедельник");
             dayName.Add("Tuesday", "Вторник");
@@ -66,15 +69,28 @@ namespace VKR.Controllers
                     allprice = allprice + c.MenuItem.Price * c.Amount;
                 }
 
+                //Отступаем от нынешнего момента минимальное время готовности заказа
+                now_h = now_h + (now_m + db.DinningRooms.FirstOrDefault().Min_time) / 60;
+                now_m = (now_m + db.DinningRooms.FirstOrDefault().Min_time) % 60;
+                
                 //Выгружаем доступное время
                 times = db.FreeTime.Where(t => t.DayWork.Name == Today && t.cur_amount < t.max_amount).ToList();
+                
+                foreach (FreeTime t in times)
+                {
+                    // 
+                    if (Convert.ToInt32(t.Time.Substring(0, t.Time.IndexOf(':'))) > now_h || Convert.ToInt32(t.Time.Substring(0, t.Time.IndexOf(':'))) == now_h && Convert.ToInt32(t.Time.Substring(t.Time.IndexOf(':') + 1, 2)) > now_m)
+                    {
+                        tmp.Add(t);
+                    }
+                }
                 
             }
             if (cart.Count == 0)
                 ViewBag.Empty = "true";
             ViewBag.Cart = cart;
             ViewBag.AllPrice = allprice;
-            ViewBag.Times = times;
+            ViewBag.Times = tmp;
             return View();
         }
 

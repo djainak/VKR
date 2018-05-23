@@ -211,6 +211,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RefreshStatusesController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\SignINUPController.cs" />
     <Compile Include="Controllers\UserBasedController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -303,6 +304,10 @@
     <Compile Include="Migrations\201805152217565_1605182.cs" />
     <Compile Include="Migrations\201805152217565_1605182.Designer.cs">
       <DependentUpon>201805152217565_1605182.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805231056362_230518.cs" />
+    <Compile Include="Migrations\201805231056362_230518.Designer.cs">
+      <DependentUpon>201805231056362_230518.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contexts.cs" />
@@ -513,6 +518,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805152217565_1605182.resx">
       <DependentUpon>201805152217565_1605182.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805231056362_230518.resx">
+      <DependentUpon>201805231056362_230518.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

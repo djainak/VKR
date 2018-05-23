@@ -319,11 +319,16 @@ namespace VKR.Models
         /// Количество блюд для рассчета предлагаемого времени
         /// </summary>
         public int Dishes { get; set; }
-
+        
         /// <summary>
         /// Интервал, в который приготавливается определенное в Dishes количество блюд в минутах
         /// </summary>
         public int Interval { get; set; }
+
+        /// <summary>
+        /// Минимальное время приготовления заказа
+        /// </summary>
+        public int Min_time { get; set; }
     }
 
     /// <summary>
