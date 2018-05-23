@@ -7,6 +7,9 @@ using VKR.Models;
 
 namespace VKR.Controllers
 {
+    /// <summary>
+    /// Контроллер, реализующий регистрацию пользователя
+    /// </summary>
     public class RegistrationController : Controller
     {
         /// <summary>
@@ -22,7 +25,7 @@ namespace VKR.Controllers
         /// <summary>
         /// Обработка формы регистрации нового пользователя
         /// </summary>
-        /// <returns>Переадресация на личный кабинет (!!!ПОКА НА АДМИНКУ)</returns>
+        /// <returns>Переадресация на страницу авторизации</returns>
         [HttpPost]
         public ActionResult NewUser()
         {
@@ -41,8 +44,8 @@ namespace VKR.Controllers
                 db.Users.Add(user);
                 db.SaveChanges();
             }
-            //В дальнейшем сделать переадресацию на личный кабинет, сейчас переадресация в админку
-            return Redirect("../Admin/Home");
+            
+            return Redirect("../Authorization/Enter");
         }
     }
 }

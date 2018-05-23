@@ -7,6 +7,9 @@ using VKR.Models;
 
 namespace VKR.Controllers
 {
+    /// <summary>
+    /// Контроллер, отвечающий за авторизацию пользователя
+    /// </summary>
     public class AuthorizationController : UserBasedController
     {
         /// <summary>
@@ -50,23 +53,9 @@ namespace VKR.Controllers
                     HttpContext.Response.Cookies.Add(token);
 
                     // если пользователь прошел проверку, редиректим его не главную страницу
-                    return Redirect("../Admin/Home?UserId=" + ViewBag.User.UserID);
+                    return Redirect("../Admin/Home");
                 }
             }
-        }
-
-        /// <summary>
-        /// Метод, обрабатывающий выход из аккаунта
-        /// </summary>
-        /// <returns>Переадресация на главную страницу КОСТЫЛЬ</returns>
-        [HttpGet]
-        public ActionResult LogOut()
-        {
-            HttpCookie token = new HttpCookie("user_token", "");
-            HttpContext.Response.Cookies.Add(token);
-
-            //Переадресация на главную страницу КОСТЫЛЬ
-            return Redirect("../Admin/Home");
         }
     }
 }

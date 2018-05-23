@@ -26,6 +26,12 @@
                 </tr>
             </table>
         </div>
+        @if (ViewBag.Empty == true)
+        {
+            <p>Пользователь не найден</p>
+        }
+        else
+        {
         <div>
             <table style="width: 100%; border: 0px" border="1">
                 <tr>
@@ -45,22 +51,23 @@
         <p><label style="font-weight:700">Фамилия: </label>@ViewBag.User.FirstName</p>
         <p><label style="font-weight:700">Имя: </label>@ViewBag.User.Name</p>
         <p><label style="font-weight:700">Отчество: </label>@ViewBag.User.Patronymic</p>
-        @if (@ViewBag.User.Status == 0)
-    {
+        if (@ViewBag.User.Status == 0)
+        {
         <p><label style="font-weight:700">Статус: </label>Покупатель</p>
-}
-        @if (@ViewBag.User.Status == 1)
-    {
+        }
+        if (@ViewBag.User.Status == 1)
+        {
         <p><label style="font-weight:700">Статус: </label>Модератор</p>
-}
-        @if (@ViewBag.User.Status == 2)
-    {
+        }
+        if (@ViewBag.User.Status == 2)
+        {
         <p><label style="font-weight:700">Статус: </label>Администратор</p>
-}
+        }
         <p><label style="font-weight:700">E-mail: </label>@ViewBag.User.Email</p>
         <p><label style="font-weight:700">Телефон: </label>@ViewBag.User.PhoneNumber</p>
         <div>
         </div>
+        }
     </div>
     <script>
         $('.menu-item').on('click', function () {

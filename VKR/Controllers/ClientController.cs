@@ -149,17 +149,21 @@ namespace VKR.Controllers
         [HttpGet]
         public ActionResult Profile()
         {
-            int id_user;
-            id_user = Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value);
-            using (var db = new Contexts())
-            {
-                ViewBag.User = db.Users.Find(id_user);
-            }
+                int id_user;
+                id_user = Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value);
+                using (var db = new Contexts())
+                {
+                    
+                    ViewBag.User = db.Users.Find(id_user);
+                    if (db.Users.Find(id_user) == null)
+                        ViewBag.Empty = true;
+                }
+           
             return View();
         }
 
         /// <summary>
-        /// метод, обрабатывающий страницу редактирования данных профиля
+        /// Метод, обрабатывающий страницу редактирования данных профиля
         /// </summary>
         /// <returns>Страница редактирования данных профиля</returns>
         [HttpGet]
@@ -208,9 +212,9 @@ namespace VKR.Controllers
         }
 
         /// <summary>
-        /// Метод, обрабатывающий страницу обратной связи
+        /// Метод, обрабатывающий страницу с контактами
         /// </summary>
-        /// <returns>Страница обратной связи</returns>
+        /// <returns>Страница контактов</returns>
         [HttpGet]
         public ActionResult Contacts()
         {

@@ -7,6 +7,9 @@ using VKR.Models;
 
 namespace VKR.Controllers
 {
+    /// <summary>
+    /// Контроллер, устанавливающий права на посещение страниц
+    /// </summary>
     public class UserBasedController : Controller
     {
         protected override void ExecuteCore()

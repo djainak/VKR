@@ -37,14 +37,14 @@ img {
     background: #FFFCF7;
     font-family: "Times New Roman", Times, serif;
 }
-.menu-item {
+.menu-item, .menu-item-exit {
     cursor: pointer;
     border: 1px solid #A68244;
     height: 25px;
     padding: 5px;
     background: #FFEED1;
 }
-    .menu-item:hover {
+    .menu-item:hover, .menu-item-exit:hover {
         background: #FFF2DD;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
@@ -141,10 +141,25 @@ th {
     font-size: 17px;
     background: #FFFCF7;
 }
-.more-inf-td:hover, remove-user-td:hover, .remove-menu-td:hover, .remove-menu-item-td:hover {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+#exit {
+    border: none;
     cursor: pointer;
+    text-decoration: none;
+    line-height: 25px;
+    display: block;
+    padding: 5px;
+    color: #000000;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
+    background: #FFEED1;
 }
+    #exit:hover {
+        background: #FFF2DD;
+    }
+    .more-inf-td:hover, remove-user-td:hover, .remove-menu-td:hover, .remove-menu-item-td:hover {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+    }
 .form-input {
     border: 1px solid #BFB29D;
     height: 30px;

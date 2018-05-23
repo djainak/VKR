@@ -12,6 +12,9 @@ using VKR.Models;
 
 namespace VKR.Controllers
 {
+    /// <summary>
+    /// Контроллер, отвечающий за обработку меню в клиентской части приложения
+    /// </summary>
     public class FilterMenuItemsController : ApiController
     {
         /// <summary>
@@ -22,7 +25,6 @@ namespace VKR.Controllers
         public string Get(int id)
         {
             string res = "";
-            try {
                 List<MenuItem> menuitems = new List<MenuItem>();
                 int menu_id;
                 using (var db = new Contexts())
@@ -38,11 +40,6 @@ namespace VKR.Controllers
                     m.Menu = null;
                 }
                 res = JsonConvert.SerializeObject(menuitems);
-            }
-            catch (Exception e)
-            {
-                res = e.StackTrace;
-            }
 
             return res;
         }
@@ -50,8 +47,8 @@ namespace VKR.Controllers
         /// <summary>
         /// Метод, обрабатывающий добавление товара в корзину
         /// </summary>
-        /// <param name="id_product"></param>
-        /// <param name="amount"></param>
+        /// <param name="id_product">Уникальный идентификатор товара</param>
+        /// <param name="amount">Количество товара</param>
         public void Post(int id_product, int amount)
         {
             int id_user;

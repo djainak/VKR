@@ -19,7 +19,7 @@ namespace VKR.Controllers
         /// Метод, обрабатывающий удаление товара из корзины
         /// </summary>
         /// <param name="id">Уникальный идентификатор товара в корзине</param>
-        /// <returns>empty - если корзина пуста, иначе пустая строка</returns>
+        /// <returns> true - если корзина пуста, иначе false </returns>
         public bool Post(int id)
         {
             int amount;
@@ -74,6 +74,14 @@ namespace VKR.Controllers
             }
         }
 
+        /// <summary>
+        /// Оформление заказа
+        /// </summary>
+        /// <param name="time">Выбранное время</param>
+        /// <param name="notes">Заметки</param>
+        /// <param name="where_eat">Место питания</param>
+        /// <param name="allprice">Итоговая сумма</param>
+        /// <returns>false если время уже занято, иначе true</returns>
         public bool Post(string time, string notes, string where_eat, int allprice)
         {
             Dictionary<string, string> dayName = new Dictionary<string, string>(7);
@@ -151,7 +159,7 @@ namespace VKR.Controllers
 
                     return true;
                 }
-                else //Если успели
+                else //Если не успели
                     return false;
             }
         }
