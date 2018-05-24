@@ -23,6 +23,7 @@
                     <td class="menu-item"><a href="../Client/CartPage" class="menu_text">Корзина</a></td>
                     <td class="menu-item"><a href="../Client/Profile" class="menu_text">Личный кабинет</a></td>
                     <td class="menu-item"><a href="../Client/Contacts" class="menu_text">Контакты</a></td>
+                    <td class="menu-item-exit"><input type="button" value="Выйти" id="exit" class="menu_text" /></td>
                 </tr>
             </table>
         </div>
@@ -39,6 +40,20 @@
         $('.menu-item').on('click', function () {
             $(this).children('a')[0].click();
         });
+        $('.menu-item-exit').on('click', function () {
+            $(this).children('input')[0].click();
+        });
+        $("#exit").on("click", function (event) {
+            $.ajax({
+                url: "../api/SignINUP",
+                type: "GET",
+                dataType: "text",
+                success: function () {
+                    window.location = '../Authorization/Enter';
+                }
+            })
+            event.stopPropagation();
+        })
     </script>
 </body>
 </html>

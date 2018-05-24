@@ -91,6 +91,8 @@ namespace VKR.Controllers
             ViewBag.Cart = cart;
             ViewBag.AllPrice = allprice;
             ViewBag.Times = tmp;
+            if (tmp.Count == 0)
+                ViewBag.NoTime = true;
             return View();
         }
 
@@ -107,6 +109,7 @@ namespace VKR.Controllers
                 using (var db = new Contexts())
                 {
                     orders = db.Orders.Where(o => o.UserId == id_user).ToList();
+                    orders.Reverse();
                 }
             if (orders.Count == 0)
                 ViewBag.Empty = true;

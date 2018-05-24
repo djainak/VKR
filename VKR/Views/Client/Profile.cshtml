@@ -23,6 +23,7 @@
                     <td class="menu-item"><a href="../Client/CartPage" class="menu_text">Корзина</a></td>
                     <td class="menu-item"><a href="../Client/Profile" class="menu_text">Личный кабинет</a></td>
                     <td class="menu-item"><a href="../Client/Contacts" class="menu_text">Контакты</a></td>
+                    <td class="menu-item-exit"><input type="button" value="Выйти" id="exit" class="menu_text" /></td>
                 </tr>
             </table>
         </div>
@@ -45,7 +46,7 @@
             <a href="../Client/ChangeProfile" class="ord_but">Редактировать профиль</a>
         </div>
         <h4>Текущее изображение:</h4>
-        <img src="~/Content/Style/Files/@ViewBag.User.Picture" width="200" height="200" alt="Изображение не добавлено">
+        <img src="~/Content/Style/Files/@ViewBag.User.Picture" style="width: 200px; height: 200px" alt="Изображение не добавлено">
 
         <p><label style="font-weight:700">Логин: </label>@ViewBag.User.Login</p>
         <p><label style="font-weight:700">Фамилия: </label>@ViewBag.User.FirstName</p>
@@ -76,6 +77,20 @@
         $('.category').on('click', function () {
             $(this).children('a')[0].click();
         });
+        $('.menu-item-exit').on('click', function () {
+            $(this).children('input')[0].click();
+        });
+        $("#exit").on("click", function (event) {
+            $.ajax({
+                url: "../api/SignINUP",
+                type: "GET",
+                dataType: "text",
+                success: function () {
+                    window.location = '../Authorization/Enter';
+                }
+            })
+            event.stopPropagation();
+        })
     </script>
 </body>
 </html>

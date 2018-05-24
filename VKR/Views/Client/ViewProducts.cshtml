@@ -23,6 +23,7 @@
                     <td class="menu-item"><a href="../Client/CartPage" class="menu_text">Корзина</a></td>
                     <td class="menu-item"><a href="../Client/Profile" class="menu_text">Личный кабинет</a></td>
                     <td class="menu-item"><a href="../Client/Contacts" class="menu_text">Контакты</a></td>
+                    <td class="menu-item-exit"><input type="button" value="Выйти" id="exit" class="menu_text" /></td>
                 </tr>
             </table>
         </div>
@@ -33,34 +34,41 @@
                 <p><label style="font-weight:700">Время оформления: </label>@ViewBag.Order.OrderTime</p>
                 <p><label style="font-weight:700">Время готовности заказа: </label>@ViewBag.Order.ReadyTime</p>
                 @if (ViewBag.Order.WhereEat == false)
-            {
-                <p><label style="font-weight:700">Упаковка заказа: </label>С собой</p>
-        }
-        else
-        {
-            <p><label style="font-weight:700">Упаковка заказа: </label>На месте</p>
-    }
-                @if (ViewBag.Order.Status == 0)
-            {
-                <p><label style="font-weight:700">Статус: </label>Обработка</p>
-        }
-        else if (ViewBag.Order.Status == 1)
-        {
-            <p><label style="font-weight:700">Статус: </label>Подтвержден</p>
-    }
-    else if (ViewBag.Order.Status == 2)
     {
-        <p><label style="font-weight:700">Статус: </label>Ожидает выдачи</p>
+            <p><label style="font-weight:700">Упаковка заказа: </label>С собой</p>
+}
+else
+{
+            <p><label style="font-weight:700">Упаковка заказа: </label>На месте</p>
+}
+                @if (ViewBag.Order.Status == 0)
+    {
+            <p><label style="font-weight:700">Статус: </label>Обработка</p>
+}
+else if (ViewBag.Order.Status == 1)
+{
+            <p><label style="font-weight:700">Статус: </label>Подтвержден</p>
+}
+else if (ViewBag.Order.Status == 2)
+{
+            <p><label style="font-weight:700">Статус: </label>Ожидает выдачи</p>
 }
 else if (ViewBag.Order.Status == 3)
 {
-    <p><label style="font-weight:700">Статус: </label>Выполнен</p>
+            <p><label style="font-weight:700">Статус: </label>Выполнен</p>
 }
 else if (ViewBag.Order.Status == 4)
 {
-    <p><label style="font-weight:700">Статус: </label>Удален</p>
+            <p><label style="font-weight:700">Статус: </label>Удален</p>
 }
-                <p><label style="font-weight:700">Заметки: </label>@ViewBag.Order.Notes</p>
+                @if (@ViewBag.Order.Notes != null)
+    {
+            <p><label style="font-weight:700">Заметки: </label>@ViewBag.Order.Notes</p>
+}
+else
+{
+            <p><label style="font-weight:700">Заметки: </label>Нет</p>
+}
                 <table>
                     <tr>
                         <th style="width: 20%">Название</th>
@@ -70,15 +78,15 @@ else if (ViewBag.Order.Status == 4)
                         <th style="width: 10%">Стоимость</th>
                     </tr>
                     @foreach (var p in ViewBag.Products)
-                {
-                    <tr>
-                        <td>@p.MenuItem.Name</td>
-                        <td>@p.MenuItem.Ingredients</td>
-                        <td>@p.MenuItem.Category.Name</td>
-                        <td>@p.Amount</td>
-                        <td>@p.Sum руб.</td>
-                    </tr>
-            }
+        {
+            <tr>
+                <td>@p.MenuItem.Name</td>
+                <td>@p.MenuItem.Ingredients</td>
+                <td>@p.MenuItem.Category.Name</td>
+                <td>@p.Amount</td>
+                <td>@p.Sum руб.</td>
+            </tr>
+}
                 </table>
                 <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice руб.</p>
             </div>
@@ -86,6 +94,20 @@ else if (ViewBag.Order.Status == 4)
         </div>
     </div>
     <script>
+        $('.menu-item-exit').on('click', function () {
+            $(this).children('input')[0].click();
+        });
+        $("#exit").on("click", function (event) {
+            $.ajax({
+                url: "../api/SignINUP",
+                type: "GET",
+                dataType: "text",
+                success: function () {
+                    window.location = '../Authorization/Enter';
+                }
+            })
+            event.stopPropagation();
+        })
         $('.menu-item').on('click', function () {
             $(this).children('a')[0].click();
         });

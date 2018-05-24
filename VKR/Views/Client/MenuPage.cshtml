@@ -23,6 +23,7 @@
                     <td class="menu-item"><a href="../Client/CartPage" class="menu_text" id="link-2">Корзина</a></td>
                     <td class="menu-item"><a href="../Client/Profile" class="menu_text" id="link-3">Личный кабинет</a></td>
                     <td class="menu-item"><a href="../Client/Contacts" class="menu_text" id="link-4">Контакты</a></td>
+                    <td class="menu-item-exit"><input type="button" value="Выйти" id="exit" class="menu_text" /></td>
                 </tr>
             </table>
         </div>
@@ -42,6 +43,20 @@
         </div>
     </div>
     <script>
+        $('.menu-item-exit').on('click', function () {
+            $(this).children('input')[0].click();
+        });
+        $("#exit").on("click", function (event) {
+            $.ajax({
+                url: "../api/SignINUP",
+                type: "GET",
+                dataType: "text",
+                success: function () {
+                    window.location = '../Authorization/Enter';
+                }
+            })
+            event.stopPropagation();
+        })
         $(window).load(function () {
             $(".category-filter")[0].click();
         });
@@ -71,7 +86,7 @@
                             + json_parse[i]["Picture"] + '" class="photo_mi" alt="Изображение не добавлено"><div class="price"><p>'
                             + json_parse[i]["Price"] + '<span class="rub">Р</span>' + '</div><div><div class="minus">-</div>'
                             + '<input type = "text" id="count_field_' + json_parse[i]["Id"] +
-                            '" value = "1" class="count_field"><div class="plus"> +</div></div><h4>Ингредиенты: </h4>'
+                            '" value = "1" class="count_field" readonly><div class="plus"> +</div></div><h4>Ингредиенты: </h4>'
                             + json_parse[i]["Ingredients"] + '</br><br clear="all"><input type="button" value="Добавить в корзину" class="add-to-cart"/>'
                             + '</div>';
        

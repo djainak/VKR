@@ -17,7 +17,6 @@
 <body>
     <div id="main-form">
         <div class="allform">
-            
             <form method="post" action="./SetDR">
                 <h2>Настройка точки питания</h2>
                 <br />
@@ -53,44 +52,52 @@
                     <p><label>Рабочие дни: </label></p>
                     <table>
                         @foreach (var day in ViewBag.WorkDays)
-    {
-                    <tr>
-                        <td class="filter-table">
-                            @if (day.IsWorkDay)
-    {
-                        <label style="font-weight: 500">
-                            <input class="checkbox" type="checkbox" name="@day.DayWorkID" id="@day.DayWorkID" value="@day.DayWorkID" checked />
-                            <span class="checkbox-custom"></span>
-                            <span class="label">@day.Name</span>
-                        </label>
+            {
+                <tr>
+                    <td class="filter-table">
+                        @if (day.IsWorkDay)
+            {
+                <label style="font-weight: 500">
+                    <input class="checkbox" type="checkbox" name="@day.DayWorkID" id="@day.DayWorkID" value="@day.DayWorkID" checked />
+                    <span class="checkbox-custom"></span>
+                    <span class="label">@day.Name</span>
+                </label>
 }
 else
 {
-                        <label style="font-weight: 500">
-                            <input class="checkbox" type="checkbox" name="@day.DayWorkID" id="@day.DayWorkID" value="@day.DayWorkID" />
-                            <span class="checkbox-custom"></span>
-                            <span class="label">@day.Name</span>
-                        </label>
+            <label style="font-weight: 500">
+                <input class="checkbox" type="checkbox" name="@day.DayWorkID" id="@day.DayWorkID" value="@day.DayWorkID" />
+                <span class="checkbox-custom"></span>
+                <span class="label">@day.Name</span>
+            </label>
 }
-                        </td>
-                        <td class="filter-table"></td>
-                    </tr>
-                    <tr>
-                        <td class="filter-table">Начало рабочего дня:</td>
-                        <td class="filter-table"><input type="number" name="StDH_@day.DayWorkID" value="@day.StartDayHour" style="width: 50px" class="form-input" required/>:<input type="number" name="StDM_@day.DayWorkID" value="@day.StartDayMin" class="form-input" style="width: 50px" required/></td>
-                    </tr>
-                    <tr>
-                        <td class="filter-table">Конец рабочего дня:</td>
-                        <td class="filter-table"><input type="number" name="EDH_@day.DayWorkID" class="form-input" value="@day.EndDayHour" style="width: 50px" required/>:<input type="number" name="EDM_@day.DayWorkID" value="@day.EndDayMin" class="form-input" style="width: 50px" required/></td>
-                    </tr>
+                    </td>
+                    <td class="filter-table"></td>
+                </tr>
+                <tr>
+                    <td class="filter-table">Начало рабочего дня:</td>
+                    <td class="filter-table"><input type="number" name="StDH_@day.DayWorkID" value="@day.StartDayHour" style="width: 50px" class="form-input" required />:<input type="number" name="StDM_@day.DayWorkID" value="@day.StartDayMin" class="form-input" style="width: 50px" required /></td>
+                </tr>
+                <tr>
+                    <td class="filter-table">Конец рабочего дня:</td>
+                    <td class="filter-table"><input type="number" name="EDH_@day.DayWorkID" class="form-input" value="@day.EndDayHour" style="width: 50px" required />:<input type="number" name="EDM_@day.DayWorkID" value="@day.EndDayMin" class="form-input" style="width: 50px" required /></td>
+                </tr>
 
 }
                     </table>
                 </div>
-                    <a href="../Admin/Home" class="link-but" style="width:80px; float: right">Отмена</a>
-                    <input type="submit" value="Сохранить" class="link-but">
+                <a href="../Admin/Home" class="link-but" style="width:80px; float: right">Отмена</a>
+                <input type="submit" id="submit" value="Сохранить" class="link-but">
             </form>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $("#submit").click(function (event) {
+                if (!confirm('При изменении интевала или длины рабочего дня данные о количестве сделанных сегодня заказах обнулятся. Вы уверены, что хотите сохранить изменения?'))
+                    event.preventDefault();
+            });
+        });
+    </script>
 </body>
 </html>

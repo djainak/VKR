@@ -151,9 +151,30 @@ namespace VKR.Controllers
                             db.Cart.Remove(c);
                         }
                         db.SaveChanges();
-                        order.NumberOrder = DateTime.Now.Year.ToString().Substring(2) + DateTime.Now.Month.ToString()
-                            + DateTime.Now.Day.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Hour.ToString()
-                            + order.OrderID;
+
+                        //Формирование номера заказа
+                        string tmp = DateTime.Now.Year.ToString().Substring(2);
+                        if (DateTime.Now.Month.ToString().Length == 1)
+                            tmp += "0" + DateTime.Now.Month.ToString();
+                        else
+                            tmp += DateTime.Now.Month.ToString();
+                        if (DateTime.Now.Day.ToString().Length == 1)
+                            tmp += "0" + DateTime.Now.Day.ToString();
+                        else
+                            tmp += DateTime.Now.Day.ToString();
+                        if (DateTime.Now.Minute.ToString().Length < 2)
+                            tmp += "0" + DateTime.Now.Minute.ToString();
+                        else
+                            tmp += DateTime.Now.Minute.ToString();
+                        if (DateTime.Now.Hour.ToString().Length < 2)
+                            tmp += "0" + DateTime.Now.Hour.ToString();
+                        else
+                            tmp += DateTime.Now.Hour.ToString();
+                        if (order.OrderID % 100 < 10)
+                            tmp += "0" + (order.OrderID % 100).ToString();
+                        else
+                            tmp += (order.OrderID % 100).ToString();
+                        order.NumberOrder = tmp;
                         db.SaveChanges();
                     }
 

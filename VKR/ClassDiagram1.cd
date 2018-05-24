@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VKR.Models.Menu">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAEAAAgABAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Contexts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VKR.Models.MenuItem">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAACgAAAAQAAAAAAAAAAACQAAAAIBAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\Contexts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VKR.Models.CategoryMenuItem">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Contexts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VKR.Models.User">
+    <Position X="8" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgGAEACAAAAAAAAAAQAwAAAAAAAACAAAQAAAAAAA=</HashCode>
+      <FileName>Models\Contexts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VKR.Models.Order">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhABAEAAAAAAAAAEAAAAwAAAAAAAAAABAAAAAACAQ=</HashCode>
+      <FileName>Models\Contexts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VKR.Models.DinningRoom">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAACAAACAAAIQAAAAAAAggBAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Contexts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VKR.Models.DayWork">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAABAEAAAAAAAAAAAAAAAQAAAAgAgAAAAAAAAAAgAE=</HashCode>
+      <FileName>Models\Contexts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VKR.Models.Cart">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAiAAQAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\Contexts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VKR.Models.FreeTime">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAABAAAAAAAAgAAAAQAAAAAAAAAAAAAABAAAAAAQA=</HashCode>
+      <FileName>Models\Contexts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VKR.Models.OrderItems">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAABAAAAgAAACAAQAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Contexts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
