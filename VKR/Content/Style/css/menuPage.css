@@ -126,6 +126,8 @@
     box-shadow: 0px 0px 10px #365D8A;
     border-radius: 3px;
     text-decoration: none;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
 }
 .count_field {
     width: 30px;
@@ -152,6 +154,7 @@
     color: #E3EAF4;
     width: 100%;
     font-size: 17px;
+    font-family: "Times New Roman", Times, serif;
 }
 .menu-item:hover, .menu-item-exit:hover {
     background: #164379;
@@ -188,6 +191,8 @@ th {
     border: 1px solid #C1D3E8;
     background: #FAFCFF;
     cursor: pointer;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
 }
 .remove-cart-item {
     border: none;
@@ -210,6 +215,8 @@ th {
     display: block;
     padding: 5px;
     color: #164379;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
 }
 .more-inf-td:hover {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -230,6 +237,8 @@ th {
     line-height: 25px;
     display: block;
     padding: 5px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
 }
 .send {
     background: #EEF1F5;
@@ -242,6 +251,8 @@ th {
     display: block;
     padding: 5px;
     margin-top: 10px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
 }
     .remove-cart:hover, .new-order:hover, .ord_but:hover, .send:hover {
         background: #CBD8E8;
@@ -259,6 +270,8 @@ th {
     height: 25px;
     padding: 5px;
     color: #164379;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
 }
 .clear {
     content: ".";

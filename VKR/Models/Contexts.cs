@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace VKR.Models
 {
     public class Contexts : DbContext
     {
         public Contexts() : base("VKR.Models.Contexts")
-        { }
+        {
+            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = 600;
+        }
 
         /// <summary>
         /// Коллекция данных, загружаемая из БД, с данными из таблицы Меню

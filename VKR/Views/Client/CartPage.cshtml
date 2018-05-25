@@ -65,7 +65,7 @@ else
             </tr>
 }
             </table>
-            <p id="allprice">Общая сумма заказа: @ViewBag.AllPrice</p>
+            <p id="allprice">Общая сумма заказа: <label id="price">@ViewBag.AllPrice</label></p>
             <input type="button" value="Очистить корзину" class="remove-cart" />
             if (ViewBag.NoTime == true)
 {
@@ -146,7 +146,7 @@ else
                         sum = sum + parseInt($(this).html());
                     });
                     $('#allprice').empty();
-                    block = 'Общая сумма заказа: ' + sum;
+                    block = 'Общая сумма заказа: <label id="price">' + sum + '</label>';
                     document.getElementById('allprice').innerHTML += block;
                 }
             })
@@ -199,7 +199,7 @@ else
                         sum = sum + parseInt($(this).html());
                     });
                     $('#allprice').empty();
-                    block = 'Общая сумма заказа: ' + sum;
+                    block = 'Общая сумма заказа: <label id="price">' + sum + '</label>';
                     document.getElementById('allprice').innerHTML += block;
                 }
             })
@@ -210,7 +210,7 @@ else
             var time = $('input[name=time]:checked').val()
             $.ajax({
                 url: "../api/CartChosing?time=" + time + "&notes=" + notes + "&where_eat=" + where_eat
-                + "&allprice=" + @ViewBag.AllPrice,
+                    + "&allprice=" + $('#price').text(),
                 type: "POST",
                 dataType: "text",
                 success: function (flag) {

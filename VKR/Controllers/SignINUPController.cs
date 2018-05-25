@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,23 +17,26 @@ namespace VKR.Controllers
     public class SignINUPController : ApiController
     {
         /// <summary>
-        /// Проверяет занятость логина
+        /// Проверяет занятость логина и Email
         /// </summary>
         /// <param name="Login">Логин</param>
-        /// <returns>1 - занят, 0 - свободен</returns>
-        public string Get(string Login)
+        /// <param name="Email">Email</param>
+        /// <returns>Login - занят логин, Email - занят Email, ОК - свободно</returns>
+        public string Get(string Login, string Email)
         {
             string login = Login;
             using (var db = new Contexts())
             {
-                if (db.Users.Where(c => c.Login == Login).FirstOrDefault() == null)
+                if (db.Users.Where(c => c.Login == Login.Trim()).FirstOrDefault() != null)
                 {
-                    return "false";
+                    return JsonConvert.SerializeObject("Login");
+                }
+                else if (db.Users.Where(c => c.Email == Email.Trim()).FirstOrDefault() != null)
+                {
+                    return JsonConvert.SerializeObject("Email");
                 }
                 else
-                {
-                    return "true";
-                }
+                    return JsonConvert.SerializeObject("OK");
             }
         }
         /// <summary>
@@ -43,8 +47,9 @@ namespace VKR.Controllers
             CookieHeaderValue cookie = Request.Headers.GetCookies("user_token").FirstOrDefault();
             if (cookie != null)
             {
-                cookie["user_token"].Value = "";
+                cookie["user_token"].Value = string.Empty;
             }
+            
         }
     }
 }

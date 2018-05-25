@@ -7,63 +7,66 @@
 
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="~/Content/Style/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
+    <link href="~/Content/Style/css/menuPage.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
     <title>Регистрация</title>
 </head>
 <body>
-    <div>
-        <a href="../Authorization/Enter">Вход</a>
-        <br />
-        <form method="post" action="./NewUser" style="background: #ccc; border: 1px solid black; padding: 20px;">
-            <p>Придумайте логин:</p>
-            <input type="text" name="Login" id="Login" placeholder="Логин" required />
+    <div id="main-form">
+        <form method="post" action="./NewUser">
+            <a href="../Authorization/Enter" class="ord_but" style="float:right">Вход</a>
+            <h2>Регистрация</h2>
+            <p style="color: #000E1F; font-weight:700">Придумайте логин:</p>
+            <input type="text" name="Login" id="Login" placeholder="Логин" class="form-input" required />
             <br />
+            <p style="color: #000E1F; font-weight:700">Придумайте пароль:</p>
+            <input type="password" name="Password" placeholder="Пароль" class="form-input" required />
             <br />
-            <p>Придумайте пароль:</p>
-            <input type="password" name="Password" placeholder="Пароль" required />
+            <p style="color: #000E1F; font-weight:700">Введите фамилию:</p>
+            <input type="text" name="FirstName" placeholder="Фамилия" class="form-input" required />
             <br />
+            <p style="color: #000E1F; font-weight:700">Введите имя:</p>
+            <input type="text" name="Name" placeholder="Имя" class="form-input" required />
             <br />
-            <p>Введите фамилию:</p>
-            <input type="text" name="FirstName" placeholder="Фамилия" required />
+            <p style="color: #000E1F; font-weight:700">Введите отчество:</p>
+            <input type="text" name="Patronymic" placeholder="Отчество" class="form-input" />
             <br />
+            <p style="color: #000E1F; font-weight:700">Введите e-mail:</p>
+            <input type="email" name="Email" id="email" placeholder="E-mail" class="form-input" required />
             <br />
-            <p>Введите имя:</p>
-            <input type="text" name="Name" placeholder="Имя" required />
+            <p style="color: #000E1F; font-weight:700">Введите телефон:</p>
+            <input type="tel" name="PhoneNumber" placeholder="Телефон" class="form-input" required />
             <br />
-            <br />
-            <p>Введите отчество:</p>
-            <input type="text" name="Patronymic" placeholder="Отчество" />
-            <br />
-            <br />
-            <p>Введите e-mail:</p>
-            <input type="email" name="Email" placeholder="E-mail" required />
-            <br />
-            <br />
-            <p>Введите телефон:</p>
-            <input type="tel" name="PhoneNumber" placeholder="Телефон" required />
-            <br />
-            <br />
-            <input type="submit" />
+            <input type="submit" class="send" />
         </form>
-
         <script>
             $(document).ready(function () {
-                $("#Login").focusout(function () {
+                $("form").submit(function (e) {
+                    e.preventDefault();
                     $.ajax({
-                        url: "../api/SignINUP",
-                        data: "Login=" + $("#Login").val(),
-                        dataType: "text",
+                        url: "../api/SignINUP?Login=" + $("#Login").val() + "&Email=" + $("#email").val(),
+                        dataType: "json",
                         success: function (text) {
-                            if (text == "true") {
-                                $("#Login").setCustomValidity("");
+                            //Преобразовываем JSON
+                            var json_parse = JSON.parse(text);
+                            if (json_parse == "Email") {
+                                alert("Такой email уже занят.");
+                                return false;
+                            }
+                            else if (json_parse == "Login") {
+                                alert("Такой логин уже занят.");
+                                return false;
                             }
                             else {
-                                $("#Login").setCustomValidity("Такой логин уже занят. Введите другой.");
+                                $("form").unbind('submit').submit();
                             }
                         }
                     })
-                })
-            }
+                });
+            });
         </script>
     </div>
 </body>

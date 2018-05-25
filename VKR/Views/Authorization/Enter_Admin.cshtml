@@ -7,29 +7,29 @@
 
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="~/Content/Style/js/jquery-ui.js"></script>
-    <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
-    <link href="~/Content/Style/css/menuPage.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
-    <title>Авторизация</title>
+    <title>Авторизация панели администратора</title>
+    <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="main-form">
-        <form method="post" action="./Authorize">
+        <form method="post" action="./Authorize_Admin">
             @if (ViewBag.isError)
     {
-        <script>alert("Неправильная пара логин-пароль");</script>
+        <script>alert("Неправильная пара логин-пароль или у вас недостаточно прав");</script>
 }
-            <a href="../Registration/SignUp" class="ord_but" style="float:right">Регистрация</a>
+            <a href="../Registration/SignUp" class="link-but" style="float:right; width: 115px">Регистрация</a>
             <h2>Авторизация</h2>
+            <br />
             <p style="color: #000E1F; font-weight:700">Введите логин:</p>
             <input type="text" name="Login" placeholder="Логин" class="form-input" required />
+            <br />
             <br />
             <p style="color: #000E1F; font-weight:700">Введите пароль:</p>
             <input type="password" name="Password" placeholder="Пароль" class="form-input" required />
             <br />
-            <input type="submit" class="send" />
+            <br />
+            <input type="submit" class="link-but" />
         </form>
     </div>
 </body>

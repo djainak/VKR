@@ -22,11 +22,11 @@ namespace VKR.Controllers
             //Получаем корневую часть URL
             string server_root_url = filterContext.HttpContext.Request.Url.AbsoluteUri.Replace(filterContext.HttpContext.Request.Url.PathAndQuery, "");
 
-            // проверяем, не является ли наш action тем, к которому пользователь имеет доступ в любом случае
+            // проверяем, не является ли  action тем, к которому пользователь имеет доступ в любом случае
             if (filterContext.ActionDescriptor.ActionName != "Enter" &&
-                filterContext.ActionDescriptor.ActionName != "Authorize")
+                filterContext.ActionDescriptor.ActionName != "SignUp" &&
+                filterContext.ActionDescriptor.ActionName != "Enter_Admin")
             {
-                // тянем токен из мешочка с печеньками
                 string token = "";
                 try
                 {
@@ -44,7 +44,7 @@ namespace VKR.Controllers
                         int id = Convert.ToInt32(token);
                         if (db.Users.Find(id) == null)
                         {
-                            filterContext.Result = Redirect(server_root_url + "Authorization/Enter?id=false");
+                            filterContext.Result = Redirect(server_root_url + "Authorization/Enter");
                         }
                     }
                 }

@@ -334,7 +334,10 @@
     <Content Include="Content\Style\css\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\Style\css\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\Style\css\mainstyle.css" />
+    <Content Include="Content\Style\js\jquery-dateformat.js" />
+    <Content Include="Content\Style\js\jquery-dateformat.min.js" />
     <Content Include="Content\Style\js\jquery-ui.js" />
+    <Content Include="Content\Style\js\jquery.cookie.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -454,6 +457,7 @@
     <Content Include="Views\Client\Contacts.cshtml" />
     <Content Include="Views\Admin\ViewProducts.cshtml" />
     <Content Include="Views\Admin\ArchiveOrders.cshtml" />
+    <Content Include="Views\Authorization\Enter_Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801172013451_initial.resx">

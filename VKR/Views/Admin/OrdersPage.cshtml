@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="~/Content/Style/js/jquery-ui.js"></script>
+    <script src="~/Content/Style/js/jquery-dateformat.min.js"></script>
     <link rel="stylesheet" href="~/Content/Style/css/jquery-ui.css" />
     <link href="~/Content/Style/css/mainstyle.css" rel="stylesheet" />
     <title>Заказы</title>
@@ -218,7 +219,7 @@ else if (order.Status == 4)
                                 || $("#OrderNumber").val() != null && json_parse[i]["NumberOrder"] == $.trim($("#OrderNumber").val())) {
                                 var block = '<tr class="tr" value="' + json_parse[i]["OrderID"]
                                     + '"><td>' + json_parse[i]["NumberOrder"] + '</td><td>'
-                                    + json_parse[i]["OrderTime"] + '</td><td>' + json_parse[i]["ReadyTime"]
+                                    + $.format.date(json_parse[i]["OrderTime"], 'dd.MM.yyyy H:mm:ss') + '</td><td>' + json_parse[i]["ReadyTime"]
                                     + '</td><td>';
                                 if (json_parse[i]["WhereEat"] == "false") {
                                     block += '<p>С собой</p></td>';
@@ -348,11 +349,10 @@ else if (order.Status == 4)
                         + '<th style="width: 30%">Заметки</th>'
                         + '<th style="width: 10%">Товары в заказе</th></tr>';
                     document.getElementById('tableorders').innerHTML += block;
-
                     for (var i = 0; i < json_parse.length; i++) {
                             block = '<tr class="tr" value="' + json_parse[i]["OrderID"]
                             + '"><td>' + json_parse[i]["NumberOrder"] + '</td><td>'
-                            + json_parse[i]["OrderTime"] + '</td><td>' + json_parse[i]["ReadyTime"]
+                                + $.format.date(json_parse[i]["OrderTime"], 'dd.MM.yyyy H:mm:ss') + '</td><td>' + json_parse[i]["ReadyTime"]
                             + '</td><td>';
                         if (json_parse[i]["WhereEat"] == "false") {
                             block += '<p>С собой</p></td>';
