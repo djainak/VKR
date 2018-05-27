@@ -166,6 +166,7 @@
     <Folder Include="Content\Style\Files\" />
     <Folder Include="Content\Style\fonts\" />
     <Folder Include="Content\Style\img\" />
+    <Folder Include="Views\AdminBased\" />
     <Folder Include="Views\EditingRights\" />
     <Folder Include="Views\FilterMenuItems\" />
     <Folder Include="Views\FilterUsers\" />
@@ -204,6 +205,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AdminBasedController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\CartChosingController.cs" />

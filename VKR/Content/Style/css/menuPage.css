@@ -293,3 +293,9 @@ form {
     padding: 20px;
     margin-bottom: 10px;
 }
+.rub {
+    float: left;
+}
+.counter {
+    float:right;
+}

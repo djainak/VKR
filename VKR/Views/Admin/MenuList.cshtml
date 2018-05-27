@@ -28,20 +28,27 @@
                 </tr>
             </table>
         </div>
-        <br/>
+        <br />
         <div class="mainstyle">
-            <a href="../Admin/AddNewMenu" class="link-but" style="width:135px; float:right">Добавить меню</a>
+            @if (ViewBag.Token == 1)
+        {
             <h2>Список меню</h2>
-            <br />
-            <p id="main_m"><label>В качестве основного меню выбрано: </label>@ViewBag.NameMenu</p>
-            <br />
-            <table border="1" style="border-color: #BFB29D">
-                <tr>
-                    <th style="width: 20%">Изображение</th>
-                    <th style="width: 30%">Название</th>
-                    <th style="width: 50%">Описание</th>
-                </tr>
-                @foreach (var menu in ViewBag.Menues)
+            <p>У вас нет доступа к этой странице</p>
+    }
+    else
+    {
+        <a href="../Admin/AddNewMenu" class="link-but" style="width:135px; float:right">Добавить меню</a>
+        <h2>Список меню</h2>
+        <br />
+        <p id="main_m"><label>В качестве основного меню выбрано: </label>@ViewBag.NameMenu</p>
+        <br />
+        <table border="1" style="border-color: #BFB29D">
+            <tr>
+                <th style="width: 20%">Изображение</th>
+                <th style="width: 30%">Название</th>
+                <th style="width: 50%">Описание</th>
+            </tr>
+            @foreach (var menu in ViewBag.Menues)
         {
             <tr value=@menu.Id>
                 <td><img src="~/Content/Style/Files/@menu.Picture" width="100" height="100" alt="Изображение не добавлено"></td>
@@ -50,60 +57,62 @@
                 <td class="more-inf-td"><a href="../Admin/ChangeMenu?MenuId=@menu.Id" class="more-inf">Редактировать</a></td>
                 <td class="remove-menu-td"><input type="button" value="Удалить" class="remove-menu" /></td>
             </tr>
+    }
+        </table>
+
 }
-            </table>
-            <script>
-                $('.menu-item-exit').on('click', function () {
-                    $(this).children('input')[0].click();
-                });
-                $("#exit").on("click", function (event) {
-                    $.ajax({
-                        url: "../api/SignINUP",
-                        type: "GET",
-                        dataType: "text",
-                        success: function () {
-                            window.location = '../Authorization/Enter';
-                        }
-                    })
-                    event.stopPropagation();
-                })
-                $('.menu-item').on('click', function () {
-                    $(this).children('a')[0].click();
-                });
-                $('.more-inf-td').on('click', function () {
-                    $(this).children('a')[0].click();
-                });
-                $('.remove-menu-td').on('click', function () {
-                    $(this).children('input')[0].click();
-                });
-                $(".remove-menu").on("click", function (event) {
-                    var button = $(this);
-                    var str = button.parent().parent();
-                    $.ajax({
-                        url: "../api/Values?id=" + str.attr("value"),
-                        type: "POST",
-                        dataType: "json",
-                        success: function (text) {
-                            //Преобразовываем JSON
-                            var json_parse = JSON.parse(text);
-                            if (json_parse == "false") {
-                                $("#main_m").empty();
-                                var block = '<label>В качестве основного меню выбрано: </label>Нет доступных меню';
-                                document.getElementById('main_m').innerHTML += block;
-                            }
-                            else if (json_parse != "true") {
-                                $("#main_m").empty();
-                                var block = '<label>В качестве основного меню выбрано: </label>' + json_parse;
-                                document.getElementById('main_m').innerHTML += block;
-                            }
-                            str.remove();
-                           
-                        }
-                    })
-                    event.stopPropagation();
-                })
-            </script>
         </div>
+        <script>
+            $('.menu-item-exit').on('click', function () {
+                $(this).children('input')[0].click();
+            });
+            $("#exit").on("click", function (event) {
+                $.ajax({
+                    url: "../api/SignINUP",
+                    type: "GET",
+                    dataType: "text",
+                    success: function () {
+                        window.location = '../Authorization/Enter';
+                    }
+                })
+                event.stopPropagation();
+            })
+            $('.menu-item').on('click', function () {
+                $(this).children('a')[0].click();
+            });
+            $('.more-inf-td').on('click', function () {
+                $(this).children('a')[0].click();
+            });
+            $('.remove-menu-td').on('click', function () {
+                $(this).children('input')[0].click();
+            });
+            $(".remove-menu").on("click", function (event) {
+                var button = $(this);
+                var str = button.parent().parent();
+                $.ajax({
+                    url: "../api/Values?id=" + str.attr("value"),
+                    type: "POST",
+                    dataType: "json",
+                    success: function (text) {
+                        //Преобразовываем JSON
+                        var json_parse = JSON.parse(text);
+                        if (json_parse == "false") {
+                            $("#main_m").empty();
+                            var block = '<label>В качестве основного меню выбрано: </label>Нет доступных меню';
+                            document.getElementById('main_m').innerHTML += block;
+                        }
+                        else if (json_parse != "true") {
+                            $("#main_m").empty();
+                            var block = '<label>В качестве основного меню выбрано: </label>' + json_parse;
+                            document.getElementById('main_m').innerHTML += block;
+                        }
+                        str.remove();
+
+                    }
+                })
+                event.stopPropagation();
+            })
+        </script>
     </div>
 </body>
 </html>

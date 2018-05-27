@@ -105,12 +105,28 @@ namespace VKR.Controllers
             }
         }
 
+        /// <summary>
+        /// Метод, реализующий выход из аккаунта клиентской части приложения
+        /// </summary>
+        /// <returns>Перенаправление на страницу авторизации клиентской части приложения</returns>
         [HttpGet]
         public ActionResult LogOut()
         {
-            //Fetch the Cookie using its Key.
-            //HttpCookie nameCookie = Request.Cookies["user_token"];
+            HttpCookie token = new HttpCookie("user_token", "");
+            HttpContext.Response.Cookies.Add(token);
             return Redirect("../Authorization/Enter");
+        }
+
+        /// <summary>
+        /// Метод, реализующий выход из аккаунта администраторской части приложения
+        /// </summary>
+        /// <returns>Перенаправление на страницу авторизации администраторской части приложения</returns>
+        [HttpGet]
+        public ActionResult LogOut_Admin()
+        {
+            HttpCookie token = new HttpCookie("user_token", "");
+            HttpContext.Response.Cookies.Add(token);
+            return Redirect("../Authorization/Enter_Admin");
         }
     }
 }

@@ -16,9 +16,16 @@
 </head>
 <body>
     <div id="main-form">
+        @if (ViewBag.Token == 1)
+        {
+        <h2>Редактирование пользователя</h2>
+        <p>У вас нет доступа к этой странице</p>
+        }
+        else
+        {
         <form method="post" action="./ChUser" enctype="multipart/form-data">
             <h2>Редактирование пользователя</h2>
-            <br/>
+            <br />
             <input type="number" name="ID" value="@ViewBag.RedUser.UserID" hidden />
             <p>Логин:</p>
             <input type="text" name="Login" id="Login" value="@ViewBag.RedUser.Login" style="width: 301px" class="form-input" required />
@@ -46,29 +53,29 @@
             <br />
             <p>Права:</p>
             @if (@ViewBag.RedUser.Status == 0)
-    {
-        <select id="entitlement" name="Entitlement" style="width: 301px" class="form-input" required>
-            <option id="0" selected="">Покупатель</option>
-            <option id="1">Модератор</option>
-            <option id="2">Администратор</option>
-        </select>
-}
-else if (@ViewBag.RedUser.Status == 1)
-{
+            {
+            <select id="entitlement" name="Entitlement" style="width: 301px" class="form-input" required>
+                <option id="0" selected="">Покупатель</option>
+                <option id="1">Модератор</option>
+                <option id="2">Администратор</option>
+            </select>
+            }
+            else if (@ViewBag.RedUser.Status == 1)
+            {
         <select id="entitlement" name="Entitlement" style="width: 301px" class="form-input" required>
             <option id="0">Покупатель</option>
             <option id="1" selected="">Модератор</option>
             <option id="2">Администратор</option>
         </select>
-}
-else
-{
-        <select id="entitlement" name="Entitlement" style="width: 301px" class="form-input" required>
-            <option id="0">Покупатель</option>
-            <option id="1">Модератор</option>
-            <option id="2" selected="">Администратор</option>
-        </select>
-}
+            }
+            else
+            {
+    <select id="entitlement" name="Entitlement" style="width: 301px" class="form-input" required>
+        <option id="0">Покупатель</option>
+        <option id="1">Модератор</option>
+        <option id="2" selected="">Администратор</option>
+    </select>
+            }
             <br />
             <br />
             <p>Текущее изображение:</p>
@@ -77,9 +84,10 @@ else
             <input type="file" name="upload" accept="image/jpeg,image/png" class="form-input" style="height: 38px">
             <br />
             <br />
-                <a href="../Admin/ListUsers" class="link-but" style="width:80px; float: right">Отмена</a>
-                <input type="submit" class="link-but" />
+            <a href="../Admin/ListUsers" class="link-but" style="width:80px; float: right">Отмена</a>
+            <input type="submit" class="link-but" />
         </form>
+        }
     </div>
 </body>
 </html>

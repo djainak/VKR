@@ -16,10 +16,17 @@
 </head>
 <body>
     <div id="main-form">
+        @if (ViewBag.Token == 1)
+        {
+        <h2>Редактирование пункта меню</h2>
+        <p>У вас нет доступа к этой странице</p>
+        }
+        else
+        {
         <div>
             <form method="post" action="./ChMenuItem?MenuId=@ViewBag.MenuId&MenuItemId=@ViewBag.MenuItemId" enctype="multipart/form-data">
                 <h2>Редактирование пункта меню</h2>
-                <br/>
+                <br />
                 <p>Введите название блюда:</p>
                 <input type="text" name="Name" value="@ViewBag.MenuItem.Name" class="form-input" required />
                 <br />
@@ -32,16 +39,16 @@
 
                 <select id="category" name="Category" class="form-input" required>
                     @foreach (var c in ViewBag.Category)
-        {
-            if (@ViewBag.MenuItem.CategoryMenuItemId == c.CategoryMenuItemID)
-            {
-                <option selected="selected">@c.Name</option>
-}
-else
-{
-            <option>@c.Name</option>
-}
-}
+                    {
+                        if (@ViewBag.MenuItem.CategoryMenuItemId == c.CategoryMenuItemID)
+                        {
+                        <option selected="selected">@c.Name</option>
+                        }
+                        else
+                        {
+                    <option>@c.Name</option>
+                        }
+                    }
                 </select>
                 <br />
                 <br />
@@ -59,6 +66,7 @@ else
                 <input type="submit" class="link-but" />
             </form>
         </div>
+        }
     </div>
 </body>
 </html>

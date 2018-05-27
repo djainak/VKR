@@ -29,9 +29,16 @@
             @if (ViewBag.isError)
     {
         <p style="font-size: 17px;">Данное меню не существует</p>
-}
-else
-{
+            }
+            else
+            {
+                if (ViewBag.Token == 1)
+                {
+        <h2>Список пунктов меню</h2>
+        <p>У вас нет доступа к этой странице</p>
+                }
+                else
+                {
         <a href="../Admin/ListMenuItems?MenuId=@ViewBag.MenuId" class="link-but" style="float: right; width: 190px">Добавить пункт меню</a>
         <a href="../Admin/MenuList" class="link-but" style="float: left; width: 220px">Вернуться к списку меню</a>
         <br clear="all">
@@ -39,14 +46,14 @@ else
         <h2>Список пунктов меню</h2>
         <br />
 
-if (ViewBag.isMI)
-{
+                    if (ViewBag.isMI)
+                    {
         <div id="items">
             <p style="font-size: 17px;">В данном меню пока нет товаров</p>
         </div>
-}
-else
-{
+                    }
+                    else
+                    {
         <div id="items">
             <table border="1" style="border-color: #BFB29D">
                 <tr>
@@ -57,7 +64,7 @@ else
                     <th style="width: 10%">Цена</th>
                 </tr>
                 @foreach (var menuItem in ViewBag.MenuItems)
-        {
+                {
             <tr value=@menuItem.Id>
                 <td><img src="~/Content/Style/Files/@menuItem.Picture" width="100" height="100" alt="Изображение не добавлено"></td>
                 <td>@menuItem.Name</td>
@@ -67,10 +74,10 @@ else
                 <td class="more-inf-td"><a href="../Admin/ChangeMenuItem?MenuItemId=@menuItem.Id&MenuId=@ViewBag.MenuId" class="more-inf">Редактировать</a></td>
                 <td class="remove-menu-item-td"><input type="button" value="Удалить" class="remove-menu-item" /></td>
             </tr>
-}
+                }
             </table>
         </div>
-            }
+                    }
         <script>
             $('.menu-item-exit').on('click', function () {
                 $(this).children('input')[0].click();
@@ -116,8 +123,9 @@ else
             event.stopPropagation();
         })
         </script>
+                }
 
-}
+            }
         </div>
     </div>
     <script>

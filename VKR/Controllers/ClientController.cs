@@ -11,7 +11,7 @@ namespace VKR.Controllers
     /// <summary>
     /// Контроллер, обрабатывающий клиентскую часть приложения
     /// </summary>
-    public class ClientController : Controller
+    public class ClientController : UserBasedController
     {
         /// <summary>
         /// Обрабатывает стартовую страницу с меню

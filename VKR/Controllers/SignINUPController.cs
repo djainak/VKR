@@ -39,17 +39,5 @@ namespace VKR.Controllers
                     return JsonConvert.SerializeObject("OK");
             }
         }
-        /// <summary>
-        /// Метод, обрабатывающий выход из аккаунта
-        /// </summary>
-        public void Get()
-        {
-            CookieHeaderValue cookie = Request.Headers.GetCookies("user_token").FirstOrDefault();
-            if (cookie != null)
-            {
-                cookie["user_token"].Value = string.Empty;
-            }
-            
-        }
     }
 }

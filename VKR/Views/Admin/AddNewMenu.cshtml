@@ -16,17 +16,24 @@
 </head>
 <body>
     <div id="main-form">
+        @if (ViewBag.Token == 1)
+        {
+        <h2>Добавление нового меню</h2>
+        <p>У вас нет доступа к этой странице</p>
+        }
+        else
+        {
         <div class="allform">
             <form method="post" action="./AddMenu" enctype="multipart/form-data">
                 <h2>Добавление нового меню</h2>
                 <br />
-                <input type="hidden" value="@ViewBag.MenuId" name="MenuId" class="form-input"/>
+                <input type="hidden" value="@ViewBag.MenuId" name="MenuId" class="form-input" />
                 <p>Введите название меню:</p>
                 <input type="text" name="Name" placeholder="Название меню" class="form-input" required />
                 <br />
                 <br />
                 <p>Введите описание меню:</p>
-                <input type="text" name="Description" placeholder="Описание меню" class="form-input"/>
+                <input type="text" name="Description" placeholder="Описание меню" class="form-input" />
                 <br />
                 <br />
                 <label style="font-weight:500">
@@ -44,6 +51,7 @@
                 <input type="submit" class="link-but" />
             </form>
         </div>
+        }
     </div>
 </body>
 </html>

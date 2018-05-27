@@ -11,7 +11,7 @@ namespace VKR.Controllers
     /// <summary>
     /// Контроллер, реализующий логику администраторской части сайта
     /// </summary>
-    public class AdminController : UserBasedController
+    public class AdminController : AdminBasedController
     {
         /// <summary>
         /// Метод, отображающий страницу с архивом заказов 
@@ -109,6 +109,7 @@ namespace VKR.Controllers
         {
             using (var db = new Contexts())
             {
+                ViewBag.Token = db.Users.Find(Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value)).Status;
                 ViewBag.WorkDays = db.DayWork.ToList();
                 ViewBag.DinningRoom = db.DinningRooms.FirstOrDefault();
                 ViewBag.Manager = db.Users.Where(c => c == db.DinningRooms.FirstOrDefault().Manager).FirstOrDefault();
@@ -265,6 +266,7 @@ namespace VKR.Controllers
         {
             using (var db = new Contexts())
             {
+                ViewBag.Token = db.Users.Find(Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value)).Status;
                 List<Menu> menues = db.Menues.ToList();
                 ViewBag.Menues = menues;
                 if (menues.Count != 0)
@@ -296,6 +298,10 @@ namespace VKR.Controllers
         [HttpGet]
         public ActionResult AddNewMenu()
         {
+            using (var db = new Contexts())
+            {
+                ViewBag.Token = db.Users.Find(Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value)).Status;
+            }
             return View();
         }
 
@@ -373,6 +379,7 @@ namespace VKR.Controllers
 
             using (var db = new Contexts())
             {
+                ViewBag.Token = db.Users.Find(Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value)).Status;
                 foreach (var c in db.CategoryMenuItem)
                 {
                     a.Add(c.Name);
@@ -397,6 +404,7 @@ namespace VKR.Controllers
             //Обращаемся к БД
             using (var db = new Contexts())
             {
+                ViewBag.Token = db.Users.Find(Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value)).Status;
                 //Ищем там меню по ид
                 Menu menu = db.Menues.Where(ent => ent.Id == id).FirstOrDefault();
                 if (menu == null)
@@ -493,6 +501,7 @@ namespace VKR.Controllers
             //Добавляем новое меню в БД
             using (var db = new Contexts())
             {
+                ViewBag.Token = db.Users.Find(Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value)).Status;
                 ViewBag.Menu = db.Menues.Find(menuId);
             }
             return View();
@@ -571,6 +580,7 @@ namespace VKR.Controllers
 
             using (var db = new Contexts())
             {
+                ViewBag.Token = db.Users.Find(Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value)).Status;
                 ViewBag.MenuItem = db.MenuItems.Find(ViewBag.MenuItemId);
                 foreach (var c in db.CategoryMenuItem)
                 {
@@ -639,6 +649,7 @@ namespace VKR.Controllers
         {
             using (var db = new Contexts())
             {
+                ViewBag.Token = db.Users.Find(Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value)).Status;
                 ViewBag.Users = db.Users.ToList();
             }
             return View();
@@ -653,6 +664,7 @@ namespace VKR.Controllers
         {
             using (var db = new Contexts())
             {
+                ViewBag.Token = db.Users.Find(Convert.ToInt32(HttpContext.Request.Cookies["user_token"].Value)).Status;
                 ViewBag.RedUser = db.Users.Find(Convert.ToInt32(HttpContext.Request.Params["RedUserId"]));
             }
 

@@ -7,10 +7,7 @@ using VKR.Models;
 
 namespace VKR.Controllers
 {
-    /// <summary>
-    /// Контроллер, устанавливающий права на посещение страниц клиентской части приложения
-    /// </summary>
-    public class UserBasedController : Controller
+    public class AdminBasedController : Controller
     {
         protected override void ExecuteCore()
         {
@@ -57,7 +54,15 @@ namespace VKR.Controllers
                 // тогда отправляем пользователя на страницу логина
                 if (token == "" || token == null)
                 {
-                    filterContext.Result = Redirect(server_root_url + "Authorization/Enter");
+                    filterContext.Result = Redirect(server_root_url + "Authorization/Enter_Admin");
+                }
+                else
+                {
+                    using (var db = new Contexts())
+                    {
+                        if (db.Users.Find(Convert.ToInt32(token)).Status == 0)
+                            filterContext.Result = Redirect(server_root_url + "Authorization/Enter_Admin");
+                    }
                 }
             }
         }

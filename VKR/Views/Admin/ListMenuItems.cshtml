@@ -16,10 +16,17 @@
 </head>
 <body>
     <div id="main-form">
+        @if (ViewBag.Token == 1)
+        {
+        <h2>Добавление нового пункта меню</h2>
+        <p>У вас нет доступа к этой странице</p>
+        }
+        else
+        {
         <div class="allform">
             <form method="post" action="./NewMenuItem?MenuId=@ViewBag.MenuId" enctype="multipart/form-data">
                 <h2>Добавление нового пункта меню</h2>
-                <br/>
+                <br />
                 <p>Введите название блюда:</p>
                 <input type="text" name="Name" placeholder="Название" class="form-input" style="width: 265px" required />
                 <br />
@@ -31,9 +38,9 @@
                 <p>Выберите категорию:</p>
                 <select id="category" name="Category" class="form-input" style="width: 265px" required>
                     @foreach (var c in ViewBag.Category)
-        {
-            <option>@c</option>
-}
+                    {
+                    <option>@c</option>
+                    }
                 </select>
                 <br />
                 <br />
@@ -50,6 +57,7 @@
 
             </form>
         </div>
+        }
     </div>
 </body>
 </html>
