@@ -1,5 +1,5 @@
 ﻿.left {
-    width: calc(21% - 15px);
+    width: calc(25% - 37px);
     float: left;
     margin-right: 15px;
     margin-top: 15px;
@@ -13,6 +13,7 @@
     transition: .3s;
     border-radius: 3px;
     height: 500px;
+    position: relative;
 }
     .left:hover {
         background: #CBD8E8;
@@ -108,6 +109,9 @@
     width: 195px;
     font-family: "Times New Roman", Times, serif;
     font-size: 17px;
+    position: absolute;
+    bottom: 10px;
+    margin-left: calc(50% - 107px);
 }
 
 .add-to-cart:hover {
@@ -292,10 +296,4 @@ form {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 10px;
-}
-.rub {
-    float: left;
-}
-.counter {
-    float:right;
 }

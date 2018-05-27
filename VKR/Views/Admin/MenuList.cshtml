@@ -24,7 +24,7 @@
                     <td class="menu-item"><a href="../Admin/MenuList" class="menu_text">Меню</a></td>
                     <td class="menu-item"><a href="../Admin/PersonalAccount" class="menu_text">Личный кабинет</a></td>
                     <td class="menu-item"><a href="../Admin/ListUsers" class="menu_text">Настройка прав пользователей</a></td>
-                    <td class="menu-item-exit"><input type="button" value="Выйти" id="exit" class="menu_text" /></td>
+                    <td class="menu-item"><a href="../Authorization/LogOut_Admin" class="menu_text">Выход</a></td>
                 </tr>
             </table>
         </div>
@@ -63,20 +63,6 @@
 }
         </div>
         <script>
-            $('.menu-item-exit').on('click', function () {
-                $(this).children('input')[0].click();
-            });
-            $("#exit").on("click", function (event) {
-                $.ajax({
-                    url: "../api/SignINUP",
-                    type: "GET",
-                    dataType: "text",
-                    success: function () {
-                        window.location = '../Authorization/Enter';
-                    }
-                })
-                event.stopPropagation();
-            })
             $('.menu-item').on('click', function () {
                 $(this).children('a')[0].click();
             });
